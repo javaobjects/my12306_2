@@ -42,13 +42,13 @@ public class LifeServlet extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		super.destroy();
+//		super.destroy();
 		System.out.println("destory()方法。。。。。");
 	}
 
 	@Override
 	public void init() throws ServletException {
-		super.init();
+//		super.init();
 		System.out.println("init()方法。。。。。");
 	}
 	
