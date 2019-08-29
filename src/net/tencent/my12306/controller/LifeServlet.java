@@ -44,5 +44,11 @@ public class LifeServlet extends HttpServlet {
 	public void destroy() {
 		super.destroy();
 	}
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
+	}
+	
 	
 }
