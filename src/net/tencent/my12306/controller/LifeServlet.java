@@ -18,8 +18,7 @@ public class LifeServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public LifeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    	System.out.println("构造方法");
     }
 
 	/**
