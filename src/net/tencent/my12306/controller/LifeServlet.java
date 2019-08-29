@@ -39,4 +39,10 @@ public class LifeServlet extends HttpServlet {
 	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
 		super.service(arg0, arg1);
 	}
+
+	@Override
+	public void destroy() {
+		super.destroy();
+	}
+	
 }
