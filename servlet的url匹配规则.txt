@@ -1,0 +1,14 @@
+
+1.servlet的名字就是url：
+
+UserServlet： @WebServlet("/UserServlet")
+
+user.UserServlet:@WebServlet("*/user/UserServlet")
+
+2.拦截所有请求：可以这样就拦截所有以.action结尾的请求
+UserServlet： @WebServlet("*.action")
+
+3.匹配所有如：
+http://localhost:8080/my12306_import_html/user/a
+http://localhost:8080/my12306_import_html/user/bc
+UserServlet:@WebServlet("/user/*")
