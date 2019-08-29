@@ -43,6 +43,7 @@ public class LifeServlet extends HttpServlet {
 	@Override
 	public void destroy() {
 		super.destroy();
+		System.out.println("destory()方法。。。。。");
 	}
 
 	@Override
