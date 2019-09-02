@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="http://localhost:8080/my12306_import_html/LifeServlet">LifeServlet</a>
+<a href="http://localhost:8080/my12306_2/LifeServlet">LifeServlet</a>
 </body>
 </html>

@@ -16,10 +16,7 @@
 </script>
 <script language="javascript">
 	function UserLogin(){
-	
-	
-	document.getElementById("loginForm").submit();
-	
+		document.querySelector("#loginForm").submit();
 	}
 </script>
 <style type="text/css">

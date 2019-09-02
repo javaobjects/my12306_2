@@ -36,15 +36,29 @@ public class LifeServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
-		super.service(arg0, arg1);
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		super.service(request, response);
+//		String method = request.getMethod();
+//		System.out.println("method:" + method);
+//		
+//		if("GET".equals(method)) {
+//			doGet(request, response);
+//		}else {
+//			doPost(request, response);
+//		}
+		
 		System.out.println("service()方法。。。。");
+		
 	}
 
 	@Override
 	public void destroy() {
 //		super.destroy();
-		System.out.println("destory()方法。。。。。");
+		System.out.println("destory()方法。。。。。111");
+		for (int i = 0; i < 100; i++) {
+			System.out.println(i);
+		}
+		System.out.println("destory()方法。。。。。222");
 	}
 
 	@Override
