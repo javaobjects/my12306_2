@@ -38,6 +38,7 @@ public class LifeServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
 		super.service(arg0, arg1);
+		System.out.println("service()方法。。。。");
 	}
 
 	@Override
