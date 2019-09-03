@@ -91,7 +91,7 @@ public class UserServlet extends HttpServlet {
 		{
 			validate_message.append("密码或者确认密码为空");
 		}
-		if(password.equals(confirm_password))
+		if(!password.equals(confirm_password))
 		{
 			validate_message.append("两次密码输入不一致");
 		}
