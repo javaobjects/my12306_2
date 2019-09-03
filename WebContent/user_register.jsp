@@ -6,7 +6,10 @@
 <title>注册信息</title>
 <link href="css/css.css" rel="stylesheet" type="text/css">
 </head>
-
+<%
+request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+%>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <form action="<%=request.getContextPath()%>/UserServlet" method="post">
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
