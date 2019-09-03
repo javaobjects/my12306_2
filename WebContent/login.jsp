@@ -95,10 +95,19 @@ if(message!=null)
         <td height="20" align="right"><img src="<%=request.getContextPath()%>/images/text_yzm.gif" width="60" height="18"></td>
         <td>&nbsp;</td>
         <td><input name="textfield3" type="text" id="textfield3" size="18" /></td>
-        <td><span class="text_cray1"><img src="<%=request.getContextPath()%>/images/bg_img2.gif" alt="" height="20" /></span></td>
-        <td><img src="<%=request.getContextPath()%>/images/text_sx.gif" width="32" height="18"></td>
+        <td><span class="text_cray1">
+        	<img src="<%=request.getContextPath()%>/ValidateCodeServlet" alt="" height="20" id="yzm" onclick="shuaxin()"/>
+        </span></td>
+        <td>
+        	<img src="<%=request.getContextPath()%>/images/text_sx.gif" width="32" height="18" onclick="shuaxin()">
+        </td>
         <td align="left">&nbsp;</td>
       </tr>
+      <script>
+      	function shuaxin(){
+      		document.querySelector("#yzm").src = "<%=request.getContextPath()%>/ValidateCodeServlet?date=" + new  Date();
+      	}
+      </script>
       <tr>
         <td height="30">&nbsp;</td>
         <td>&nbsp;</td>
