@@ -38,8 +38,16 @@ public class UserServlet extends HttpServlet {
 			stmt.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
 			stmt.setString(5, user.getLoginIp());
 		 */
+		//1.获取数据
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		String confirm_password=request.getParameter("confirm_password");
+		String sex=request.getParameter("sex");
+		String birthday_date=request.getParameter("birthday");
+		//2.数据的非空校验和合法性校验
+		validateRegisterForm(username, password, confirm_password);
 		
-		//1.调用底层service的注册方法添加用户到数据库
+		//3.调用底层service的注册方法添加用户到数据库
 		Date birthday=null;
 		try {
 			birthday=new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthday"));
@@ -60,6 +68,38 @@ public class UserServlet extends HttpServlet {
 			System.out.println("register fail");
 		}
 	}
-	
+
+	/**
+	 * 
+	 * <p>Title: validateRegisterForm</p>  
+	 * <p>
+	 *	Description: 
+	 *	对表单进行服务端校验的方法 
+	 * </p> 
+	 * @param username
+	 * @param password
+	 * @param confirm_password
+	 */
+	private void validateRegisterForm(String username, String password,
+			String confirm_password) {
+		StringBuffer validate_message=new StringBuffer();
+		if(username==null||"".equals(username))
+		{
+			validate_message.append("用户名为空");
+		}
+		if(password==null||"".equals(password)||confirm_password==null||"".equals(confirm_password))
+		{
+			validate_message.append("密码或者确认密码为空");
+		}
+		if(password.equals(confirm_password))
+		{
+			validate_message.append("两次密码输入不一致");
+		}
+		if(validate_message.length()>0)
+		{
+			System.out.println(validate_message.toString());
+			return;
+		}
+	}
 
 }
