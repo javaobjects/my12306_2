@@ -23,10 +23,15 @@ public class UserServlet extends HttpServlet {
 		stmt.setString(5, user.getLoginIp());
 	 */
 	@Override
-	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
-		super.service(arg0, arg1);
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getPassword());
+			stmt.setString(3, user.getSex() + "");
+			stmt.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
+			stmt.setString(5, user.getLoginIp());
+		 */
 	}
-	
 	
 
 }

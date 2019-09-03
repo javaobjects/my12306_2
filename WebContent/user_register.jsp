@@ -8,7 +8,7 @@
 </head>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<form action="" method="get">
+<form action="<%=request.getContextPath()%>/UserServlet" method="post">
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="2" background="images/ny_top_img_bg.gif"><img src="images/ny_top_img.gif" width="650" height="108"></td>
@@ -50,19 +50,19 @@
           <tr>
             <td width="19" align="center" class="text_red">*</td>
                   <td width="98" height="40" align="left" class="text_cray1">登录名：</td>
-                  <td width="160" align="left" class="text_cray1"><input name="textfield2" type="text" class="text_cray" id="textfield2" /></td>
+                  <td width="160" align="left" class="text_cray1"><input name="username" type="text" class="text_cray" id="textfield2" /></td>
                   <td width="423" height="35" align="left" class="text_cray">由字母、数字或“_”组成，长度不少于6位，不多于30位</td>
                 </tr>
           <tr>
             <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">密码：</td>
-                  <td align="left" class="text_cray1"><input name="textfield3" type="text" class="text_cray" id="textfield3" /></td>
+                  <td align="left" class="text_cray1"><input name="password" type="text" class="text_cray" id="textfield3" /></td>
                   <td height="35" align="left" class="text_cray">不少于6位字符</td>
                 </tr>
           <tr>
             <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">确认密码：</td>
-                  <td align="left" class="text_cray1"><input name="textfield4" type="password" class="text_cray" id="textfield4" /></td>
+                  <td align="left" class="text_cray1"><input name="confirm_password" type="password" class="text_cray" id="textfield4" /></td>
                   <td height="35" align="left" class="text_cray">请再次输入密码</td>
                 </tr>
         </table>
@@ -81,11 +81,11 @@
                   <td width="98" height="40" align="left" class="text_cray1">性 别：</td>
                   <td height="35" colspan="3" align="left" class="text_cray1">
                     <span class="mr25">
-                    <input type="radio" name="userDTO.sex_code" value="M" checked="checked" />
+                    <input type="radio" name="sex" value="1" checked="checked" />
                     </span>
                     <span class="text_cray">
                     <label>男</label>
-                    <input type="radio" name="userDTO.sex_code" value="F" />
+                    <input type="radio" name="sex" value="2" />
                     <label>女</label>
                     </span>
                     <label></label>
@@ -126,7 +126,7 @@
             <tr>
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">出生日期：</td>
-                  <td height="35" colspan="3" align="left"><input name="textfield7" type="text" class="text_cray" id="textfield7" /></td>
+                  <td height="35" colspan="3" align="left"><input name="birthday" type="text" class="text_cray" id="textfield7" /></td>
                 </tr>
             
             <tr>
