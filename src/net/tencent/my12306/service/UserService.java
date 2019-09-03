@@ -18,7 +18,19 @@ public class UserService {
 		return userDao.addUser(user)>0;
 	}
 	
-	
+	/**
+	 * 
+	 * <p>Title: isExistsUserName</p>  
+	 * <p>
+	 *	Description: 
+	 *	判断用户名是否已经存在
+	 * </p> 
+	 * @param username
+	 * @return
+	 */
+	public boolean isExistsUserName(String username) {
+		return userDao.queryUsername(username);
+	}
 	
 	
 	
