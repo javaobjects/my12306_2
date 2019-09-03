@@ -30,7 +30,7 @@ body {
     欢迎您，${sessionScope.user.username}
     </td>
     <td width="64" align="left" valign="top" bgcolor="#deedf8">
-    <a href="<%=request.getContextPath()%>/login.jsp" target="_blank" class="cray">退出</a>
+    <a href="<%=request.getContextPath()%>/ExitServlet" target="_blank" class="cray">退出</a>
     </td>
   </tr>
 </table>
