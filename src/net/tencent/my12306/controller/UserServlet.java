@@ -1,6 +1,7 @@
 package net.tencent.my12306.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,30 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	/*
+	 stmt.setString(1, user.getUsername());
+		stmt.setString(2, user.getPassword());
+		stmt.setString(3, user.getSex() + "");
+		stmt.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
+		stmt.setString(5, user.getLoginIp());
+	 */
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+		super.service(arg0, arg1);
+	}
 	
-//	private User user;//不可以
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserServlet() {
-        super();
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
 
 }
