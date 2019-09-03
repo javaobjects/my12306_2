@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8" import="net.tencent.my12306.entity.Users"%>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,6 +25,55 @@ body {
 -->
 </style>
 </head>
+<%
+//如果用户前面登录时勾选了自动登录，那么访问登录页面时需要先获取cookie中的内容，如果有，就说明上次写cookie写成功了，
+//那么根据cookie的内容自动跳转到对应的首页面
+Cookie[] cookies=request.getCookies();
+if(cookies!=null)
+{
+	String username=null;
+	String password=null;
+	String rule=null;
+	Users user=null;
+	for(Cookie c:cookies)
+	{
+		if("username".equals(c.getName()))
+		{
+			username=c.getValue();
+		}
+		if("password".equals(c.getName()))
+		{
+			password=c.getValue();
+		}
+		if("rule".equals(c.getName()))
+		{
+			rule=c.getValue();
+		}
+	}
+	if(username!=null&&password!=null&&rule!=null&&!"".equals(username))
+	{
+		user=new Users();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setRule(rule);
+		
+		session.setAttribute("user", user);
+		
+		//跳转到对应权限页面
+		if("1".equals(rule))
+		{
+			response.sendRedirect("admin/index.jsp");
+		}else if("2".equals(rule))
+		{
+			response.sendRedirect("user/index.jsp");
+		}
+	}
+	
+}
+
+
+
+%>
 <%
 
 String message=request.getParameter("message");
@@ -113,7 +163,7 @@ if(message!=null)
         <td>&nbsp;</td>
         <td valign="bottom"><table width="100%" border="0" cellspacing="0">
           <tr>
-            <td width="26" align="left"><input name="checkbox" type="checkbox" value="checkbox" style=" margin:0 auto;"/></td>
+            <td width="26" align="left"><input name="auto_login" type="checkbox" value="auto" style=" margin:0 auto;"/></td>
             <td width="170"><img src="<%=request.getContextPath()%>/images/text_zddl.gif" width="60" height="18"></td>
           </tr>
         </table></td>
