@@ -41,7 +41,7 @@ if(message!=null)
 <% }%>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
- <form name="form1" method="post" action="<%=request.getContextPath()%>/LifeServlet" id="loginForm">
+ <form name="form1" method="post" action="<%=request.getContextPath()%>/LoginServlet" id="loginForm">
    <table width="933" border="0" align="center" cellpadding="0" cellspacing="0" style="margin:120px;">
   <tr>
     <td height="412" valign="top" background="<%=request.getContextPath()%>/images/bg_img1.jpg"><table height="300" border="0" cellspacing="0">
@@ -53,7 +53,7 @@ if(message!=null)
         <td rowspan="9">&nbsp;</td>
         <td width="98" height="20" align="right"><img src="<%=request.getContextPath()%>/images/text_yh.gif" width="60" height="18"></td>
         <td width="16">&nbsp;</td>
-        <td width="136"><input name="textfield" type="text" id="textfield" size="18" /></td>
+        <td width="136"><input name="username" type="text" id="textfield" size="18" /></td>
         <td width="55">&nbsp;</td>
         <td width="44">&nbsp;</td>
         <td width="32">&nbsp;</td>
@@ -69,7 +69,7 @@ if(message!=null)
       <tr>
         <td height="20" align="right"><img src="<%=request.getContextPath()%>/images/text_password.gif" width="60" height="18"></td>
         <td>&nbsp;</td>
-        <td><input name="textfield2" type="text" id="textfield2" size="18" /></td>
+        <td><input name="password" type="text" id="textfield2" size="18" /></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>

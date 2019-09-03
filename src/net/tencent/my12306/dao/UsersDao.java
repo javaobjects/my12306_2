@@ -22,6 +22,8 @@ public class UsersDao {
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path)"
 			+ " values (tab_user_seq.nextval,?,?,'2','张三',?,200,1,'440104201910106119',?,1,'备注','1',?,'')";
 	private static final String QUERY_USERNAME = "select count(1) from my12306_2_user where username = ?";
+	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select id,username,password,rule,realname,sex,city,cert_type"
+			+ ",cert,birthday,user_type,content,status,login_ip,image_path from my12306_2_user where username=? and password=?";
 	
 	private UsersDao() {}
 	
@@ -78,6 +80,7 @@ public class UsersDao {
 
 			conn = DBUtils.getConnection();
 			stmt = conn.prepareStatement(QUERY_USERNAME);
+			stmt.setString(1,username);
 
 			rs = stmt.executeQuery();
 			if(rs.next()) {
@@ -92,5 +95,52 @@ public class UsersDao {
 			DBUtils.release(conn, stmt, null);
 		}
 		return result;
+	}
+
+	/**
+	 * 
+	 * <p>Title: queryUserByUsernameAndPassword</p>  
+	 * <p>
+	 *	Description: 
+	 *	根据用户名和密码查询用户信息
+	 * </p> 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public Users queryUserByUsernameAndPassword(String username, String password) {
+		Users user = null;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs=null;
+		try {
+
+			conn = DBUtils.getConnection();
+			stmt = conn.prepareStatement(QUERY_USER_BY_USERNAME_AND_PASSWORD);
+			stmt.setString(1,username);
+			stmt.setString(2,password);
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				user=new Users();
+				/*
+				 * id,username,password,rule,realname,sex,city,cert_type"
+			+ ",cert,birthday,user_type,content,status,login_ip,image_path
+				 */
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setRule(rs.getString("rule"));
+				user.setRealname(rs.getString("realname"));
+				//补全另外10个数据
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.release(conn, stmt, rs);
+		}
+		
+		return user;
 	}
 }

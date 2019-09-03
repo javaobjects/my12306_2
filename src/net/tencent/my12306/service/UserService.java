@@ -32,8 +32,20 @@ public class UserService {
 		return userDao.queryUsername(username);
 	}
 	
-	
-	
+	/**
+	 * 
+	 * <p>Title: login</p>  
+	 * <p>
+	 *	Description: 
+	 *	登录方法
+	 * </p> 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public Users login(String username,String password) {
+		return userDao.queryUserByUsernameAndPassword(username,password);
+	}
 	
 	private UserService()
 	{
