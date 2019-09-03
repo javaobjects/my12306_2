@@ -8,10 +8,7 @@
 </style>
 <script language="javascript">
 	function UserRegistration(){
-	
-	
-	window.navigate("UserRegistration.html");
-	
+		location.href = "UserRegistration.html";
 	}
 </script>
 <script language="javascript">
@@ -25,7 +22,23 @@ body {
 	background-image: url(images/bg_point.gif);
 }
 -->
-</style></head>
+</style>
+</head>
+<%
+
+String message=request.getParameter("message");
+
+if(message!=null)
+{
+	%>
+	<script>
+	window.onload=function()
+	{
+		alert('<%=message%>');
+	}</script>
+	
+	
+<% }%>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
  <form name="form1" method="post" action="<%=request.getContextPath()%>/LifeServlet" id="loginForm">

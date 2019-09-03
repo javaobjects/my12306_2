@@ -70,11 +70,22 @@ public class UserServlet extends HttpServlet {
 //				System.out.println("register success");
 				//注册成功，去到登录页面
 //				request.getRequestDispatcher("/login.jsp").forward(request, response);
-				response.sendRedirect(request.getContextPath()+ "/login.jsp");//request.getContextPath() === /my12306_user_register
+				
+				 //弹窗效果:技术实现，对响应进行设置，响应就是response
+//					response.setContentType("text/html;charset=utf-8");
+//					//获取输出流，输出一段script代码
+//					PrintWriter pw=response.getWriter();
+//					pw.println("<script>alert('"+"注册成功"+"');location.href='login.jsp';</script>");
+				//生产环境不用挨骂的代码：需求,既要有弹窗又要重定向登录页面
+				
+				response.sendRedirect(request.getContextPath()+"/login.jsp?message=registersuccess");
+				
+//				response.sendRedirect(request.getContextPath()+ "/login.jsp");//request.getContextPath() === /my12306_user_register
 			}else
 			{
 //				System.out.println("register fail");
 				//注册失败，回到注册页面
+				request.setAttribute("message", "注册失败");
 				request.getRequestDispatcher("/user_register.jsp").forward(request, response);
 			}
 		}
