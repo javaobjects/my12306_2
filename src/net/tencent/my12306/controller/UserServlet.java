@@ -45,27 +45,38 @@ public class UserServlet extends HttpServlet {
 		String sex=request.getParameter("sex");
 		String birthday_date=request.getParameter("birthday");
 		//2.数据的非空校验和合法性校验
-		validateRegisterForm(username, password, confirm_password);
+		StringBuffer sb = validateRegisterForm(username, password, confirm_password);
 		
-		//3.调用底层service的注册方法添加用户到数据库
-		Date birthday=null;
-		try {
-			birthday=new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthday"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		UserService userService=UserService.getInstance();
-		
-		Users user=new Users(request.getParameter("username"), request.getParameter("password"), 
-				request.getParameter("sex").charAt(0), birthday);
-		user.setLoginIp(request.getRemoteAddr());
-		if(userService.register(user))
-		{
-			System.out.println("register success");
-		}else
-		{
-			System.out.println("register fail");
+		if(sb.length() > 0) {
+			//如果校验不通过，那么返回注册页面，让用户再注册一次
+			request.setAttribute("message", "必填信息为空，请重新注册");
+			request.getRequestDispatcher("/user_register.jsp").forward(request, response);
+		}else {
+			//3.调用底层service的注册方法添加用户到数据库
+			Date birthday=null;
+			try {
+				birthday=new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthday"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			UserService userService=UserService.getInstance();
+			
+			Users user=new Users(request.getParameter("username"), request.getParameter("password"), 
+					request.getParameter("sex").charAt(0), birthday);
+			user.setLoginIp(request.getRemoteAddr());
+			if(userService.register(user))
+			{
+//				System.out.println("register success");
+				//注册成功，去到登录页面
+//				request.getRequestDispatcher("/login.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath()+ "/login.jsp");//request.getContextPath() === /my12306_user_register
+			}else
+			{
+//				System.out.println("register fail");
+				//注册失败，回到注册页面
+				request.getRequestDispatcher("/user_register.jsp").forward(request, response);
+			}
 		}
 	}
 
@@ -80,7 +91,7 @@ public class UserServlet extends HttpServlet {
 	 * @param password
 	 * @param confirm_password
 	 */
-	private void validateRegisterForm(String username, String password,
+	private StringBuffer validateRegisterForm(String username, String password,
 			String confirm_password) {
 		StringBuffer validate_message=new StringBuffer();
 		if(username==null||"".equals(username))
@@ -98,8 +109,8 @@ public class UserServlet extends HttpServlet {
 		if(validate_message.length()>0)
 		{
 			System.out.println(validate_message.toString());
-			return;
 		}
+		return validate_message;
 	}
 
 }
