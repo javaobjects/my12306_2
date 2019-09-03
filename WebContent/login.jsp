@@ -53,7 +53,16 @@ if(message!=null)
         <td rowspan="9">&nbsp;</td>
         <td width="98" height="20" align="right"><img src="<%=request.getContextPath()%>/images/text_yh.gif" width="60" height="18"></td>
         <td width="16">&nbsp;</td>
-        <td width="136"><input name="username" type="text" id="textfield" size="18" /></td>
+        <td width="136"><input name="username" type="text" id="textfield" size="18" />
+    <%--     <% 
+        String login_message = (String)request.getAttribute("login_message");
+        if(login_message != null){
+        %>	
+        <%=login_message%>
+        <%}
+        %> --%>
+        ${login_message}
+        </td>
         <td width="55">&nbsp;</td>
         <td width="44">&nbsp;</td>
         <td width="32">&nbsp;</td>
