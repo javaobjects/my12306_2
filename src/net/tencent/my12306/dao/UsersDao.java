@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import net.tencent.my12306.entity.CertType;
+import net.tencent.my12306.entity.City;
+import net.tencent.my12306.entity.Province;
+import net.tencent.my12306.entity.UserType;
 import net.tencent.my12306.entity.Users;
 import net.tencent.my12306.util.DBUtils;
 
@@ -22,8 +26,14 @@ public class UsersDao {
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path)"
 			+ " values (tab_user_seq.nextval,?,?,'2','张三',?,200,1,'440104201910106119',?,1,'备注','1',?,'')";
 	private static final String QUERY_USERNAME = "select count(1) from my12306_2_user where username = ?";
-	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select id,username,password,rule,realname,sex,city,cert_type"
-			+ ",cert,birthday,user_type,content,status,login_ip,image_path from my12306_2_user where username=? and password=?";
+	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select u.id,u.username,u.password,u.rule,"
+			+ "u.realname,u.sex,u.city c_id,u.cert_type"
+			+ ",u.cert,u.birthday,u.user_type,u.content,u.status,u.login_ip,u.image_path,"
+			+ "c.city,p.province,ut.content ut_content,ct.content ct_content "
+			+ "from my12306_2_user u,my12306_2_city c,my12306_2_province p,my12306_2_usertype ut,my12306_2_certtype ct"
+			+ " where u.city=c.id and p.provinceid=c.father "
+			+ "and ut.id=u.user_type and ct.id=u.cert_type "
+			+ "and u.username=? and u.password=?";
 	
 	private UsersDao() {}
 	
@@ -134,6 +144,18 @@ public class UsersDao {
 				user.setRule(rs.getString("rule"));
 				user.setRealname(rs.getString("realname"));
 				//补全另外10个数据
+				user.setId(rs.getInt("id"));
+				user.setRule(rs.getString("rule"));
+				user.setSex(rs.getString("sex").charAt(0));
+				user.setCity(new City(rs.getInt("c_id"),null, rs.getString("city"), new Province(null, null, rs.getString("province"))));
+				user.setCerttype(new CertType(rs.getInt("cert_type"), rs.getString("ct_content")));
+				user.setCert(rs.getString("cert"));
+				user.setBirthday(rs.getDate("birthday"));
+				user.setUsertype(new UserType(rs.getInt("user_type"),rs.getString("ut_content")));
+				user.setContent(rs.getString("content"));
+				user.setStatus(rs.getString("status").charAt(0));
+				user.setLoginIp(rs.getString("login_ip"));
+				user.setImagePath(rs.getString("image_path"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,5 +164,16 @@ public class UsersDao {
 		}
 		
 		return user;
+	}
+	
+	public int updateUser(Users user) {
+		int rows=0;
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		
+		//update tab_user set realname=? where id=?
+		
+		
+		return rows;
 	}
 }

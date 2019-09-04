@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8" import="net.tencent.my12306.entity.Users"%>
+    <!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,12 +8,12 @@
 <link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css">
 <script language="javascript">
 	function UpdateInfo(){
-	
-	
-	window.navigate("UserManageInfo_Edit.html");
-	
+		location.href = "<%=request.getContextPath()%>/ToUpdateUserServlet";
 	}
 </script>
+<%
+Users user = (Users)request.getAttribute("userinfo");
+%>
 </head>
 <body class="write_bg">
 <form name="form1" method="post" action="">
@@ -47,53 +48,53 @@
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">登录名：</td>
-            <td width="350" align="left" class="text_cray">用户1</td>
+            <td width="350" align="left" class="text_cray"><%=user.getUsername() %></td>
             <td width="230" rowspan="5" align="center" background="../images/bg_point_write.gif" class="text_cray"><img src="../images/photo.jpg" width="139" height="139"></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">真实姓名：</td>
-            <td align="left" class="text_cray">王小明</td>
+            <td align="left" class="text_cray"><%=user.getRealname() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">性 别：</td>
-            <td align="left" class="text_cray">男</td>
+            <td align="left" class="text_cray"><%=user.getSex().equals("1")?"男":"女" %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">省份：</td>
-            <td align="left" class="text_cray">辽宁</td>
+            <td align="left" class="text_cray"><%=user.getCity().getProvince().getProvinceName() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">城市：</td>
-            <td align="left" class="text_cray">沈阳</td>
+            <td align="left" class="text_cray"><%=user.getCity().getCityId() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">证件类型：</td>
-            <td colspan="2" align="left" class="text_cray">二代身份证</td>
+            <td colspan="2" align="left" class="text_cray"><%=user.getCerttype().getContent() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">证件号码：</td>
-            <td colspan="2" align="left" class="text_cray">220221199802051028</td>
+            <td colspan="2" align="left" class="text_cray"><%=user.getCert() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">出生日期：</td>
-            <td colspan="2" align="left" class="text_cray">1998-2-5</td>
+            <td colspan="2" align="left" class="text_cray"><%=user.getBirthday() %></td>
           </tr>
           <tr>
             <td width="20" height="40" ></td>
             <td width="100" height="40" align="left" class="text_cray1">旅客类型：</td>
-            <td colspan="3" align="left" class="text_cray">学生</td>
+            <td colspan="3" align="left" class="text_cray"><%=user.getUsertype() %></td>
           </tr>
           <tr>
             <td width="20" height="40"></td>
             <td width="100" height="40" align="left" class="text_cray1">备注：</td>
-            <td height="40" colspan="2" align="left" class="text_cray">无</td>
+            <td height="40" colspan="2" align="left" class="text_cray"><%=user.getContent() %></td>
           </tr>
         </table><br>
       <table width="100%" border="0" cellspacing="0">
