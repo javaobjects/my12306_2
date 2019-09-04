@@ -13,7 +13,18 @@ import net.tencent.my12306.entity.Users;
 import net.tencent.my12306.service.UserService;
 
 /**
- * Servlet implementation class ToUpdateUserServlet
+ * 
+* <p>Title: ToUpdateUserServlet</p>  
+* <p>
+*	Description: 
+* 去往用户修改信息页面的servlet
+* 需要获取以下信息
+* 1.用户本人信息
+* 2.所有省份信息
+* 3.获取当前用户所在省份的所有城市信息
+* </p> 
+* @author xianxian 
+* @date 2019年9月4日
  */
 @WebServlet("/ToUpdateUserServlet")
 public class ToUpdateUserServlet extends HttpServlet {

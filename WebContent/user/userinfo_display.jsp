@@ -64,7 +64,7 @@ Users user = (Users)request.getAttribute("userinfo");
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">省份：</td>
-            <td align="left" class="text_cray"><%=user.getCity().getProvince().getProvinceName() %></td>
+  <%--           <td align="left" class="text_cray"><%=user.getCity().getProvince().getProvinceName() %></td> --%>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
