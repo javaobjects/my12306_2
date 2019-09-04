@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8" import="java.util.List,
+    net.tencent.my12306.entity.Province,
+    java.util.Iterator,
+    net.tencent.my12306.entity.Users"%>
+     <!-- 使用jstl:java standard tag library(单词缩写)
+ 1.需要先导入jstl.jar包 2.页面通过指令引入标签  3.使用标签 -->   
+  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+    <!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -95,14 +102,42 @@
             <td width="20" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">省份：</td>
             <td align="left" class="text_cray1">
-            	<input name="province" type="text"  class="text_cray" id="textfield2" value="${userinfo.city.province.provinceName}"/>            
+            
+ <%-- <input name="province" type="text"  class="text_cray" id="textfield2" value="${userinfo.city.province.provinceName}"/>  --%>
+     <%  Users user=(Users)request.getAttribute("userinfo");
+     	
+     %>       
+  <select name="provinceid" class="text_cray">
+  	<%
+  	List<Province> provinces =(List<Province>)request.getAttribute("provinces");
+  	Iterator it=provinces.iterator();
+  	while(it.hasNext())
+  	{
+  		Province p=(Province)it.next();
+  		%>
+  		<option value="<%=p.getProvinceId()%>" <%=p.getProvinceId().equals(user.getCity().getProvince().getProvinceId())?"selected":"" %>><%=p.getProvinceName() %></option>
+  		<% 
+  	}
+  	%>
+  
+  </select>    
+            	
+            	          
             	</td>
           </tr>
           <tr>
             <td width="20" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">城市：</td>
             <td align="left" class="text_cray1">
-            <input name="city" type="text" class="text_cray" id="textfield2" value="${userinfo.city.cityName}"/>            </td>
+            
+     <%-- <input name="city" type="text" class="text_cray" id="textfield2" value="${userinfo.city.cityName}"/>  --%> 
+            <select name="city" class="text_cray">
+            <c:forEach items="${cities}" var="c">
+            <option value="${c.id}" ${c.id.equals(userinfo.city.id)?"selected":""}>${c.cityName}</option>
+            </c:forEach>
+            </select>
+            
+                       </td>
           </tr>
           
            <tr>
