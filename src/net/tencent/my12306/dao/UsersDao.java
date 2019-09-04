@@ -146,8 +146,6 @@ public class UsersDao {
 				user.setRule(rs.getString("rule"));
 				user.setRealname(rs.getString("realname"));
 				//补全另外10个数据
-				user.setId(rs.getInt("id"));
-				user.setRule(rs.getString("rule"));
 				user.setSex(rs.getString("sex").charAt(0));
 				user.setCity(new City(rs.getInt("c_id"),null, rs.getString("city"), new Province(null, rs.getString("provinceid"), rs.getString("province"))));
 				user.setCerttype(new CertType(rs.getInt("cert_type"), rs.getString("ct_content")));
