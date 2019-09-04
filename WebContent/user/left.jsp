@@ -14,8 +14,7 @@ body {
 	margin-top: 0px;
 }
 -->
-</style>
-</head>
+</style></head>
 
 <body>
 <table width="247" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -32,7 +31,7 @@ body {
   </tr>
   <tr>
     <td align="right"><img src="../images/ny_arrow1.gif" width="24" height="13"></td>
-    <td height="35"><a href="<%=request.getContextPath()%>/user/user_password_edit.jsp" target="mainFrame" class="cray">普通用户密码修改</a></td>
+    <td height="35"><a href="<%=request.getContextPath()%>/ToUpdatePasswordServlet" target="mainFrame" class="cray">普通用户密码修改</a></td>
   </tr>
 </table>
 </body>

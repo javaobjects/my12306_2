@@ -7,6 +7,27 @@ public class UserService {
 	
 	/**
 	 * 
+	 * <p>Title: updatePassword</p>  
+	 * <p>
+	 *	Description: 
+	 * </p> 
+	 * @param id
+	 * @param password_old
+	 * @param password_new
+	 * @return
+	 */
+	public boolean updatePassword(Integer id,String password_old,String password_new)
+	{
+		boolean tmp=false;//默认更新失败
+		if(userDao.find(id,password_old))
+		{
+			userDao.updatePassword(id,password_new);
+			tmp=true;
+		}
+		return tmp;
+	}
+	/**
+	 * 
 	 * <p>Title: updateUser</p>  
 	 * <p>
 	 *	Description: 
@@ -76,4 +97,5 @@ public class UserService {
 		}
 		return userService;
 	}
+
 }

@@ -8,7 +8,7 @@
 </head>
 
 <body class="write_bg">
- <form name="form1" method="post" action="#">
+ <form name="form1" method="post" action="<%=request.getContextPath()%>/UpdatePasswordServlet">
 
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
@@ -31,22 +31,22 @@
       <tr>
         <td width="20"></td>
         <td width="100" height="40" class="text_cray1">用户名：</td>
-        <td align="left" class="text_cray1"><input name="textfield4" type="text" disabled="true" class="text_cray" id="textfield4" value="用户1" size="30" readonly="reasonly"/></td>
+        <td align="left" class="text_cray1"><input name="username" type="text" disabled="true" class="text_cray" id="textfield4" value="${sessionScope.user.username}" size="30" readonly="reasonly"/></td>
       </tr>
       <tr>
         <td width="20" align="center" class="text_red">*</td>
         <td width="100" height="40" class="text_cray1">原密码：</td>
-        <td align="left" class="text_cray1"><input name="textfield5" type="text" class="text_cray" id="textfield5" size="30" /></td>
+        <td align="left" class="text_cray1"><input name="password_old" type="text" class="text_cray" id="textfield5" size="30" /></td>
       </tr>
       <tr>
         <td width="20" align="center"  class="text_red">*</td>
         <td width="100" height="40" class="text_cray1">新密码：</td>
-        <td align="left" class="text_cray1"><input name="textfield6" type="text" class="text_cray" id="textfield6" size="30" /></td>
+        <td align="left" class="text_cray1"><input name="password_new" type="text" class="text_cray" id="textfield6" size="30" /></td>
       </tr>
       <tr>
         <td width="20" align="center" class="text_red">*</td>
         <td width="100" height="40" class="text_cray1">确认新密码：</td>
-        <td align="left" class="text_cray1"><input name="textfield7" type="text" class="text_cray" id="textfield7" size="30" /></td>
+        <td align="left" class="text_cray1"><input name="password_new_confirm" type="text" class="text_cray" id="textfield7" size="30" /></td>
       </tr>
     </table>
       <br></td>
