@@ -1,5 +1,7 @@
 package net.tencent.my12306.service;
 
+import java.util.List;
+
 import net.tencent.my12306.dao.UsersDao;
 import net.tencent.my12306.entity.Users;
 
@@ -96,6 +98,12 @@ public class UserService {
 			userService=new UserService();
 		}
 		return userService;
+	}
+	
+	public List<Users> getUserByCondition(String username, int certtype,
+			String cert, int usertype, char sex) {
+		
+		return userDao.queryUserByCondition(username,certtype,cert,usertype,sex);
 	}
 
 }
