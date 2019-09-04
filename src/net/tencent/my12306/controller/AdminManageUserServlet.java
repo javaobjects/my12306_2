@@ -1,6 +1,6 @@
 package net.tencent.my12306.controller;
 
-import java.awt.Label;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jxl.Workbook;
+import jxl.write.Label;//lib文件夹内导入对应的jar
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 import net.tencent.my12306.entity.Users;
 import net.tencent.my12306.service.UserService;
 import net.tencent.my12306.util.PageUtil;
