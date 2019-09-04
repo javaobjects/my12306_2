@@ -4,7 +4,21 @@ import net.tencent.my12306.dao.UsersDao;
 import net.tencent.my12306.entity.Users;
 
 public class UserService {
-
+	
+	/**
+	 * 
+	 * <p>Title: updateUser</p>  
+	 * <p>
+	 *	Description: 
+	 * 更新用户信息的方法
+	 * </p> 
+	 * @param user
+	 * @return
+	 */
+	public boolean updateUser(Users user)
+	{
+		return userDao.updateUser(user)>0;
+	}
 	/**
 	 * 属性依赖UserDao
 	 */

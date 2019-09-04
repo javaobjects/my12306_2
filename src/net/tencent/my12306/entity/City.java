@@ -52,6 +52,10 @@ public class City {
 	public City() {
 		super();
 	}
+	public City(Integer id) {
+		super();
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "City [id=" + id + ", cityId=" + cityId + ", cityName=" + cityName + ", provinceId=" + provinceId + "]";

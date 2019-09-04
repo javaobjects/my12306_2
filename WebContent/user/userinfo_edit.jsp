@@ -164,7 +164,7 @@
           <tr>
             <td width="20" height="35" ></td>
             <td width="100" height="40" align="left" class="text_cray1">旅客类型：</td>
-            <td height="35" colspan="2" align="left" class="text_cray1"><select class="text_cray" id="passengerType" name="passenger_type">
+            <td height="35" colspan="2" align="left" class="text_cray1"><select class="text_cray" id="passengerType" name="usertype">
               <option value="1" ${userinfo.usertype.id==1?"selected":""}>成人</option>
                 <option value="2" ${userinfo.usertype.id==2?"selected":""}>儿童</option>
                 <option value="3" ${userinfo.usertype.id==3?"selected":""}>学生</option>
