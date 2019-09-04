@@ -11,7 +11,14 @@ public class CityService {
 	private CityDao cityDao=CityDao.getInstance();
 	
 	/**
-	 * 获取指定省份的城市信息的业务方法
+	 * 
+	 * <p>Title: getCityByProvinceid</p>  
+	 * <p>
+	 *	Description: 
+	 *	获取指定省份的城市信息的业务方法
+	 * </p> 
+	 * @param provinceid
+	 * @return
 	 */
 	public List<City> getCityByProvinceid(String provinceid)
 	{

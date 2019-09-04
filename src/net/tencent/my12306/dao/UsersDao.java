@@ -29,7 +29,7 @@ public class UsersDao {
 	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select u.id,u.username,u.password,u.rule,"
 			+ "u.realname,u.sex,u.city c_id,u.cert_type"
 			+ ",u.cert,u.birthday,u.user_type,u.content,u.status,u.login_ip,u.image_path,"
-			+ "c.city,p.province,ut.content ut_content,ct.content ct_content "
+			+ "c.city,p.province,p.provinceid,ut.content ut_content,ct.content ct_content "
 			+ "from my12306_2_user u,my12306_2_city c,my12306_2_province p,my12306_2_usertype ut,my12306_2_certtype ct"
 			+ " where u.city=c.id and p.provinceid=c.father "
 			+ "and ut.id=u.user_type and ct.id=u.cert_type "
@@ -147,7 +147,7 @@ public class UsersDao {
 				user.setId(rs.getInt("id"));
 				user.setRule(rs.getString("rule"));
 				user.setSex(rs.getString("sex").charAt(0));
-				user.setCity(new City(rs.getInt("c_id"),null, rs.getString("city"), new Province(null, null, rs.getString("province"))));
+				user.setCity(new City(rs.getInt("c_id"),null, rs.getString("city"), new Province(null, rs.getString("provinceid"), rs.getString("province"))));
 				user.setCerttype(new CertType(rs.getInt("cert_type"), rs.getString("ct_content")));
 				user.setCert(rs.getString("cert"));
 				user.setBirthday(rs.getDate("birthday"));
@@ -171,9 +171,84 @@ public class UsersDao {
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		
-		//update tab_user set realname=? where id=?
-		
-		
+		try {
+			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
+			String update_user_sql="update my12306_2_user set realname=?,sex=?,city=?,cert_type=?,cert=?,"
+					+ "birthday=?,user_type=?,content=? where id=?";
+			conn=DBUtils.getConnection();
+			stmt=conn.prepareStatement(update_user_sql);
+			stmt.setString(1, user.getRealname());
+			stmt.setString(2, user.getSex() + "");
+			stmt.setInt(3, user.getCity().getId());
+			stmt.setInt(4,user.getCerttype().getId());
+			stmt.setString(5,user.getCert());
+			stmt.setDate(6, new java.sql.Date(user.getBirthday().getTime()));
+			stmt.setInt(7,user.getUsertype().getId());
+			stmt.setString(8,user.getContent());
+			stmt.setInt(9, user.getId());
+			
+			rows=stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtils.release(conn, stmt, null);
+		}
 		return rows;
+	}
+	/**
+	 * 
+	 * <p>Title: find</p>  
+	 * <p>
+	 *	Description: 
+	 *	根据id和旧的密码查询数据库，看能否找到用户，找到则旧密码输入正确
+	 * </p> 
+	 * @param id
+	 * @param password_old
+	 * @return
+	 */
+	public boolean find(Integer id, String password_old) {
+		Boolean result=false;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs=null;
+		try {
+
+			conn = DBUtils.getConnection();
+			stmt = conn.prepareStatement("select * from my12306_2_user where id=? and password=?");
+			stmt.setInt(1,id);
+			stmt.setString(2, password_old);
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				result=true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.release(conn, stmt, rs);
+		}
+
+		return result;
+	}
+
+	public void updatePassword(Integer id, String password_new) {
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		
+		try {
+			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
+			String update_user_sql="update my12306_2_user set password=? where id=?";
+			conn=DBUtils.getConnection();
+			stmt=conn.prepareStatement(update_user_sql);
+			stmt.setString(1,password_new);
+			stmt.setInt(2,id);
+			
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtils.release(conn, stmt, null);
+		}
 	}
 }
