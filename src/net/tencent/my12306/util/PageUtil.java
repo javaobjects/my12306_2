@@ -5,11 +5,16 @@ import java.util.List;
 
 import net.tencent.my12306.entity.Users;
 
+
 /**
- * 分页工具类
  * 
- * @author hp
- *
+* <p>Title: PageUtil</p>  
+* <p>
+*	Description: 
+*	分页工具类
+* </p> 
+* @author xianxian 
+* @date 2019年9月4日
  */
 public class PageUtil {
 	
