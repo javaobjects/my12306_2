@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.tencent.my12306.entity.CertType;
 import net.tencent.my12306.entity.City;
@@ -60,6 +61,10 @@ public class UpdateUserServlet extends HttpServlet {
 		if(result)
 		{
 			//重定向到ToUpdateUserServlet即可:再次获取更新后的用户信息然后去往更新页面展示，让用户看到更新后的效果
+			//同步更新session中的用户信息
+			HttpSession session=request.getSession();
+			Users session_user=(Users)session.getAttribute("user");
+			session.setAttribute("user", userService.login(session_user.getUsername(), session_user.getPassword()));
 			response.sendRedirect("ToUpdateUserServlet");
 		}else
 		{
