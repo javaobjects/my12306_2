@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.tencent.my12306.entity.Users;
+import net.tencent.my12306.service.CityService;
+import net.tencent.my12306.service.ProvinceService;
 import net.tencent.my12306.service.UserService;
 
 /**
@@ -47,6 +49,11 @@ public class ToUpdateUserServlet extends HttpServlet {
 				
 				//2.把用户信息传给页面，并跳转到目标页面
 				request.setAttribute("userinfo", result);
+				//获取所有省份并传给页面
+				request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
+				//获取当前用户所在省份的所有城市信息并传给页面
+//				request.setAttribute("cities", CityService.getInstance().getCityByProvinceid(result.getCity().getProvince().getProvinceId()));
+				
 				request.getRequestDispatcher("/user/userinfo_edit.jsp").forward(request, response);
 	}
 	
