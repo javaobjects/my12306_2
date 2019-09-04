@@ -151,6 +151,7 @@ public class AdminManageUserServlet extends HttpServlet {
 		 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），username  cert_type cert user_type sex  pageCount要回显
 		 */
 		//回传刚刚输入的查询条件
+		
 		request.setAttribute("username", username);
 		request.setAttribute("cert_type", cert_type);
 		request.setAttribute("cert", cert);
