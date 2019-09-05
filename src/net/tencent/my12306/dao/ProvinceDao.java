@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.tencent.my12306.entity.Province;
-import net.tencent.my12306.util.DBUtils;
+import net.tencent.my12306.util.DBUtils_pool;
 
 public class ProvinceDao {
 	
@@ -30,7 +30,7 @@ public class ProvinceDao {
 		ResultSet rs=null;
 		try {
 
-			conn = DBUtils.getConnection();
+			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(QUERY_ALL_PROVINCE);
 			rs=stmt.executeQuery();
 			while(rs.next())
@@ -45,7 +45,7 @@ public class ProvinceDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBUtils.release(conn, stmt, rs);
+			DBUtils_pool.release(conn, stmt, rs);
 		}
 		return provinces;
 	}

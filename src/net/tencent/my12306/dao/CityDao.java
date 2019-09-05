@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.tencent.my12306.entity.City;
-import net.tencent.my12306.util.DBUtils;
+import net.tencent.my12306.util.DBUtils_pool;
 
 public class CityDao {
 	
@@ -24,7 +24,7 @@ public class CityDao {
 		ResultSet rs=null;
 		try {
 
-			conn = DBUtils.getConnection();
+			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(QUERY_CITY_BY_PROVINCEID);
 			stmt.setString(1,provinceId);
 			rs=stmt.executeQuery();
@@ -42,7 +42,7 @@ public class CityDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBUtils.release(conn, stmt, rs);
+			DBUtils_pool.release(conn, stmt, rs);
 		}
 		return cities;
 	}
