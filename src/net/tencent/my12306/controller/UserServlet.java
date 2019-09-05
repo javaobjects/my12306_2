@@ -44,6 +44,9 @@ public class UserServlet extends HttpServlet {
 		String confirm_password=request.getParameter("confirm_password");
 		String sex=request.getParameter("sex");
 		String birthday_date=request.getParameter("birthday");
+		
+		String operator = request.getParameter("operator");
+		
 		//2.数据的非空校验和合法性校验
 		StringBuffer sb = validateRegisterForm(username, password, confirm_password);
 		
@@ -71,6 +74,12 @@ public class UserServlet extends HttpServlet {
 			 * 则需要定义判断用户名是否已经存在的方法，如果存在则返回注册页面，
 			 * 提示用户名已经存在，如果不存在则继续注册
 			 */
+			
+
+			if ("checkUsername".equals(operator)) {
+				checkUsername(request, response);
+			}
+			
 			if(userService.isExistsUserName(username)) {
 				//用户名已存在，回到注册页面
 				request.setAttribute("message", "用户名已被占用");
@@ -136,4 +145,38 @@ public class UserServlet extends HttpServlet {
 		return validate_message;
 	}
 
+	/**
+	 * 
+	 * <p>Title: checkUsername</p>  
+	 * <p>
+	 *	Description: 
+	 *	校验用户名是否可用的后台方法
+	 * </p> 
+	 * @param req
+	 * @param resp
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void checkUsername(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String username = req.getParameter("username");
+		//System.out.println(username);
+		
+		 //张三可用，除了张三都不可用
+		
+		//调用底层service，到数据库查询用户名，判断用户名是否可用
+		 UserService userService=UserService.getInstance();
+		resp.setContentType("text/plain;charset=utf-8");
+		
+		//if("zhangsan".equals(username))
+		if(!userService.isExistsUserName(username))
+		{
+			//返回客户端结果：可用
+			resp.getWriter().println("可用");
+		}else
+		{
+			//返回客户端结果：不可用
+			resp.getWriter().println("不可用");
+		}
+	}
 }

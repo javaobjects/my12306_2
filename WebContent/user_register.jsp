@@ -5,6 +5,56 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>注册信息</title>
 <link href="css/css.css" rel="stylesheet" type="text/css">
+<script>
+//定义XMLHttpRequest对象
+var xmlHttpRequest;
+
+function checkUsername() {
+
+	//alert();
+	//把ajax引擎对象XMLHttpRequest实例化
+	xmlHttpRequest = null;
+	if (window.XMLHttpRequest) {// code for all new browsers
+		xmlHttpRequest = new XMLHttpRequest();
+	} else if (window.ActiveXObject) {// code for IE5 and IE6
+		xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+	}else {
+		//alert("Your browser does not support XMLHTTP.");
+	}
+	//alert(xmlHttpRequest==null);
+	
+	//创建ajax引擎对象之后需要做什么？
+	
+	//2.需要获取用户名
+	var username=document.getElementById("username").value;
+	//alert(username);
+	//1.需要创建一个请求url
+	//alert("发送之前："+xmlHttpRequest.readyState);
+	xmlHttpRequest.open("get","UserServlet?operator=checkUsername&username="+username,true);
+	
+	
+	//3.需要指定回调函数
+	
+	xmlHttpRequest.onreadystatechange=getResult;//刚开始readyState是0
+	//4.发送请求
+	
+	xmlHttpRequest.send();
+}
+
+
+//获取校验结果的回调函数
+function getResult()
+{
+	//alert("发送之后："+xmlHttpRequest.readyState);//1,2,3,4
+	if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200)
+		{
+			//alert("ok");
+			//alert(xmlHttpRequest.responseText);
+			document.getElementById("mess").innerText=xmlHttpRequest.responseText;
+		}
+	
+}
+</script>
 </head>
 <%
 request.setCharacterEncoding("utf-8");
@@ -53,7 +103,8 @@ response.setCharacterEncoding("utf-8");
           <tr>
             <td width="19" align="center" class="text_red">*</td>
                   <td width="98" height="40" align="left" class="text_cray1">登录名：</td>
-                  <td width="160" align="left" class="text_cray1"><input name="username" type="text" class="text_cray" id="textfield2" />
+                  <td width="160" align="left" class="text_cray1">
+                  <input name="username" type="text" class="text_cray" id="textfield2" onblur="checkUsername()"/>
                   <%=request.getAttribute("message") %>
                   </td>
                   <td width="423" height="35" align="left" class="text_cray">由字母、数字或“_”组成，长度不少于6位，不多于30位</td>
