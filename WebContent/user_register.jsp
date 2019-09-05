@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-    <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -166,7 +166,7 @@ response.setCharacterEncoding("utf-8");
                   <td width="98" height="40" align="left" class="text_cray1">登录名：</td>
                   <td width="160" align="left" class="text_cray1">
                   <input name="username" type="text" class="text_cray" id="textfield2" onblur="checkUsername()"/>
-                  <%=request.getAttribute("message") %>
+                  <%=request.getAttribute("message") == null ? "" : request.getAttribute("message")%>
                   </td>
                   <td width="423" height="35" align="left" class="text_cray">由字母、数字或“_”组成，长度不少于6位，不多于30位</td>
                 </tr>

@@ -25,8 +25,4 @@ public class ToRegisterViewServlet extends HttpServlet {
 		request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
 		request.getRequestDispatcher("/user_register.jsp").forward(request, response);
 	}
-       
-  
-	
-
 }
