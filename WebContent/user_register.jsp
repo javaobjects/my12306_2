@@ -48,7 +48,10 @@ function checkUsername() {
 function getResult()
 {
 	//alert("发送之后："+xmlHttpRequest.readyState);//1,2,3,4
-	if(xmlHttpRequest.readyState==4&&xmlHttpRequest.status==200)
+	console.info(xmlHttpRequest.readyState);
+	console.info(xmlHttpRequest.status);
+	console.info(xmlHttpRequest.responseText);
+	if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200)
 		{
 			//alert("ok");
 			//alert(xmlHttpRequest.responseText);
@@ -166,6 +169,7 @@ response.setCharacterEncoding("utf-8");
                   <td width="98" height="40" align="left" class="text_cray1">登录名：</td>
                   <td width="160" align="left" class="text_cray1">
                   <input name="username" type="text" class="text_cray" id="username" onblur="checkUsername()"/>
+                  <span id="mess"></span>
                   <%=request.getAttribute("message") == null ? "" : request.getAttribute("message")%>
                   </td>
                   <td width="423" height="35" align="left" class="text_cray">由字母、数字或“_”组成，长度不少于6位，不多于30位</td>
@@ -308,6 +312,12 @@ response.setCharacterEncoding("utf-8");
   </tr>
 </table>
 </form>
+<script src="js/jquery-3.4.1.js"></script>
+<script>
+$(function(){
+	
+})
+</script>
 <!-- <script type="text/JavaScript" src="js/common.js"></script> -->
 </body>
 </html>
