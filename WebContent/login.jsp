@@ -9,7 +9,7 @@
 </style>
 <script language="javascript">
 	function UserRegistration(){
-		location.href = "UserRegistration.html";
+		location.href = "<%=request.getContextPath()%>/ToRegisterViewServlet";
 	}
 </script>
 <script language="javascript">
