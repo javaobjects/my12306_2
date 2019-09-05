@@ -30,7 +30,7 @@ public class DBUtilServlet extends HttpServlet {
 		for (int i = 0; i < 10000; i++) {
 			Connection conn = DBUtils_pool.getConnection();
 			
-		//	System.out.println(conn);
+			System.out.println(conn);
 			
 			try {
 				//还回连接池

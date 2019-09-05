@@ -168,7 +168,7 @@ response.setCharacterEncoding("utf-8");
             <td width="19" align="center" class="text_red">*</td>
                   <td width="98" height="40" align="left" class="text_cray1">登录名：</td>
                   <td width="160" align="left" class="text_cray1">
-                  <input name="username" type="text" class="text_cray" id="username" onblur="checkUsername()"/>
+                  <input name="username" type="text" class="text_cray" id="username"/>  <!-- onblur="checkUsername()" -->
                   <span id="mess"></span>
                   <%=request.getAttribute("message") == null ? "" : request.getAttribute("message")%>
                   </td>
@@ -315,7 +315,27 @@ response.setCharacterEncoding("utf-8");
 <script src="js/jquery-3.4.1.js"></script>
 <script>
 $(function(){
-	
+	$("#username").blur(function(){
+		var username = $("#username").val();
+		console.info(username);
+		$.ajax({
+		       url:"UserServlet?operator=checkUsername&username="+ username,
+		       method:"POST",
+		       data:{},
+		       dataType:"json",
+		       beforeSend:function (XMLHttpRequest) {},
+		       success:function (data,textStatus,XMLHttpRequest) {
+		    	   console.log(data);
+		    	   $("#mess").text(data);
+		       },
+		       error:function (XMLHttpRequest,textStatus,errorThorwn) {
+		              console.error(XMLHttpRequest);
+		              console.error(textStatus);
+		              console.error(errorThorwn)
+		       },
+		       complete:function (XMLHttpRequest,textStatus) {}
+		       })
+	});
 })
 </script>
 <!-- <script type="text/JavaScript" src="js/common.js"></script> -->
