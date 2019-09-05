@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+    <!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,6 +57,7 @@ function getResult()
 	
 }
 </script>
+
 </head>
 <%
 request.setCharacterEncoding("utf-8");
@@ -152,8 +155,11 @@ response.setCharacterEncoding("utf-8");
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">省份：</td>
                   <td width="104" height="35" align="left"><label>
-                    <select name="province" class="text_cray" id="province">
-                      <option value="省份" selected="selected">省份</option>
+                    <select name="province" class="text_cray" id="province" onchange="getCity()">
+                      <option selected="selected">--请选择省份--</option>
+                      <c:forEach items="${provinces}" var="p">
+                      	<option value="${p.provinceId}">${p.provinceName}</option>
+                      </c:forEach>
                     </select>
                   </label></td>
                   <td width="43" height="35" align="left"  class="text_cray">城市：</td>
@@ -244,6 +250,6 @@ response.setCharacterEncoding("utf-8");
   </tr>
 </table>
 </form>
-<script type="text/JavaScript" src="js/common.js"></script>
+<!-- <script type="text/JavaScript" src="js/common.js"></script> -->
 </body>
 </html>
