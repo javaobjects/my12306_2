@@ -52,31 +52,63 @@
           <tr>
             <td height="10" colspan="4" ></td>
           </tr>
-          <tr>
-            <td width="20" align="center" class="text_red1"></td>
-            <td width="100" height="40" align="left" class="text_cray1">登录名：</td>
-            <td width="350" align="left" class="text_cray1">
-            	<input name="username" type="text"  class="text_cray" id="textfield22" value="${userinfo.username}" readonly="readonly"/>
-           	</td>
-            <td width="230" colspan="-1" rowspan="7" align="center" background="<%=request.getContextPath()%>/images/bg_point_write.gif" class="text_cray1">
-            	<img src="../images/photo_mr.jpg" width="120">              
-            		<table width="90%" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td height="15" >
-                  </td>
-                </tr>
-                <tr>
-                  <td height="7" align="center" class="text_cray">上传照片</td>
-                </tr>
-                <tr>
-                  <td height="8" ></td>
-                </tr>
-                <tr>
-                  <td align="center"><input name="uploadFile" type="file" class="text_cray" size="20" /></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+          
+		<tr>
+			<td width="20" align="center" class="text_red1"><input
+				type="hidden" value="${userinfo.id}" name="id" /></td>
+			<td width="100" height="40" align="left" class="text_cray1">登录名：</td>
+			<td width="350" align="left" class="text_cray1"><input
+				name="username" type="text" disabled="true" class="text_cray"
+				id="textfield22" value="${userinfo.username}"
+				readonly="readonly" /></td>
+			<td width="230" colspan="-1" rowspan="7" align="center"
+				background="<%=request.getContextPath()%>/images/bg_point_write.gif"
+				class="text_cray1"><img src="<%=request.getContextPath()%>/photos/${userinfo.imagePath}"
+				width="120">
+					<table width="90%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="15"></td>
+						</tr>
+						<tr>
+							<td height="7" align="center" class="text_cray">上传照片</td>
+						</tr>
+						<tr>
+							<td height="8"></td>
+						</tr>
+						<tr>
+							<td align="center"><input name="uploadFile" type="file"
+								class="text_cray" size="20" /><input type="button"
+								value="上传" onclick="upload()" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		<script>
+          function upload()
+          {
+        	  //alert();
+        	  //表单提交，上传照片，告诉我是成功还是失败，最好回显照片
+        	  
+        	  //1.获取表单元素
+        	  var form=document.getElementById("form1");
+        	  
+        	  //2.修改表单的属性：支持进行二进制数据的提交
+        	  form.encoding="multipart/form-data";
+        	  
+        	  //3.指定处理上传图片请求的servlet
+        	  form.action="UploadPhotoServlet";
+        	  
+        	  //4.表单提交
+        	  form.submit();
+        	  //以下代码将表单属性还原
+        	  //需要修改表单的enctype属性，js中的代码如下：
+        	  form.encoding="application/x-www-form-urlencoded";
+        	  form.action="UpdateUserServlet";
+        	  
+          }
+          
+         </script>
+          
           <tr>
             <td width="20" ></td>
             <td width="100" height="40" align="left" class="text_cray1">真实姓名：</td>
