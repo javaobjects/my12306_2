@@ -247,7 +247,5 @@ public class AdminManageUserServlet extends HttpServlet {
 		//由于不需要带礼物（传递数据）给页面，所以直接跳转过去
 		request.getRequestDispatcher("/admin/userlist.jsp").forward(request, response);
 	}
-       
-   
 
 }
