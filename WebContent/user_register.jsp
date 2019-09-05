@@ -165,7 +165,7 @@ response.setCharacterEncoding("utf-8");
             <td width="19" align="center" class="text_red">*</td>
                   <td width="98" height="40" align="left" class="text_cray1">登录名：</td>
                   <td width="160" align="left" class="text_cray1">
-                  <input name="username" type="text" class="text_cray" id="textfield2" onblur="checkUsername()"/>
+                  <input name="username" type="text" class="text_cray" id="username" onblur="checkUsername()"/>
                   <%=request.getAttribute("message") == null ? "" : request.getAttribute("message")%>
                   </td>
                   <td width="423" height="35" align="left" class="text_cray">由字母、数字或“_”组成，长度不少于6位，不多于30位</td>
