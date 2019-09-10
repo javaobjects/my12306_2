@@ -58,18 +58,6 @@ public class UsersDao {
 
 			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(ADD_USER);
-			System.out.println("username:" + user.getUsername());
-			System.out.println("password:" + user.getPassword());
-			System.out.println("realname:"+ user.getRealname());
-			System.out.println("sex:"+ user.getSex());
-			System.out.println("city:" + user.getCity().getId());
-			System.out.println("certtype:" + user.getCerttype().getId().toString());
-			System.out.println("cert:" + user.getCert());
-			System.out.println("birthday:" + user.getBirthday().getTime());
-			System.out.println("usertype:" + user.getUsertype().getId());
-			System.out.println("content:" + user.getContent());
-			System.out.println("loginip:" + user.getLoginIp());
-			
 			
 			stmt.setString(1, user.getUsername());//用户名
 			stmt.setString(2, Md5Utils.md5(user.getPassword()));//密码
