@@ -12,6 +12,7 @@ import net.tencent.my12306.entity.Province;
 import net.tencent.my12306.entity.UserType;
 import net.tencent.my12306.entity.Users;
 import net.tencent.my12306.util.DBUtils_pool;
+import net.tencent.my12306.util.Md5Utils;
 
 public class UsersDao {
 
@@ -26,7 +27,8 @@ public class UsersDao {
 	 */
 	private static final String ADD_USER = "insert into my12306_2_user(id,username,password,rule,realname,sex,city,cert_type"
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path)"
-			+ " values (tab_user_seq.nextval,?,?,'2','张三',?,200,1,'440104201910106119',?,1,'备注','1',?,'')";
+			+ " values (tab_user_seq.nextval,?,?,'2',?,?,?,?,?,?,?,?,'1',?,'')";
+		//	+ " values (tab_user_seq.nextval,?,?,'2',?,?,200,1,'440104201910106119',?,1,'备注','1',?,'')";
 	private static final String QUERY_USERNAME = "select count(1) as col_count from my12306_2_user where username = ?";
 	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select u.id,u.username,u.password,u.rule,"
 			+ "u.realname,u.sex,u.city c_id,u.cert_type"
@@ -56,11 +58,18 @@ public class UsersDao {
 
 			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(ADD_USER);
-			stmt.setString(1, user.getUsername());
-			stmt.setString(2, user.getPassword());
-			stmt.setString(3, user.getSex() + "");
-			stmt.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
-			stmt.setString(5, user.getLoginIp());
+			stmt.setString(1, user.getUsername());//用户名
+			stmt.setString(2, Md5Utils.md5(user.getPassword()));//密码
+			//权限默认为2
+			stmt.setString(3, user.getRealname());//真实姓名
+			stmt.setString(4, user.getSex() + "");//性别
+			stmt.setInt(5, Integer.parseInt(user.getCity().getCityId()));//城市
+			stmt.setString(6, user.getCerttype().getId().toString());//证件类型
+			stmt.setString(7, user.getCert());//证件号码
+			stmt.setDate(8, new java.sql.Date(user.getBirthday().getTime()));//生日
+			stmt.setInt(9, user.getUsertype().getId());//旅客类型
+			stmt.setString(10, user.getContent());//备注
+			stmt.setString(11, user.getLoginIp());//Ip地址
 			
 			rows=stmt.executeUpdate();
 
@@ -322,6 +331,7 @@ public class UsersDao {
 	}
 
 	public void insertImage(Integer id, String fileName) {
+
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		
@@ -341,4 +351,5 @@ public class UsersDao {
 			DBUtils_pool.release(conn, stmt, null);
 		}
 	}
+
 }

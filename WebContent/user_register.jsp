@@ -192,7 +192,9 @@ response.setCharacterEncoding("utf-8");
             <tr>
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">真实姓名：</td>
-                  <td height="35" colspan="3" align="left"><input name="textfield2" type="text" class="text_cray" id="textfield2" /></td>
+                  <td height="35" colspan="3" align="left">
+                  <input name="real_name" type="text" class="text_cray" id="textfield2" />
+                  </td>
                 </tr>
             <tr>
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
@@ -232,7 +234,7 @@ response.setCharacterEncoding("utf-8");
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">证件类型：</td>
                   <td height="35" colspan="3" align="left">
-                    <select class="text_cray" name="loginUserDTO.id_type_code" id="cardType">
+                    <select class="text_cray" name="cert_type" id="cardType">
                       <option value="1"><span>二代身份证</span>				</option>
                       <option value="C"><span>港澳通行证</span>				</option>
                       <option value="G"><span>台湾通行证</span>				</option>
@@ -242,7 +244,9 @@ response.setCharacterEncoding("utf-8");
             <tr>
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">证件号码：</td>
-                  <td height="35" colspan="3" align="left"><input name="textfield6" type="text" class="text_cray" id="textfield6" /></td>
+                  <td height="35" colspan="3" align="left">
+                  <input name="cert" type="text" class="text_cray" id="textfield6" />
+                  </td>
                 </tr>
             <tr>
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
@@ -255,7 +259,8 @@ response.setCharacterEncoding("utf-8");
               <td width="19" align="center">&nbsp;</td>
                   <td width="98" height="40" align="left" class="text_cray1">旅客类型：</td>
                   <td height="35" colspan="3" align="left">
-                    <select class="text_cray" id="passengerType" name="passenger_type"><option value="1">成人</option>
+                    <select class="text_cray" id="passengerType" name="usertype">
+                      <option value="1">成人</option>
                       <option value="2">儿童</option>
                       <option value="3">学生</option>
                       <option value="4">残疾军人、伤残人民警察</option>
@@ -274,17 +279,15 @@ response.setCharacterEncoding("utf-8");
               <td width="19" align="center">&nbsp;</td>
                   <td width="98" height="30" align="left" class="text_cray1">备注：</td>
                   <td colspan="3" align="left" height="80">
-                  <textarea name="textarea" rows="8" class="text_cray" style="width:100%"></textarea>				</td>
+                  <textarea name="content" rows="8" class="text_cray" style="width:100%"></textarea>				</td>
                 </tr>
-            
-            
-            
             <tr>
               <td align="center">&nbsp;</td>
                   <td height="30" align="left" class="text_cray1"></td>
                   <td height="50" colspan="3" align="left" valign="middle" class="text_cray1">
-                  <input type="checkbox" class="check" id="checkAgree" /> 
-                  我已阅读并同意遵守				<a href="/otn/regist/rule;jsessionid=FA97B306AACF75E37DD4D10CFD59994A" class="ft14" target="_blank" shape="rect"> 《中国铁路客户服务中心网站服务条款》</a></td>
+                  <input type="checkbox" class="check" id="checkAgree" name="agree"/> 
+                  我已阅读并同意遵守				
+                  <a href="https://www.taobao.com" class="ft14" target="_blank" shape="rect"> 《中国铁路客户服务中心网站服务条款》</a></td>
                 </tr>
           </table> <br>        
           <table width="835" border="0" align="center" cellpadding="0" cellspacing="0">
