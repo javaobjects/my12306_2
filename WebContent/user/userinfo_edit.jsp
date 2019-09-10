@@ -147,7 +147,9 @@
   	{
   		Province p=(Province)it.next();
   		%>
-  		<option value="<%=p.getProvinceId()%>" <%=p.getProvinceId().equals(user.getCity().getProvince().getProvinceId())?"selected":"" %>><%=p.getProvinceName() %></option>
+  		<option value="<%=p.getProvinceId()%>" 
+  		<%=p.getProvinceId().equals(user.getCity().getProvince().getProvinceId())?"selected":"" %>>
+  		<%=p.getProvinceName() %></option>
   		<% 
   	}
   	%>

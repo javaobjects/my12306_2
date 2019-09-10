@@ -183,7 +183,8 @@ public class AdminManageUserServlet extends HttpServlet {
 	 * 
 	 * 进来的数据有哪些：username  cert_type cert user_type sex  pageCount
 	 * 
-	 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），username  cert_type cert user_type sex  pageCount要回显，
+	 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），
+	 * username  cert_type cert user_type sex  pageCount要回显，
 	 * 
 	 * @param request
 	 * @param response

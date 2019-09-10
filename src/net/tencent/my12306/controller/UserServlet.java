@@ -21,130 +21,115 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/*
-	 stmt.setString(1, user.getUsername());
-		stmt.setString(2, user.getPassword());
-		stmt.setString(3, user.getSex() + "");
-		stmt.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
-		stmt.setString(5, user.getLoginIp());
+	 * stmt.setString(1, user.getUsername()); stmt.setString(2, user.getPassword());
+	 * stmt.setString(3, user.getSex() + ""); stmt.setDate(4, new
+	 * java.sql.Date(user.getBirthday().getTime())); stmt.setString(5,
+	 * user.getLoginIp());
 	 */
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		/*
-		 stmt.setString(1, user.getUsername());
-			stmt.setString(2, user.getPassword());
-			stmt.setString(3, user.getSex() + "");
-			stmt.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
-			stmt.setString(5, user.getLoginIp());
-		 */
-		//1.获取数据
-		String username=request.getParameter("username");
-		String password=request.getParameter("password");
-		String confirm_password=request.getParameter("confirm_password");
-		String sex=request.getParameter("sex");
-		String birthday_date=request.getParameter("birthday");
 		
-		String operator = request.getParameter("operator");
-		System.out.println("line 49   " + operator);
-		
-		System.out.println("line 79   " + "checkUsername".equals(operator));
+		// 1.获取数据
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String confirm_password = request.getParameter("confirm_password");
+		String sex = request.getParameter("sex");
+		String birthday_date = request.getParameter("birthday");
 
-		if ("checkUsername".equals(operator)) {
-			System.out.println("line 82 ");
-			checkUsername(request, response);
-		}
-		
-		//2.数据的非空校验和合法性校验
+//		String operator = request.getParameter("operator");
+//
+//		if ("checkUsername".equals(operator)) {
+//			checkUsername(request, response);
+//		}
+
+		// 2.数据的非空校验和合法性校验
 		StringBuffer sb = validateRegisterForm(username, password, confirm_password);
-		
-		if(sb.length() > 0) {
-			//如果校验不通过，那么返回注册页面，让用户再注册一次
+
+		if (sb.length() > 0) {
+			// 如果校验不通过，那么返回注册页面，让用户再注册一次
 			request.setAttribute("message", "必填信息为空，请重新注册");
 			request.getRequestDispatcher("/user_register.jsp").forward(request, response);
-		}else {
-			//3.调用底层service的注册方法添加用户到数据库
-			Date birthday=null;
+		} else {
+			// 3.调用底层service的注册方法添加用户到数据库
+			Date birthday = null;
 			try {
-				birthday=new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthday"));
+				birthday = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("birthday"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			UserService userService=UserService.getInstance();
-			
-			Users user=new Users(request.getParameter("username"), request.getParameter("password"), 
+
+			UserService userService = UserService.getInstance();
+
+			Users user = new Users(request.getParameter("username"), request.getParameter("password"),
 					request.getParameter("sex").charAt(0), birthday);
 			user.setLoginIp(request.getRemoteAddr());
-			
-			//服务端校验通过之后，注册方法调用之前，应该先判断用户名是否经存在
+
+			// 服务端校验通过之后，注册方法调用之前，应该先判断用户名是否经存在
 			/**
-			 * 则需要定义判断用户名是否已经存在的方法，如果存在则返回注册页面，
-			 * 提示用户名已经存在，如果不存在则继续注册
+			 * 则需要定义判断用户名是否已经存在的方法，如果存在则返回注册页面， 提示用户名已经存在，如果不存在则继续注册
 			 */
-			
-		
-			
-			if(userService.isExistsUserName(username)) {
-				//用户名已存在，回到注册页面
+
+			if (userService.isExistsUserName(username)) {
+				// 用户名已存在，回到注册页面
 				request.setAttribute("message", "用户名已被占用");
 				request.getRequestDispatcher("/user_register.jsp").forward(request, response);
-			}else {
-				if(userService.register(user))
-				{
+			} else {
+				if (userService.register(user)) {
 //					System.out.println("register success");
-					//注册成功，去到登录页面
+					// 注册成功，去到登录页面
 //					request.getRequestDispatcher("/login.jsp").forward(request, response);
-					
-					 //弹窗效果:技术实现，对响应进行设置，响应就是response
+
+					// 弹窗效果:技术实现，对响应进行设置，响应就是response
 //						response.setContentType("text/html;charset=utf-8");
 //						//获取输出流，输出一段script代码
 //						PrintWriter pw=response.getWriter();
 //						pw.println("<script>alert('"+"注册成功"+"');location.href='login.jsp';</script>");
-					//生产环境不用挨骂的代码：需求,既要有弹窗又要重定向登录页面
-					
-					response.sendRedirect(request.getContextPath()+"/login.jsp?message=registersuccess");
-					
+					// 生产环境不用挨骂的代码：需求,既要有弹窗又要重定向登录页面
+
+					response.sendRedirect(request.getContextPath() + "/login.jsp?message=注册成功");
+
 //					response.sendRedirect(request.getContextPath()+ "/login.jsp");//request.getContextPath() === /my12306_user_register
-				}else
-				{
+				} else {
 //					System.out.println("register fail");
-					//注册失败，回到注册页面
+					// 注册失败，回到注册页面
 					request.setAttribute("message", "注册失败");
 					request.getRequestDispatcher("/user_register.jsp").forward(request, response);
 				}
 			}
 		}
+		
+		
+		
 	}
 
 	/**
 	 * 
-	 * <p>Title: validateRegisterForm</p>  
 	 * <p>
-	 *	Description: 
-	 *	对表单进行服务端校验的方法 
-	 * </p> 
+	 * Title: validateRegisterForm
+	 * </p>
+	 * <p>
+	 * Description: 对表单进行服务端校验的方法
+	 * </p>
+	 * 
 	 * @param username
 	 * @param password
 	 * @param confirm_password
 	 */
-	private StringBuffer validateRegisterForm(String username, String password,
-			String confirm_password) {
-		StringBuffer validate_message=new StringBuffer();
-		if(username==null||"".equals(username))
-		{
+	private StringBuffer validateRegisterForm(String username, String password, String confirm_password) {
+		StringBuffer validate_message = new StringBuffer();
+		if (username == null || "".equals(username)) {
 			validate_message.append("用户名为空");
 		}
-		if(password==null||"".equals(password)||confirm_password==null||"".equals(confirm_password))
-		{
+		if (password == null || "".equals(password) || confirm_password == null || "".equals(confirm_password)) {
 			validate_message.append("密码或者确认密码为空");
 		}
-		if(!password.equals(confirm_password))
-		{
+		if (!password.equals(confirm_password)) {
 			validate_message.append("两次密码输入不一致");
 		}
-		if(validate_message.length()>0)
-		{
+		if (validate_message.length() > 0) {
 			System.out.println(validate_message.toString());
 		}
 		return validate_message;
@@ -152,11 +137,13 @@ public class UserServlet extends HttpServlet {
 
 	/**
 	 * 
-	 * <p>Title: checkUsername</p>  
 	 * <p>
-	 *	Description: 
-	 *	校验用户名是否可用的后台方法
-	 * </p> 
+	 * Title: checkUsername
+	 * </p>
+	 * <p>
+	 * Description: 校验用户名是否可用的后台方法
+	 * </p>
+	 * 
 	 * @param req
 	 * @param resp
 	 * @throws ServletException
@@ -165,25 +152,18 @@ public class UserServlet extends HttpServlet {
 	private void checkUsername(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
-		System.out.println(username);
-		
-		 //张三可用，除了张三都不可用
-		
-		//调用底层service，到数据库查询用户名，判断用户名是否可用
-		 UserService userService=UserService.getInstance();
-		 response.setContentType("text/plain;charset=utf-8");
-		
-		//if("zhangsan".equals(username))
-		if(!userService.isExistsUserName(username))
-		{
-			System.out.println("line 177 +可用");
-			//返回客户端结果：可用
-			response.getWriter().println("可用");
-		}else
-		{
-			System.out.println("line 182 + 不可用");
-			//返回客户端结果：不可用
-			response.getWriter().println("不可用");
+		if (username == null || "".equals(username)) {
+			response.getWriter().println("用户名为空");
+		}else {
+			// 调用底层service，到数据库查询用户名，判断用户名是否可用
+			UserService userService = UserService.getInstance();
+			response.setContentType("text/plain;charset=utf-8");
+
+			if (!userService.isExistsUserName(username)) {
+				response.getWriter().println("可用");
+			} else {
+				response.getWriter().println("不可用");
+			}
 		}
 	}
 }

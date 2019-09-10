@@ -65,10 +65,8 @@ function getResult()
 var xhr;
 function getCity()
 {
-	alert("getCity");
 	//1.获取省份id
 	var pid=document.getElementById("province").value;
-	alert(pid);
 	
 	//2.实例化ajax引擎对象，定义全局变量
 	xhr = null;
@@ -79,7 +77,6 @@ function getCity()
 		}else {
 			//alert("Your browser does not support XMLHTTP.");
 		}
-		alert(xhr==null);
 	//3.调用open方法创建连接
 	xhr.open("get","GetCityServlet?pid="+pid,true);
 	//4.指定回调函数
@@ -250,7 +247,8 @@ response.setCharacterEncoding("utf-8");
             <tr>
               <td width="19" align="center" class="text_red1"><span class="text_red">*</span></td>
                   <td width="98" height="40" align="left" class="text_cray1">出生日期：</td>
-                  <td height="35" colspan="3" align="left"><input name="birthday" type="text" class="text_cray" id="textfield7" /></td>
+                  <td height="35" colspan="3" align="left">
+                  <input name="birthday" type="date" class="text_cray" id="textfield7" /></td>
                 </tr>
             
             <tr>
@@ -315,14 +313,14 @@ response.setCharacterEncoding("utf-8");
 <script src="js/jquery-3.4.1.js"></script>
 <script>
 $(function(){
-	$("#username").blur(function(){
+ /* 	$("#username").blur(function(){
 		var username = $("#username").val();
 		console.info(username);
 		$.ajax({
 		       url:"UserServlet?operator=checkUsername&username="+ username,
 		       method:"POST",
 		       data:{},
-		       dataType:"json",
+		       dataType:"text",
 		       beforeSend:function (XMLHttpRequest) {},
 		       success:function (data,textStatus,XMLHttpRequest) {
 		    	   console.log(data);
@@ -335,7 +333,7 @@ $(function(){
 		       },
 		       complete:function (XMLHttpRequest,textStatus) {}
 		       })
-	});
+	});  */
 })
 </script>
 <!-- <script type="text/JavaScript" src="js/common.js"></script> -->

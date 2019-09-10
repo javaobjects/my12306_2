@@ -44,7 +44,7 @@ public class GetCityServlet extends HttpServlet {
 			//<city><cid>41</cid><cname>长沙市</cname></city>
 			writer.write("<city><cid>"+city.getId()+"</cid><cname>"+city.getCityName()+"</cname></city>");
 		}
-		 writer.write("</cities>");
+		writer.write("</cities>");
 		writer.flush();
 		writer.close();
 	}

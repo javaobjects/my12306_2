@@ -27,7 +27,7 @@ public class UsersDao {
 	private static final String ADD_USER = "insert into my12306_2_user(id,username,password,rule,realname,sex,city,cert_type"
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path)"
 			+ " values (tab_user_seq.nextval,?,?,'2','张三',?,200,1,'440104201910106119',?,1,'备注','1',?,'')";
-	private static final String QUERY_USERNAME = "select count(1) from my12306_2_user where username = ?";
+	private static final String QUERY_USERNAME = "select count(1) as col_count from my12306_2_user where username = ?";
 	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select u.id,u.username,u.password,u.rule,"
 			+ "u.realname,u.sex,u.city c_id,u.cert_type"
 			+ ",u.cert,u.birthday,u.user_type,u.content,u.status,u.login_ip,u.image_path,"
@@ -96,7 +96,7 @@ public class UsersDao {
 
 			rs = stmt.executeQuery();
 			if(rs.next()) {
-				int tmp = rs.getInt("count");
+				int tmp = rs.getInt("col_count");
 				if(tmp > 0) {
 					result = true;
 				}
