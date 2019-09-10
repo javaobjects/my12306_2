@@ -33,8 +33,6 @@ public class LoginServlet extends HttpServlet {
 				String code=request.getParameter("code");
 				String auto=request.getParameter("auto_login");// 获取用户是否自动登录的复选框的值
 				
-				
-				
 				//2.服务端非空校验
 				StringBuffer sb=new StringBuffer();
 				if(username==null||"".equals(username.trim()))

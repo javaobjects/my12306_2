@@ -144,7 +144,7 @@ if(message!=null)
       <tr>
         <td height="20" align="right"><img src="<%=request.getContextPath()%>/images/text_yzm.gif" width="60" height="18"></td>
         <td>&nbsp;</td>
-        <td><input name="textfield3" type="text" id="textfield3" size="18" /></td>
+        <td><input name="code" type="text" id="textfield3" size="18" /></td>
         <td><span class="text_cray1">
         	<img src="<%=request.getContextPath()%>/ValidateCodeServlet" alt="" height="20" id="yzm" onclick="shuaxin()"/>
         </span></td>
