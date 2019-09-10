@@ -88,7 +88,10 @@ public class UserServlet extends HttpServlet {
 			
 			Users user = new Users(null,username,password,"2",real_name,sex.charAt(0),
 					new City(null,city,null,new Province(null,province,null)),
-					new CertType(Integer.parseInt(cert_type),null),cert,birthday,
+//					new City(null,city,null,new Province()),
+					new CertType(Integer.parseInt(cert_type),null),
+					cert,
+					birthday,
 					new UserType(Integer.parseInt(usertype),null),content,'1',request.getRemoteAddr(),"");
 			
 			
