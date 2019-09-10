@@ -236,9 +236,9 @@ response.setCharacterEncoding("utf-8");
                   <td height="35" colspan="3" align="left">
                     <select class="text_cray" name="cert_type" id="cardType">
                       <option value="1"><span>二代身份证</span>				</option>
-                      <option value="C"><span>港澳通行证</span>				</option>
-                      <option value="G"><span>台湾通行证</span>				</option>
-                      <option value="B"><span>护照</span>				</option>
+                      <option value="2"><span>港澳通行证</span>				</option>
+                      <option value="3"><span>台湾通行证</span>				</option>
+                      <option value="4"><span>护照</span>				</option>
                   </select>				</td>
                 </tr>
             <tr>
