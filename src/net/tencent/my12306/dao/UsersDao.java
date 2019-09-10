@@ -62,7 +62,7 @@ public class UsersDao {
 			System.out.println("password:" + user.getPassword());
 			System.out.println("realname:"+ user.getRealname());
 			System.out.println("sex:"+ user.getSex());
-			System.out.println("cityid:" + user.getCity().getCityId());
+			System.out.println("city:" + user.getCity().getId());
 			System.out.println("certtype:" + user.getCerttype().getId().toString());
 			System.out.println("cert:" + user.getCert());
 			System.out.println("birthday:" + user.getBirthday().getTime());

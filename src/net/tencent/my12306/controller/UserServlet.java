@@ -43,7 +43,7 @@ public class UserServlet extends HttpServlet {
 		String real_name = request.getParameter("real_name");//真实姓名
 		String sex = request.getParameter("sex");//性别
 		String province = request.getParameter("province");//省份
-		String city = request.getParameter("province");//城市 
+		String city = request.getParameter("city");//城市 
 		String cert_type = request.getParameter("cert_type");//证件类型
 		String cert = request.getParameter("cert");//证件号码
 		String birthday_date = request.getParameter("birthday");//出生日期
@@ -87,7 +87,7 @@ public class UserServlet extends HttpServlet {
 			 */			
 			
 			Users user = new Users(null,username,password,"2",real_name,sex.charAt(0),
-					new City(null,city,null,new Province(null,province,null)),
+					new City(Integer.parseInt(city),null,null,new Province(null,province,null)),
 					new CertType(Integer.parseInt(cert_type),null),
 					cert,
 					birthday,
@@ -116,7 +116,7 @@ public class UserServlet extends HttpServlet {
 //						pw.println("<script>alert('"+"注册成功"+"');location.href='login.jsp';</script>");
 					// 生产环境不用挨骂的代码：需求,既要有弹窗又要重定向登录页面
 
-					response.sendRedirect(request.getContextPath() + "/login.jsp?message=注册成功");
+					response.sendRedirect(request.getContextPath() + "/login.jsp?message='注册成功'");
 
 //					response.sendRedirect(request.getContextPath()+ "/login.jsp");//request.getContextPath() === /my12306_user_register
 				} else {

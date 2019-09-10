@@ -76,6 +76,9 @@ if(cookies!=null)
 %>
 <%
 
+request.setCharacterEncoding("utf-8");
+response.setCharacterEncoding("utf-8");
+
 String message=request.getParameter("message");
 
 if(message!=null)
