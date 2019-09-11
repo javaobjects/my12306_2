@@ -25,3 +25,9 @@
 原因：前端JSP页面value里的值为C或G或者任何字母,不能转换成数值。
 
 解决：将前端JSP页面中的value里的值更改为数字类型的字符串即可
+
+3. 数据库能根据用户名密码能够查到而页面却不能登陆
+
+![](WebContent/bug/bug3.png)
+
+![](WebContent/bug/bug3_1.png)
