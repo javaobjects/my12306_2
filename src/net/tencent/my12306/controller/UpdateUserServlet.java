@@ -40,7 +40,6 @@ public class UpdateUserServlet extends HttpServlet {
 		String usertype = request.getParameter("usertype");
 		String content = request.getParameter("content");
 		
-		
 		//3.把数据封装到User对象中
 		Date birth = null;
 		try{

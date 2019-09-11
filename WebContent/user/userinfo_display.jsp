@@ -28,10 +28,14 @@ Users user = (Users)request.getAttribute("userinfo");
   </tr>
   <tr>
     <td width="64" align="center" ></td>
-    <td width="771" height="30" align="left" valign="top" ><span class="text_blod_title">查看个人信息</span></td>
+    <td width="771" height="30" align="left" valign="top" >
+   		<span class="text_blod_title">查看个人信息</span>
+    </td>
   </tr>
   <tr>
-    <td height="15" colspan="2" ><img src="<%=request.getContextPath()%>/images/line1.jpg" width="835" height="6"></td>
+    <td height="15" colspan="2" >
+    	<img src="<%=request.getContextPath()%>/images/line1.jpg" width="835" height="6">
+   	</td>
   </tr>
   <tr>
     <td colspan="2" valign="top"  ><table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -44,14 +48,13 @@ Users user = (Users)request.getAttribute("userinfo");
           <tr>
             <td height="10" colspan="4" ></td>
           </tr>
-          
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">登录名：</td>
             <td width="350" align="left" class="text_cray"><%=user.getUsername() %></td>
             <td width="230" rowspan="5" align="center"
              background="<%=request.getContextPath() %>/images/bg_point_write.gif" class="text_cray">
-             <img src="<%=request.getContextPath() %>/images/photo.jpg" width="139" height="139">
+             <img src="<%=request.getContextPath()+"/photos/"+user.getImagePath() %>" width="139" height="139">
              </td>
           </tr>
           <tr>

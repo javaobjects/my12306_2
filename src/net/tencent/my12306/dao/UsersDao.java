@@ -151,7 +151,6 @@ public class UsersDao {
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path
 				 */
 				user.setId(rs.getInt("id"));
-				System.out.println("id:" + rs.getInt("id"));
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
 				user.setRule(rs.getString("rule"));

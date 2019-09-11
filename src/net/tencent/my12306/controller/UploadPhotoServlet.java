@@ -54,8 +54,8 @@ public class UploadPhotoServlet extends HttpServlet {
 			String fileName = getFileName(header);
 			// 把文件写到指定路径
 			//UUID.randomUUID()+".jpg"
-			part.write(savePath + File.separator + fileName);//   /
-		
+			part.write(savePath + File.separator + fileName);//
+
 			//把这个照片路径保存到数据库
 
 			HttpSession session = request.getSession();
@@ -63,14 +63,11 @@ public class UploadPhotoServlet extends HttpServlet {
 			UserService userService = UserService.getInstance();
 			Users user = userService.login(user_session.getUsername(), 
 					user_session.getPassword());
-			session.setAttribute("user", user);
 			
 			//之前的代码
 //			HttpSession session = request.getSession();
 //			Users user = (Users)session.getAttribute("user");
 			
-			System.out.println("user:" + user);
-			System.out.println("user.getId(): " + user.getId());
 			UserService.getInstance().saveImage(user.getId(),fileName);
 			//回到更新用户信息页面，让用户看到自己的照片
 			response.sendRedirect("ToUpdateUserServlet");
