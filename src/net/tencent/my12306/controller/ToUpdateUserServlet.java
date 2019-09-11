@@ -44,7 +44,6 @@ public class ToUpdateUserServlet extends HttpServlet {
 				
 				Users result=UserService.getInstance().login(user.getUsername(), user.getPassword());
 				
-				System.out.println(result);
 				
 				
 				//2.把用户信息传给页面，并跳转到目标页面

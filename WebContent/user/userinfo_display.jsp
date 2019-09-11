@@ -107,7 +107,9 @@ Users user = (Users)request.getAttribute("userinfo");
       </table>
       <table width="263" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td height="30" align="center"><input name="button" type="button" class="butxg" id="button"value="" onClick="UpdateInfo()"></td>
+          <td height="30" align="center">
+          	<input name="button" type="button" class="butxg" id="button"value="" onClick="UpdateInfo()">
+          </td>
           </tr>
       </table>
     </table>
@@ -121,7 +123,8 @@ Users user = (Users)request.getAttribute("userinfo");
       <td height="2" background="<%=request.getContextPath()%>/images/bottom_point.gif"></td>
     </tr>
     <tr>
-      <td height="25" align="center" background="<%=request.getContextPath()%>/images/bottom_ny_bg.gif" class="text_cray">copyright@12306 购票网</td>
+      <td height="25" align="center" background="<%=request.getContextPath()%>/images/bottom_ny_bg.gif" 
+      class="text_cray">copyright@12306 购票网</td>
     </tr>
   </table>
   </td>

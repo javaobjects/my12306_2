@@ -6,7 +6,7 @@
      <!-- 使用jstl:java standard tag library(单词缩写)
  1.需要先导入jstl.jar包 2.页面通过指令引入标签  3.使用标签 -->   
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-    <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,13 +33,14 @@
     <td width="786" height="30" align="left" class="text_blod_title">修改个人信息</td>
   </tr>
   <tr>
-    <td height="15" colspan="2" ><img src="../images/line1.jpg" width="835" height="6"></td>
+    <td height="15" colspan="2" ><img src="<%=request.getContextPath() %>/images/line1.jpg" width="835" height="6"></td>
   </tr>
   <tr>
     <td colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="64"></td>
-        <td width="772" height="25" align="left" class="text_cray">注：标有 <span class="text_red">*</span> 处，均为必填项</td>
+        <td width="772" height="25" align="left" class="text_cray">注：标有
+         <span class="text_red">*</span> 处，均为必填项</td>
       </tr>
       <tr>
         <td height="20" colspan="2"></td>
@@ -63,8 +64,8 @@
 				readonly="readonly" /></td>
 			<td width="230" colspan="-1" rowspan="7" align="center"
 				background="<%=request.getContextPath()%>/images/bg_point_write.gif"
-				class="text_cray1"><img src="<%=request.getContextPath()%>/photos/${userinfo.imagePath}"
-				width="120">
+				class="text_cray1">
+				<img src="<%=request.getContextPath()%>/photos/${userinfo.imagePath}" width="120">
 					<table width="90%" border="0" cellpadding="0" cellspacing="0">
 						<tr>
 							<td height="15"></td>
@@ -76,9 +77,10 @@
 							<td height="8"></td>
 						</tr>
 						<tr>
-							<td align="center"><input name="uploadFile" type="file"
-								class="text_cray" size="20" /><input type="button"
-								value="上传" onclick="upload()" /></td>
+							<td align="center">
+								<input name="uploadFile" type="file" class="text_cray" size="20" />
+								<input type="button" value="上传" onclick="upload()" />
+							</td>
 						</tr>
 					</table>
 				</td>
@@ -90,20 +92,20 @@
         	  //表单提交，上传照片，告诉我是成功还是失败，最好回显照片
         	  
         	  //1.获取表单元素
-        	  var form=document.getElementById("form1");
+        	  var form = document.getElementById("form1");
         	  
         	  //2.修改表单的属性：支持进行二进制数据的提交
-        	  form.encoding="multipart/form-data";
+        	  form.encoding = "multipart/form-data";
         	  
         	  //3.指定处理上传图片请求的servlet
-        	  form.action="UploadPhotoServlet";
+        	  form.action = "UploadPhotoServlet";
         	  
         	  //4.表单提交
         	  form.submit();
         	  //以下代码将表单属性还原
         	  //需要修改表单的enctype属性，js中的代码如下：
-        	  form.encoding="application/x-www-form-urlencoded";
-        	  form.action="UpdateUserServlet";
+        	  form.encoding = "application/x-www-form-urlencoded";
+        	  form.action = "UpdateUserServlet";
         	  
           }
           

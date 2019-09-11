@@ -41,7 +41,6 @@ public class UpdateUserServlet extends HttpServlet {
 		String content=request.getParameter("content");
 	
 		
-		System.out.println(id+","+realname);
 		//3.把数据封装到User对象中
 		Date birth=null;
 		try{
@@ -53,7 +52,9 @@ public class UpdateUserServlet extends HttpServlet {
 		CertType cert_type=new CertType(Integer.parseInt(certtype), null);
 		UserType user_type=new UserType(Integer.parseInt(usertype), null);
 		
-		Users user=new Users(Integer.parseInt(id), null, null, null, realname, sex.charAt(0), new City(Integer.parseInt(city)), cert_type, cert, birth, user_type, content, null, null, null);
+		Users user=new Users(Integer.parseInt(id), null, null, null,
+				realname, sex.charAt(0), new City(Integer.parseInt(city)), 
+				cert_type, cert, birth, user_type, content, null, null, null);
 		//4.调用底层UserService中的更新方法更新用户信息
 		UserService userService=UserService.getInstance();
 		boolean result=userService.updateUser(user);
@@ -64,7 +65,8 @@ public class UpdateUserServlet extends HttpServlet {
 			//同步更新session中的用户信息
 			HttpSession session=request.getSession();
 			Users session_user=(Users)session.getAttribute("user");
-			session.setAttribute("user", userService.login(session_user.getUsername(), session_user.getPassword()));
+			session.setAttribute("user", userService.login(session_user.getUsername(), 
+					session_user.getPassword()));
 			response.sendRedirect("ToUpdateUserServlet");
 		}else
 		{
