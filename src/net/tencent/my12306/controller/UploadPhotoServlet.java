@@ -38,7 +38,6 @@ public class UploadPhotoServlet extends HttpServlet {
 		// 存储路径
 		String savePath = request.getServletContext().getRealPath(
 				"/photos");
-		System.out.println("savePath:"+savePath);
 		
 		// 获取上传的文件集合
 		//Collection<Part> parts = request.getParts();
@@ -53,15 +52,25 @@ public class UploadPhotoServlet extends HttpServlet {
 			String header = part.getHeader("content-disposition");
 			// 获取文件名
 			String fileName = getFileName(header);
-			System.out.println("fileName:"+fileName);
 			// 把文件写到指定路径
 			//UUID.randomUUID()+".jpg"
 			part.write(savePath + File.separator + fileName);//   /
 		
 			//把这个照片路径保存到数据库
-			HttpSession session=request.getSession();
-			Users user=(Users)session.getAttribute("user");
+
+			HttpSession session = request.getSession();
+			Users user_session = (Users)session.getAttribute("user");
+			UserService userService = UserService.getInstance();
+			Users user = userService.login(user_session.getUsername(), 
+					user_session.getPassword());
+			session.setAttribute("user", user);
 			
+			//之前的代码
+//			HttpSession session = request.getSession();
+//			Users user = (Users)session.getAttribute("user");
+			
+			System.out.println("user:" + user);
+			System.out.println("user.getId(): " + user.getId());
 			UserService.getInstance().saveImage(user.getId(),fileName);
 			//回到更新用户信息页面，让用户看到自己的照片
 			response.sendRedirect("ToUpdateUserServlet");
@@ -90,18 +99,14 @@ public class UploadPhotoServlet extends HttpServlet {
 		 * tempArr1={form-data,name="file",filename="snmp4j--api.zip"}
 		 * IE浏览器下：tempArr1={form-data,name="file",filename="E:\snmp4j--api.zip"}
 		 */
-		System.out.println("header："+header);
 		String[] tempArr1 = header.split(";");
 		/**
 		 * 火狐或者google浏览器下：tempArr2={filename,"snmp4j--api.zip"}
 		 * IE浏览器下：tempArr2={filename,"E:\snmp4j--api.zip"}
 		 */
-		System.out.println("tempArr1:"+tempArr1);
 		String[] tempArr2 = tempArr1[2].split("=");
 		// 获取文件名，兼容各种浏览器的写法
-		System.out.println("tempArr2:"+tempArr2);
 		String fileName = tempArr2[1].substring(tempArr2[1].lastIndexOf("\\") + 1).replaceAll("\"", "");
-		System.out.println("fileName:"+fileName);
 		return fileName;
 	}
    

@@ -16,7 +16,7 @@
 </head>
 
 <body class="write_bg">
-<form name="form1" method="post" action="<%=request.getContextPath()%>/UpdateUserServlet">
+<form name="form1" method="post" action="<%=request.getContextPath()%>/UpdateUserServlet" id="edit_form">
 
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
@@ -55,8 +55,9 @@
           </tr>
           
 		<tr>
-			<td width="20" align="center" class="text_red1"><input
-				type="hidden" value="${userinfo.id}" name="id" /></td>
+			<td width="20" align="center" class="text_red1">
+				<input type="hidden" value="${userinfo.id}" name="id" />
+			</td>
 			<td width="100" height="40" align="left" class="text_cray1">登录名：</td>
 			<td width="350" align="left" class="text_cray1"><input
 				name="username" type="text" disabled="true" class="text_cray"
@@ -79,35 +80,29 @@
 						<tr>
 							<td align="center">
 								<input name="uploadFile" type="file" class="text_cray" size="20" />
-								<input type="button" value="上传" onclick="upload()" />
+								<input type="button" value="上传" id="btn_uploadFile" 
+								style="position: relative;top: -21px;left: 70px;"/>
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 		<script>
-          function upload()
-          {
-        	  //alert();
-        	  //表单提交，上传照片，告诉我是成功还是失败，最好回显照片
-        	  
-        	  //1.获取表单元素
-        	  var form = document.getElementById("form1");
-        	  
-        	  //2.修改表单的属性：支持进行二进制数据的提交
-        	  form.encoding = "multipart/form-data";
-        	  
-        	  //3.指定处理上传图片请求的servlet
-        	  form.action = "UploadPhotoServlet";
-        	  
-        	  //4.表单提交
-        	  form.submit();
-        	  //以下代码将表单属性还原
-        	  //需要修改表单的enctype属性，js中的代码如下：
-        	  form.encoding = "application/x-www-form-urlencoded";
-        	  form.action = "UpdateUserServlet";
-        	  
-          }
+		document.querySelector("#btn_uploadFile").onclick = () => {
+			//表单提交，上传照片，告诉我是成功还是失败，最好回显照片
+			//1.获取表单元素
+			let form = document.querySelector("#edit_form");
+			//2.修改表单的属性：支持进行二进制数据的提交
+			form.encoding = "multipart/form-data";
+			//3.指定处理上传图片请求的servlet
+			form.action = "UploadPhotoServlet";
+			//4.表单提交
+			form.submit();
+			//以下代码将表单属性还原
+			//需要修改表单的enctype属性，js中的代码如下：
+			form.encoding = "application/x-www-form-urlencoded";
+			form.action = "UpdateUserServlet";
+		}
           
          </script>
           
@@ -224,9 +219,14 @@
         <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
             <td width="164"></td>
-            <td width="99" height="30" align="center"><input name="button" type="submit" class="buttj" id="button"value=""></td>
-            <td width="98" ></td>
-            <td width="97" align="center"><input name="button2" type="submit" class="butcz" id="button2"value=""></td>
+            <td width="99" height="30" align="center">
+            	<input name="button" type="submit" class="buttj" id="button"value="">
+            </td>
+            <td width="98" >
+            </td>
+            <td width="97" align="center">
+            	<input name="button2" type="reset" class="butcz" id="button2"value="">
+           	</td>
             <td width="92" ></td>
           </tr>
         </table>

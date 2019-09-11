@@ -142,7 +142,7 @@ public class UsersDao {
 			stmt = conn.prepareStatement(QUERY_USER_BY_USERNAME_AND_PASSWORD);
 			stmt.setString(1,username);
 			stmt.setString(2,password);
-			rs=stmt.executeQuery();
+			rs = stmt.executeQuery();
 			if(rs.next())
 			{
 				user=new Users();
@@ -151,6 +151,7 @@ public class UsersDao {
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path
 				 */
 				user.setId(rs.getInt("id"));
+				System.out.println("id:" + rs.getInt("id"));
 				user.setUsername(rs.getString("username"));
 				user.setPassword(rs.getString("password"));
 				user.setRule(rs.getString("rule"));
@@ -343,7 +344,6 @@ public class UsersDao {
 			stmt=conn.prepareStatement(update_user_sql);
 			stmt.setString(1, fileName);
 			stmt.setInt(2, id);
-			
 			
 			stmt.executeUpdate();
 		} catch (Exception e) {
