@@ -19,8 +19,8 @@ import net.tencent.my12306.util.Md5Utils;
  * Servlet implementation class LoginServlet
  * 
  * insert into my12306_2_user values(my12306_2_user_seq.nextval,'bbb',
-'e10adc3949ba59abbe56e057f20f883e','2',
-'bbb','2',1,'1','123456789',sysdate,'1','bbb','2','0:0:0:0:0:0:0:1',null);
+'e10adc3949ba59abbe56e057f20f883e','1',
+'bbb','2',200,'1','123456789',sysdate,'1','bbb','1','0:0:0:0:0:0:0:1','7.png');
  * 
  * 
  */
