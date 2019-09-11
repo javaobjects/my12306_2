@@ -30,8 +30,8 @@ body {
     <td height="35"><a href="<%=request.getContextPath()%>/GetUserInfoServlet" target="mainFrame"class="cray">查看个人信息</a></td>
   </tr>
   <tr>
-    <td align="right"><img src="../images/ny_arrow1.gif" width="24" height="13"></td>
-    <td height="35"><a href="<%=request.getContextPath()%>/ToUpdatePasswordServlet" target="mainFrame" class="cray">普通用户密码修改</a></td>
+    <td align="right"><img src="<%=request.getContextPath() %>/images/ny_arrow1.gif" width="24" height="13"></td>
+    <td height="35"><a href="<%=request.getContextPath()%>/user/user_password_edit.jsp" target="mainFrame" class="cray">普通用户密码修改</a></td>
   </tr>
 </table>
 </body>

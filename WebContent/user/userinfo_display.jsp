@@ -49,7 +49,10 @@ Users user = (Users)request.getAttribute("userinfo");
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">登录名：</td>
             <td width="350" align="left" class="text_cray"><%=user.getUsername() %></td>
-            <td width="230" rowspan="5" align="center" background="../images/bg_point_write.gif" class="text_cray"><img src="../images/photo.jpg" width="139" height="139"></td>
+            <td width="230" rowspan="5" align="center"
+             background="<%=request.getContextPath() %>/images/bg_point_write.gif" class="text_cray">
+             <img src="<%=request.getContextPath() %>/images/photo.jpg" width="139" height="139">
+             </td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>

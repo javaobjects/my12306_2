@@ -29,36 +29,38 @@ body {
 //如果用户前面登录时勾选了自动登录，那么访问登录页面时需要先获取cookie中的内容，如果有，就说明上次写cookie写成功了，
 //那么根据cookie的内容自动跳转到对应的首页面
 Cookie[] cookies=request.getCookies();
-if(cookies!=null)
+if(cookies != null)
 {
-	String username=null;
-	String password=null;
-	String rule=null;
-	Users user=null;
+	String username = null;
+	String password = null;
+	String rule = null;
+	Users user = null;
 	for(Cookie c:cookies)
 	{
 		if("username".equals(c.getName()))
 		{
-			username=c.getValue();
+			username = c.getValue();
 		}
 		if("password".equals(c.getName()))
 		{
-			password=c.getValue();
+			password = c.getValue();
 		}
 		if("rule".equals(c.getName()))
 		{
-			rule=c.getValue();
+			rule = c.getValue();
 		}
 	}
-	if(username!=null&&password!=null&&rule!=null&&!"".equals(username))
+	
+	
+if(username != null && password != null && rule != null && !"".equals(username))
 	{
-		user=new Users();
+		user = new Users();
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setRule(rule);
 		
 		session.setAttribute("user", user);
-		
+
 		//跳转到对应权限页面
 		if("1".equals(rule))
 		{
@@ -68,10 +70,7 @@ if(cookies!=null)
 			response.sendRedirect("user/index.jsp");
 		}
 	}
-	
 }
-
-
 
 %>
 <%
@@ -79,18 +78,17 @@ if(cookies!=null)
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
-String message=request.getParameter("message");
+String message = request.getParameter("message");
 
-if(message!=null)
+if(message != null)
 {
 	%>
 	<script>
-	window.onload=function()
+	window.onload = function()
 	{
 		alert('<%=message%>');
 	}</script>
-	
-	
+
 <% }%>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
@@ -152,7 +150,7 @@ if(message!=null)
         	<img src="<%=request.getContextPath()%>/ValidateCodeServlet" alt="" height="20" id="yzm" onclick="shuaxin()"/>
         </span></td>
         <td>
-        	<img src="<%=request.getContextPath()%>/images/text_sx.gif" width="32" height="18" onclick="shuaxin()">
+        	<img src="<%=request.getContextPath()%>/images/text_sx.gif" width="32" height="18" onclick="shuaxin()" style="cursor:pointer;">
         </td>
         <td align="left">&nbsp;</td>
       </tr>

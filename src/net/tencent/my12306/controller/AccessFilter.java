@@ -34,7 +34,6 @@ public class AccessFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("f1");
 		//这行代码保证多个过滤器依次执行
 		
 		/* 如何进行访问权限控制？
@@ -45,28 +44,27 @@ public class AccessFilter implements Filter {
 		 * 4.如果访问用户模块，那么必须第一登录，第二用户的rule是2，否则先登录去
 		 * 5.如果访问的既不是管理员模块，又不是用户模块，那么放行
 		 */
-		HttpServletRequest res=null;
+		HttpServletRequest res = null;
 		if(request instanceof HttpServletRequest)
 		{
-			res=(HttpServletRequest)request;
+			res = (HttpServletRequest)request;
 		}
-		HttpServletResponse resp=null;
+		HttpServletResponse resp = null;
 		if(response instanceof HttpServletResponse)
 		{
-			resp=(HttpServletResponse)response;
+			resp = (HttpServletResponse)response;
 		}
 		
 		
-		String url=res.getRequestURL().toString();
-		System.out.println("url:"+url);
+		String url = res.getRequestURL().toString();
 		
 		//从session中获取user
-		HttpSession session=res.getSession();
-		Users user=(Users)session.getAttribute("user");
+		HttpSession session = res.getSession();
+		Users user = (Users)session.getAttribute("user");
 		
 		if(url.contains("/admin/"))
 		{
-			if(user!=null)
+			if(user!= null)
 			{
 				//用户已经登录了
 				if(user.getRule().equals("1"))
@@ -88,7 +86,7 @@ public class AccessFilter implements Filter {
 		{
 			
 			
-			if(user!=null)
+			if(user!= null)
 			{
 				//用户已经登录了
 				if(user.getRule().equals("2"))
