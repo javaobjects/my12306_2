@@ -7,7 +7,6 @@
 <title>普通用户</title>
 <link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css">
 </head>
-<script type="text/JavaScript" src="<%=request.getContextPath()%>/js/common.js"></script>
 <body class="topbody">
 <form action="" method="get">
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">

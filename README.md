@@ -31,3 +31,6 @@
 ![](WebContent/bug/bug3.png)
 
 ![](WebContent/bug/bug3_1.png)
+
+完全是因为自己事务没有学好，特么小废物不知道插入数据之后提交造成的。。。。
+
