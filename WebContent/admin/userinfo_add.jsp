@@ -114,44 +114,78 @@
             <td align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">省 份：</td>
             <td>&nbsp;</td>
-            <td align="left" class="text_cray"><select name="province" class="text_cray" id="province">
+            <td align="left" class="text_cray">
+              <!-- <select name="province" class="text_cray" id="province">
                 <option value="省份" selected="selected">省份</option>
-            </select> 
+              </select>  -->
+              <%  Users user=(Users)request.getAttribute("userinfo");
+     	
+              %>       
+           <select name="provinceid" class="text_cray">
+             <%
+             List<Province> provinces =(List<Province>)request.getAttribute("provinces");
+             Iterator it=provinces.iterator();
+             while(it.hasNext())
+             {
+               Province p=(Province)it.next();
+               %>
+               <option value="<%=p.getProvinceId()%>" 
+               <%=p.getProvinceId().equals(user.getCity().getProvince().getProvinceId())?"selected":"" %>>
+               <%=p.getProvinceName() %></option>
+               <% 
+             }
+             %>
+           
+           </select>   
             </td>
             <td width="48" align="left" class="text_cray">城市：</td>
-            <td width="343" align="left" class="text_cray"><select name="city" class="text_cray" id="city">
-                <option value="城市" selected="selected">市县</option>
-            </select>            </td>
+            <td width="343" align="left" class="text_cray">
+                <!-- <select name="city" class="text_cray" id="city">
+                    <option value="城市" selected="selected">市县</option>
+                </select>             -->
+                <select name="city" class="text_cray">
+                    <c:forEach items="${cities}" var="c">
+                    <option value="${c.id}" ${c.id.equals(userinfo.city.id)?"selected":""}>${c.cityName}</option>
+                    </c:forEach>
+                </select>
+            </td>
           </tr>
           <tr>
             <td align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">证件类型：</td>
             <td>&nbsp;</td>
-            <td colspan="3" align="left"><select class="text_cray" name="loginUserDTO.id_type_code" id="cardType">
+            <td colspan="3" align="left">
+              <select class="text_cray" name="certtype" id="cardType">
                 <option value="1">二代身份证</option>
-                <option value="C">港澳通行证</option>
-                <option value="G">台湾通行证</option>
-                <option value="B">护照</option>
-            </select>            </td>
+                <option value="2">港澳通行证</option>
+                <option value="3">台湾通行证</option>
+                <option value="4">护照</option>
+              </select>            
+          </td>
           </tr>
           <tr>
             <td align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">证件号码：</td>
             <td></td>
-            <td colspan="3" align="left" class="text_cray"><input type="text" name="textfield6" id="textfield6" /></td>
+            <td colspan="3" align="left" class="text_cray">
+              <input type="text" name="cert" id="textfield6" />
+            </td>
           </tr>
           <tr>
             <td align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">出生日期：</td>
             <td></td>
-            <td width="175" align="left" class="text_cray"><input type="text" name="textfield7" id="textfield7" /></td>
+            <td width="175" align="left" class="text_cray">
+              <input type="text" name="birthday" id="textfield7" />
+            </td>
             <td colspan="2" align="left"></td>
           </tr>
           <tr>
             <td align="center"></td>
             <td width="100" height="40" align="left" class="text_cray1">旅客类型：</td>
             <td></td>
-            <td width="175" align="left" class="text_cray"><select class="text_cray" id="passengerType" name="passenger_type">
+            <td width="175" align="left" class="text_cray">
+              <select class="text_cray" id="passengerType" name="user_type">
               <option value="1" selected="selected">成人</option>
                 <option value="2">儿童</option>
                 <option value="3">学生</option>
@@ -166,7 +200,9 @@
             <td align="center"></td>
             <td height="15" align="left" class="text_cray1">备注：</td>
             <td></td>
-            <td height="15" colspan="3" align="left"><textarea name="textarea" style="width:100%" rows="8"></textarea></td>
+            <td height="15" colspan="3" align="left">
+              <textarea name="content" style="width:100%" rows="8"></textarea>
+            </td>
           </tr>
         </table>
 </table><br>
