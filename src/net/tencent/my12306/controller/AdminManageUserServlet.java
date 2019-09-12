@@ -193,20 +193,21 @@ public class AdminManageUserServlet extends HttpServlet {
 			HttpServletResponse response)throws ServletException, IOException {
 		System.out.println("--------------------");
 		//获取表单数据
-		String username=request.getParameter("username");
-		
-		String cert_type=request.getParameter("cert_type");
-		String cert=request.getParameter("cert");
-		
-		String user_type=request.getParameter("user_type");
-		String sex=request.getParameter("sex");
-		String pageCount=request.getParameter("pageCount");
+		String username = request.getParameter("username");
+		String sex = request.getParameter("sex");
+		String cert_type = request.getParameter("cert_type");//证件类型
+		String cert = request.getParameter("cert");//证件号码
+		String user_type = request.getParameter("user_type");//旅客类型
+
+		String pageCount = request.getParameter("pageCount");//每页显示多少条信息
 		System.out.println("======================");
 		
 		//怎么查询servlet是不管的，全部交给service，servlet只管调用
-		UserService userService=UserService.getInstance();
+		UserService userService = UserService.getInstance();
 		
-		List<Users> users=userService.getUserByCondition(username,Integer.parseInt(cert_type),cert,Integer.parseInt(user_type),sex.charAt(0));
+		List<Users> users = userService.getUserByCondition(username,
+				Integer.parseInt(cert_type),cert,
+				Integer.parseInt(user_type),sex.charAt(0));
 		
 		System.out.println(users.toString());
 		
