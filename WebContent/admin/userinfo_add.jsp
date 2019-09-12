@@ -24,13 +24,18 @@
     <td width="771" height="30" valign="top"  class="text_blod_title">新增用户信息</td>
   </tr>
   <tr>
-    <td height="15" colspan="2" ><img src="../images/line1.jpg" width="835" height="6"></td>
+    <td height="15" colspan="2" >
+    	<img src="<%=request.getContextPath() %>/images/line1.jpg" width="835" height="6">
+    </td>
     </tr>
   <tr>
-    <td colspan="2" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td colspan="2" >
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="64"></td>
-        <td width="771" height="25" align="left" class="text_cray">注：标有<span class="text_red"> *</span> 处，均为必填项</td>
+        <td width="771" height="25" align="left" class="text_cray">注：标有
+        	<span class="text_red"> *</span> 处，均为必填项
+        </td>
       </tr>
       <tr>
         <td></td>
@@ -47,8 +52,10 @@
           <tr>
             <td width="20" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">登录名：</td>
-            <td class="text_cray"><input type="text" name="textfield2" id="textfield2" />
-            由字母、数字或“_”组成，长度不少于6位，不多于30位</td>
+            <td class="text_cray">
+              <input type="text" name="username" id="textfield2" />
+            由字母、数字或“_”组成，长度不少于6位，不多于30位
+          </td>
           </tr>
         </table>
       <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -65,9 +72,9 @@
             <td width="20" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">用户权限：</td>
             <td><label>
-              <select name="select" class="text_cray">
-                <option>管理员</option>
-                <option>普通用户</option>
+              <select name="rule" class="text_cray">
+                <option value="1">管理员</option>
+                <option value="2">普通用户</option>
               </select>
             </label></td>
           </tr>
@@ -86,17 +93,19 @@
             <td width="20" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">真实姓名：</td>
             <td width="14"></td>
-            <td colspan="3" align="left"><input name="textfield" type="text" class="text_cray" id="textfield2" /></td>
+            <td colspan="3" align="left">
+              <input name="realName" type="text" class="text_cray" id="textfield2" />
+            </td>
           </tr>
           <tr>
             <td align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">性 别：</td>
             <td></td>
             <td colspan="3" align="left" class="text_cray1">
-              <input name="userDTO.sex_code" type="radio" value="M" checked />
+              <input name="sex" type="radio" value="1" checked />
               <span class="text_cray">
               <label>男</label>
-              <input type="radio" name="userDTO.sex_code" value="F" />
+              <input name="sex" type="radio"  value="2" />
                 <label>女</label>
                 <label></label>
               </span> </td>
