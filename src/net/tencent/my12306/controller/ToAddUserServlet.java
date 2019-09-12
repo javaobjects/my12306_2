@@ -41,7 +41,8 @@ public class ToAddUserServlet extends HttpServlet {
 		//获取所有省份并传给页面
 		request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
 		//获取当前用户所在省份的所有城市信息并传给页面
-		request.setAttribute("cities", CityService.getInstance().getCityByProvinceid(result.getCity().getProvince().getProvinceId()));
+		request.setAttribute("cities", CityService.getInstance().getCityByProvinceid
+				(result.getCity().getProvince().getProvinceId()));
 		
 		request.getRequestDispatcher("/admin/userinfo_add.jsp").forward(request, response);
 	}
