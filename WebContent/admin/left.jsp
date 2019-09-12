@@ -35,7 +35,9 @@ body {
   <tr>
     <td align="right"><img src="../images/ny_arrow1.gif" width="24" height="13"></td>
     <td height="35">
-    	<a href="<%=request.getContextPath()%>/admin/userinfo_add.jsp" 
+<%--     	<a href="<%=request.getContextPath()%>/admin/userinfo_add.jsp" 
+    	target="mainFrame" class="cray">新增用户</a> --%>
+    	   	<a href="<%=request.getContextPath()%>/ToAddUserServlet" 
     	target="mainFrame" class="cray">新增用户</a>
     </td>
   </tr>
