@@ -9,7 +9,7 @@
 </head>
 
 <body class="write_bg">
-<form action="<%=request.getContextPath()%>/UpdateAdminServlet" method="post">
+<form action="<%=request.getContextPath()%>/AddUserServlet" method="post">
   <table width="100%" border="0" cellspacing="0">
     <tr>
       <td height="30"></td>
