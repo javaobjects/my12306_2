@@ -26,14 +26,18 @@ body {
     <td width="165" height="35"><span class="text_blod">管理员</span></td>
   </tr>
   <tr>
-    <td align="right"><img src="<%=request.getContextPath()%>/images/ny_arrow1.gif" width="24" height="13"></td>
+    <td align="right">
+    	<img src="<%=request.getContextPath()%>/images/ny_arrow1.gif" width="24" height="13">
+   	</td>
     <td height="35">
 	    <a href="<%=request.getContextPath()%>/AdminManageUserServlet?operator=toQueryUserView" 
 	    target="mainFrame" class="cray">用户管理</a>
     </td>
   </tr>
   <tr>
-    <td align="right"><img src="../images/ny_arrow1.gif" width="24" height="13"></td>
+    <td align="right">
+    	<img src="../images/ny_arrow1.gif" width="24" height="13">
+   	</td>
     <td height="35">
 <%--     	<a href="<%=request.getContextPath()%>/admin/userinfo_add.jsp" 
     	target="mainFrame" class="cray">新增用户</a> --%>
