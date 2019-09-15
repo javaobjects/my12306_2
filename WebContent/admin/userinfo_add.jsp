@@ -63,6 +63,20 @@
             由字母、数字或“_”组成，长度不少于6位，不多于30位
           </td>
           </tr>
+          <tr>
+            <td width="20" align="center" class="text_red">*</td>
+            <td width="100" height="40" align="left" class="text_cray1">登录密码：</td>
+            <td class="text_cray">
+              <input type="password" name="password"/>
+          	</td>
+          </tr>
+          <tr>
+            <td width="20" align="center" class="text_red">*</td>
+            <td width="100" height="40" align="left" class="text_cray1">确认密码：</td>
+            <td class="text_cray">
+              <input type="password" name="confirm_password"/>
+          	</td>
+          </tr>
         </table>
       <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>

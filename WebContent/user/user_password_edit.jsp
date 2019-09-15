@@ -36,12 +36,16 @@
       <tr>
         <td width="20" align="center" class="text_red">*</td>
         <td width="100" height="40" class="text_cray1">原密码：</td>
-        <td align="left" class="text_cray1"><input name="password_old" type="text" class="text_cray" id="textfield5" size="30" /></td>
+        <td align="left" class="text_cray1">
+        	<input name="password_old" type="text" class="text_cray" id="textfield5" size="30" />
+       	</td>
       </tr>
       <tr>
         <td width="20" align="center"  class="text_red">*</td>
         <td width="100" height="40" class="text_cray1">新密码：</td>
-        <td align="left" class="text_cray1"><input name="password_new" type="text" class="text_cray" id="textfield6" size="30" /></td>
+        <td align="left" class="text_cray1">
+        	<input name="password_new" type="text" class="text_cray" id="textfield6" size="30" />
+        </td>
       </tr>
       <tr>
         <td width="20" align="center" class="text_red">*</td>

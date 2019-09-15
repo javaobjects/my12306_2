@@ -31,15 +31,17 @@ public class AddUserServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		//2.获取这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注：
-		String id = request.getParameter("id");
-		String realname = request.getParameter("realname");
+//		String id = request.getParameter("id");
+		String username = request.getParameter("username");
+		String rule = request.getParameter("rule");
+		String realname = request.getParameter("realName");
 		String sex = request.getParameter("sex");
-		String city = request.getParameter("city");
-		String certtype = request.getParameter("certtype");
-		String cert = request.getParameter("cert");
-		String birthday = request.getParameter("birthday");
-		String usertype = request.getParameter("usertype");
-		String content = request.getParameter("content");
+		String cityId = request.getParameter("city");//cityid
+		String certtype = request.getParameter("certtype");//证件类型
+		String cert = request.getParameter("cert");//证件号码
+		String birthday = request.getParameter("birthday");//出生日期
+		String usertype = request.getParameter("user_type");//旅客类型
+		String content = request.getParameter("content");//备注
 		
 		//3.把数据封装到User对象中
 		Date birth = null;
@@ -53,8 +55,8 @@ public class AddUserServlet extends HttpServlet {
 		UserType user_type = new UserType(Integer.parseInt(usertype), null);
 		
 		
-		Users user = new Users(Integer.parseInt(id), null, null, null,
-				realname, sex.charAt(0), new City(Integer.parseInt(city)), 
+		Users user = new Users(null, username, null, null,
+				realname, sex.charAt(0), new City(Integer.parseInt(cityId)), 
 				cert_type, cert, birth, user_type, content, null, null, null);
 		
 		//4.调用底层UserService中的更新方法更新用户信息
