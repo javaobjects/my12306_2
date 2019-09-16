@@ -51,6 +51,14 @@
         <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
             <td height="15" colspan="3" align="left" class="text_title">登录信息</td>
+            
+          </tr>
+          <tr>
+          	<td height="15" colspan="3" align="left">
+          		<span id="mess" 
+          		style="color:red;font-weight:bloder;font-size:13px;">
+          		${message}</span>
+          	</td>
           </tr>
           <tr>
             <td height="10" colspan="3"></td>
