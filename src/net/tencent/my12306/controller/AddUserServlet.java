@@ -1,12 +1,21 @@
 package net.tencent.my12306.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.tencent.my12306.entity.CertType;
+import net.tencent.my12306.entity.City;
+import net.tencent.my12306.entity.Province;
+import net.tencent.my12306.entity.UserType;
+import net.tencent.my12306.entity.Users;
+import net.tencent.my12306.service.UserService;
 
 /**
  * Servlet implementation class UpdateAdminServlet
@@ -27,10 +36,11 @@ public class AddUserServlet extends HttpServlet {
 		String rule = request.getParameter("rule");
 		String realname = request.getParameter("realName");
 		String sex = request.getParameter("sex");//性别
+		String province = request.getParameter("province");//省份
 		String cityId = request.getParameter("city");//cityid
 		String certtype = request.getParameter("certtype");//证件类型
 		String cert = request.getParameter("cert");//证件号码
-		String birthday = request.getParameter("birthday");//出生日期
+		String birthday_date = request.getParameter("birthday");//出生日期
 		String usertype = request.getParameter("user_type");//旅客类型
 		String content = request.getParameter("content");//备注
 		
@@ -43,50 +53,57 @@ public class AddUserServlet extends HttpServlet {
 			request.getRequestDispatcher("/userinfo_add.jsp").forward(request, response);
 		}else {
 			//4. 校验通过,调用底层service的注册方法添加用户到数据库
-			
-		}
-		
-		
-		
-		//3.把数据封装到User对象中
-//		Date birth = null;
-//		try{
-//			birth = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
-//		}catch(Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//		CertType cert_type = new CertType(Integer.parseInt(certtype), null);
-//		UserType user_type = new UserType(Integer.parseInt(usertype), null);
-//		
-//		
-//		Users user = new Users(null, username, null, null,
-//				realname, sex.charAt(0), new City(Integer.parseInt(cityId)), 
-//				cert_type, cert, birth, user_type, content, null, null, null);
-//		
-//		//4.调用底层UserService中的更新方法更新用户信息
-//		UserService userService = UserService.getInstance();
-//		boolean result = userService.updateUser(user);
-//		
-//		
-//		if(result)
-//		{
-//			//重定向到ToUpdateUserServlet即可:再次获取更新后的用户信息然后去往更新页面展示，让用户看到更新后的效果
-//			//同步更新session中的用户信息
-//			HttpSession session = request.getSession();
-//			Users session_user = (Users)session.getAttribute("user");
-//			
-//			session.setAttribute("user", userService.login(session_user.getUsername(), 
-//					session_user.getPassword()));
-//
-//			response.sendRedirect("ToUpdateUserServlet");
-//		}else
-//		{
-//			response.setContentType("text/html;charset=utf-8");
-//			PrintWriter pw=response.getWriter();
-//			pw.println("<script>alert('更新失败');</script>");
-//		}
-	}
+			Date birthday = null;
+			try {
+				birthday = new SimpleDateFormat("yyyy-MM-dd").parse(birthday_date);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-       
+			UserService userService = UserService.getInstance();
+			
+
+			/*
+			 * 转换方法 需要牢记！！！
+			 * 
+			 * City c = new City(); 
+			 * c.setCityId(city);
+			 *  user.setCity(c);//获取城市 String 转 引用类型
+			 * 
+			 * user.setCerttype(new CertType(Integer.parseInt(cert_type), null));//证件类型
+			 * String 转 引用类型
+			 */			
+			
+			Users user = new Users(null,username,password,rule,realname,sex.charAt(0),
+					new City(Integer.parseInt(cityId),null,null,new Province(null,province,null)),
+					new CertType(Integer.parseInt(certtype),null),
+					cert,
+					birthday,
+					new UserType(Integer.parseInt(usertype),null),content,'1',request.getRemoteAddr(),"");
+
+			// 服务端校验通过之后，注册方法调用之前，应该先判断用户名是否经存在
+			/**
+			 * 则需要定义判断用户名是否已经存在的方法，
+			 * 如果存在则返回新增用户页面， 
+			 * 提示用户名已经存在，
+			 * 如果不存在则继续新增
+			 */
+
+			if (userService.isExistsUserName(username)) {
+				// 用户名已存在，回到注册页面
+				request.setAttribute("message", "用户名已被占用");
+				request.getRequestDispatcher("/userinfo_add.jsp").forward(request, response);
+			} else {
+				if (userService.register(user)) {
+
+					response.sendRedirect(request.getContextPath() + "/login.jsp?message='注册成功'");
+
+				} else {
+					// 注册失败，回到新增用户页面
+					request.setAttribute("message", "注册失败");
+					request.getRequestDispatcher("/userinfo_add.jsp").forward(request, response);
+				}
+			}
+		}
+	}
 }
