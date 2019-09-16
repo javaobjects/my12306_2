@@ -27,7 +27,8 @@ public class UsersDao {
 	 */
 	private static final String ADD_USER = "insert into my12306_2_user(id,username,password,rule,realname,sex,city,cert_type"
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path)"
-			+ " values (my12306_2_user_seq.nextval,?,?,'2',?,?,?,?,?,?,?,?,'1',?,'')";
+			+ " values (my12306_2_user_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,'1',?,'')";
+//			+ " values (my12306_2_user_seq.nextval,?,?,'2',?,?,?,?,?,?,?,?,'1',?,'')";
 		//	+ " values (tab_user_seq.nextval,?,?,'2',?,?,200,1,'440104201910106119',?,1,'备注','1',?,'')";
 	private static final String QUERY_USERNAME = "select count(1) as col_count from my12306_2_user where username = ?";
 	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select u.id,u.username,u.password,u.rule,"
@@ -61,16 +62,16 @@ public class UsersDao {
 			
 			stmt.setString(1, user.getUsername());//用户名
 			stmt.setString(2, Md5Utils.md5(user.getPassword()));//密码
-			//权限默认为2
-			stmt.setString(3, user.getRealname());//真实姓名
-			stmt.setString(4, user.getSex() + "");//性别
-			stmt.setInt(5, user.getCity().getId());//城市 此处关联的居然是id不是cityid
-			stmt.setString(6, user.getCerttype().getId().toString());//证件类型
-			stmt.setString(7, user.getCert());//证件号码
-			stmt.setDate(8, new java.sql.Date(user.getBirthday().getTime()));//生日
-			stmt.setInt(9, user.getUsertype().getId());//旅客类型
-			stmt.setString(10, user.getContent());//备注
-			stmt.setString(11, user.getLoginIp());//Ip地址
+			stmt.setString(3, user.getRule());//权限
+			stmt.setString(4, user.getRealname());//真实姓名
+			stmt.setString(5, user.getSex() + "");//性别
+			stmt.setInt(6, user.getCity().getId());//城市 此处关联的居然是id不是cityid
+			stmt.setString(7, user.getCerttype().getId().toString());//证件类型
+			stmt.setString(8, user.getCert());//证件号码
+			stmt.setDate(9, new java.sql.Date(user.getBirthday().getTime()));//生日
+			stmt.setInt(10, user.getUsertype().getId());//旅客类型
+			stmt.setString(11, user.getContent());//备注
+			stmt.setString(12, user.getLoginIp());//Ip地址
 			
 			rows=stmt.executeUpdate();
 
