@@ -6,9 +6,11 @@ import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.tencent.my12306.entity.CertType;
 import net.tencent.my12306.entity.City;
@@ -95,8 +97,32 @@ public class AddUserServlet extends HttpServlet {
 				request.getRequestDispatcher("/admin/userinfo_add.jsp").forward(request, response);
 			} else {
 				if (userService.register(user)) {
-
+					/**
+					 * 由于记住咯session所以进来时是两层界面
+					 * 所以此处需要清除session再跳login.jsp
+					 */
+					HttpSession session=request.getSession();
+					session.invalidate();//销毁session，会马上重新创建一个新的session
+					
+					//1.把cookie清除掉
+					Cookie username_cookie=new Cookie("username", null);
+					username_cookie.setMaxAge(7*24*60*60);
+					username_cookie.setPath(request.getContextPath()+"/");
+					
+					Cookie password_cookie=new Cookie("password",null);
+					password_cookie.setMaxAge(7*24*60*60);
+					password_cookie.setPath(request.getContextPath()+"/");
+					
+					Cookie rule_cookie=new Cookie("rule",null);
+					rule_cookie.setMaxAge(7*24*60*60);
+					rule_cookie.setPath(request.getContextPath()+"/");
+					
+					response.addCookie(username_cookie);
+					response.addCookie(password_cookie);
+					response.addCookie(rule_cookie);
+					//2.返回登录页面
 					response.sendRedirect(request.getContextPath() + "/login.jsp?message='注册成功'");
+
 
 				} else {
 					// 注册失败，回到新增用户页面

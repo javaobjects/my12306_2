@@ -16,7 +16,7 @@
 </head>
 
 <body class="write_bg">
-<form name="form1" method="post" action="<%=request.getContextPath()%>/UpdateUserServlet" id="edit_form">
+<form name="form1" method="post" action="<%=request.getContextPath()%>/UpdateUserServlet" id="edit_form" >
 
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>

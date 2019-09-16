@@ -26,7 +26,6 @@ public class GetCityServlet extends HttpServlet {
 		String provinceid=request.getParameter("pid");
 		
 		List<City> cities=CityService.getInstance().getCityByProvinceid(provinceid);
-		System.out.println("获取的城市信息："+cities.toString());
 		
 		//输出一个xml文件
 		response.setCharacterEncoding("utf-8");
