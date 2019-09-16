@@ -130,7 +130,7 @@ public class UserServlet extends HttpServlet {
 				} else {
 //					System.out.println("register fail");
 					// 注册失败，回到注册页面
-					request.setAttribute("message", "注册失败");
+					request.setAttribute("message", "注册失败,请稍后再试");
 					//为防止省份为空白需要把所有省份再传一次
 					request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
 					request.getRequestDispatcher("/user_register.jsp").forward(request, response);
