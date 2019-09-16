@@ -80,7 +80,9 @@ public class UserServlet extends HttpServlet {
 			/*
 			 * 转换方法 需要牢记！！！
 			 * 
-			 * City c = new City(); c.setCityId(city); user.setCity(c);//获取城市 String 转 引用类型
+			 * City c = new City(); 
+			 * c.setCityId(city);
+			 *  user.setCity(c);//获取城市 String 转 引用类型
 			 * 
 			 * user.setCerttype(new CertType(Integer.parseInt(cert_type), null));//证件类型
 			 * String 转 引用类型

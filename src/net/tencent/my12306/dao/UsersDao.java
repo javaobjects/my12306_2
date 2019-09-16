@@ -131,8 +131,6 @@ public class UsersDao {
 	 * @return
 	 */
 	public Users queryUserByUsernameAndPassword(String username, String password) {
-		System.out.println("username:" + username);
-		System.out.println("password:" + password);
 		
 		Users user = null;
 		
@@ -148,7 +146,6 @@ public class UsersDao {
 			rs = stmt.executeQuery();
 			if(rs.next())
 			{
-				System.out.println("enter rs.next()");
 				user = new Users();
 				/*
 				 * id,username,password,rule,realname,sex,city,cert_type"
@@ -177,7 +174,6 @@ public class UsersDao {
 			DBUtils_pool.release(conn, stmt, rs);
 		}
 		
-		System.out.println("user:" + user);
 		return user;
 	}
 	

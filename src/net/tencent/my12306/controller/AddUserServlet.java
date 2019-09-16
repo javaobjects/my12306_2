@@ -37,6 +37,14 @@ public class AddUserServlet extends HttpServlet {
 		//3. 数据的非空校验和合法性校验
 		StringBuffer sb = UserServlet.validateRegisterForm(username, password, confirm_password,"on");
 		
+		if(sb.length() > 0) {
+			//校验不通过
+			request.setAttribute("message", "必填信息为空，请重新注册");
+			request.getRequestDispatcher("/userinfo_add.jsp").forward(request, response);
+		}else {
+			//4. 校验通过,调用底层service的注册方法添加用户到数据库
+			
+		}
 		
 		
 		
