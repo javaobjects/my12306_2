@@ -50,7 +50,7 @@ public class AddUserServlet extends HttpServlet {
 		if(sb.length() > 0) {
 			//校验不通过
 			request.setAttribute("message", "必填信息为空，请重新注册");
-			request.getRequestDispatcher("/userinfo_add.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/userinfo_add.jsp").forward(request, response);
 		}else {
 			//4. 校验通过,调用底层service的注册方法添加用户到数据库
 			Date birthday = null;
@@ -92,7 +92,7 @@ public class AddUserServlet extends HttpServlet {
 			if (userService.isExistsUserName(username)) {
 				// 用户名已存在，回到注册页面
 				request.setAttribute("message", "用户名已被占用");
-				request.getRequestDispatcher("/userinfo_add.jsp").forward(request, response);
+				request.getRequestDispatcher("/admin/userinfo_add.jsp").forward(request, response);
 			} else {
 				if (userService.register(user)) {
 
@@ -101,7 +101,7 @@ public class AddUserServlet extends HttpServlet {
 				} else {
 					// 注册失败，回到新增用户页面
 					request.setAttribute("message", "注册失败");
-					request.getRequestDispatcher("/userinfo_add.jsp").forward(request, response);
+					request.getRequestDispatcher("/admin/userinfo_add.jsp").forward(request, response);
 				}
 			}
 		}

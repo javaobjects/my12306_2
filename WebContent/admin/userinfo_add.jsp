@@ -138,7 +138,9 @@
               <!-- <select name="province" class="text_cray" id="province">
                 <option value="省份" selected="selected">省份</option>
               </select>  -->
-              <%  Users user=(Users)request.getAttribute("userinfo");
+              
+              
+        <%--       <%  Users user=(Users)request.getAttribute("userinfo");
      	
               %>       
            <select name="provinceid" class="text_cray">
@@ -156,20 +158,89 @@
              }
              %>
            
-           </select>   
+           </select>  --%>
+           
+           
+            <select name="province" class="text_cray" id="province" onchange="getCity()">
+              	<option selected="selected">--请选择省份--</option>
+              		<c:forEach items="${provinces}" var="p">
+           				<option value="${p.provinceId}">${p.provinceName}</option>
+              		</c:forEach>
+            </select>
+             
             </td>
             <td width="48" align="left" class="text_cray">城市：</td>
             <td width="343" align="left" class="text_cray">
-                <!-- <select name="city" class="text_cray" id="city">
+                <select name="city" class="text_cray" id="city">
                     <option value="城市" selected="selected">市县</option>
-                </select>             -->
-                <select name="city" class="text_cray">
+                </select>            
+                
+                
+     <%--            <select name="city" class="text_cray">
                     <c:forEach items="${cities}" var="c">
                     <option value="${c.id}" ${c.id.equals(userinfo.city.id)?"selected":""}>${c.cityName}</option>
                     </c:forEach>
-                </select>
+                </select> --%>
+                
+                
             </td>
           </tr>
+          <script>
+//实例化ajax引擎对象，定义全局变量
+var xhr;
+function getCity()
+{
+	//1.获取省份id
+	var pid=document.getElementById("province").value;
+	
+	//2.实例化ajax引擎对象，定义全局变量
+	xhr = null;
+		if (window.XMLHttpRequest) {// code for all new browsers
+			xhr = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {// code for IE5 and IE6
+			xhr= new ActiveXObject("Microsoft.XMLHTTP");
+		}else {
+			//alert("Your browser does not support XMLHTTP.");
+		}
+	//3.调用open方法创建连接
+	xhr.open("get","GetCityServlet?pid="+pid,true);
+	//4.指定回调函数
+	xhr.onreadystatechange=displayCity;
+	//5.发送请求
+	xhr.send();
+	}
+	
+	//获取服务端响应的信息，把数据取出来放入城市下拉框
+	function displayCity()
+	{
+		 if(xhr.readyState==4)
+			{
+				if(xhr.status==200)
+				{
+					//alert("ok");
+					//获取响应的xml文档
+				  var doc=xhr.responseXML;
+					var city_all=doc.getElementsByTagName("city");//这是一个存放所有city的数组
+					
+					var city_object=document.getElementById("city");//拿到城市下拉框
+					city_object.options.length=0;//将城市下拉框清零
+					//alert("ok");
+					for(var i=0;i<city_all.length;i++)
+					{
+							var city=city_all[i];//拿到数组中的city对象
+							var id=city.childNodes[0].firstChild.nodeValue;
+							var name=city.childNodes[1].firstChild.nodeValue;
+							//alert(id+"---"+name);
+							//给城市下拉框添加选项，其实就是拿到选项然后给选项赋值
+							city_object.options[city_object.options.length]=new Option(name,id);
+					}  
+				}	
+			} 
+		
+	}
+	
+
+</script>
           <tr>
             <td align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">证件类型：</td>
