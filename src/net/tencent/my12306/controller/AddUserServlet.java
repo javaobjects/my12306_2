@@ -20,7 +20,7 @@ import net.tencent.my12306.service.UserService;
 /**
  * Servlet implementation class UpdateAdminServlet
  */
-@WebServlet(description = "新增管理员用户", urlPatterns = { "/UpdateAdminServlet" })
+@WebServlet(description = "新增管理员用户", urlPatterns = { "/AddUserServlet" })
 public class AddUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
