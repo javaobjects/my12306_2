@@ -145,7 +145,7 @@ public class UserServlet extends HttpServlet {
 	 * @param password
 	 * @param confirm_password
 	 */
-	private StringBuffer validateRegisterForm(String username, String password, String confirm_password,String agree) {
+	static StringBuffer validateRegisterForm(String username, String password, String confirm_password,String agree) {
 		StringBuffer validate_message = new StringBuffer();
 		if (username == null || "".equals(username)) {
 			validate_message.append("用户名为空");

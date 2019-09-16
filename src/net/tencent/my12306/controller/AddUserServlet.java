@@ -1,22 +1,12 @@
 package net.tencent.my12306.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import net.tencent.my12306.entity.CertType;
-import net.tencent.my12306.entity.City;
-import net.tencent.my12306.entity.UserType;
-import net.tencent.my12306.entity.Users;
-import net.tencent.my12306.service.UserService;
 
 /**
  * Servlet implementation class UpdateAdminServlet
@@ -30,12 +20,13 @@ public class AddUserServlet extends HttpServlet {
 		//1.处理乱码
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		//2.获取这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注：
-//		String id = request.getParameter("id");
+		//2. 获取数据
 		String username = request.getParameter("username");
+		String password = request.getParameter("password");//密码
+		String confirm_password = request.getParameter("confirm_password");//确认密码
 		String rule = request.getParameter("rule");
 		String realname = request.getParameter("realName");
-		String sex = request.getParameter("sex");
+		String sex = request.getParameter("sex");//性别
 		String cityId = request.getParameter("city");//cityid
 		String certtype = request.getParameter("certtype");//证件类型
 		String cert = request.getParameter("cert");//证件号码
@@ -43,44 +34,51 @@ public class AddUserServlet extends HttpServlet {
 		String usertype = request.getParameter("user_type");//旅客类型
 		String content = request.getParameter("content");//备注
 		
+		//3. 数据的非空校验和合法性校验
+		StringBuffer sb = UserServlet.validateRegisterForm(username, password, confirm_password,"on");
+		
+		
+		
+		
 		//3.把数据封装到User对象中
-		Date birth = null;
-		try{
-			birth = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		CertType cert_type = new CertType(Integer.parseInt(certtype), null);
-		UserType user_type = new UserType(Integer.parseInt(usertype), null);
-		
-		
-		Users user = new Users(null, username, null, null,
-				realname, sex.charAt(0), new City(Integer.parseInt(cityId)), 
-				cert_type, cert, birth, user_type, content, null, null, null);
-		
-		//4.调用底层UserService中的更新方法更新用户信息
-		UserService userService = UserService.getInstance();
-		boolean result = userService.updateUser(user);
-		
-		
-		if(result)
-		{
-			//重定向到ToUpdateUserServlet即可:再次获取更新后的用户信息然后去往更新页面展示，让用户看到更新后的效果
-			//同步更新session中的用户信息
-			HttpSession session = request.getSession();
-			Users session_user = (Users)session.getAttribute("user");
-			
-			session.setAttribute("user", userService.login(session_user.getUsername(), 
-					session_user.getPassword()));
-
-			response.sendRedirect("ToUpdateUserServlet");
-		}else
-		{
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter pw=response.getWriter();
-			pw.println("<script>alert('更新失败');</script>");
-		}
+//		Date birth = null;
+//		try{
+//			birth = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
+//		}catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		CertType cert_type = new CertType(Integer.parseInt(certtype), null);
+//		UserType user_type = new UserType(Integer.parseInt(usertype), null);
+//		
+//		
+//		Users user = new Users(null, username, null, null,
+//				realname, sex.charAt(0), new City(Integer.parseInt(cityId)), 
+//				cert_type, cert, birth, user_type, content, null, null, null);
+//		
+//		//4.调用底层UserService中的更新方法更新用户信息
+//		UserService userService = UserService.getInstance();
+//		boolean result = userService.updateUser(user);
+//		
+//		
+//		if(result)
+//		{
+//			//重定向到ToUpdateUserServlet即可:再次获取更新后的用户信息然后去往更新页面展示，让用户看到更新后的效果
+//			//同步更新session中的用户信息
+//			HttpSession session = request.getSession();
+//			Users session_user = (Users)session.getAttribute("user");
+//			
+//			session.setAttribute("user", userService.login(session_user.getUsername(), 
+//					session_user.getPassword()));
+//
+//			response.sendRedirect("ToUpdateUserServlet");
+//		}else
+//		{
+//			response.setContentType("text/html;charset=utf-8");
+//			PrintWriter pw=response.getWriter();
+//			pw.println("<script>alert('更新失败');</script>");
+//		}
 	}
+
        
 }
