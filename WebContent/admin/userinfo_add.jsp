@@ -196,7 +196,7 @@
             <td width="100" height="40" align="left" class="text_cray1">出生日期：</td>
             <td></td>
             <td width="175" align="left" class="text_cray">
-              <input type="text" name="birthday" id="textfield7" />
+              <input type="date" name="birthday" id="textfield7" />
             </td>
             <td colspan="2" align="left"></td>
           </tr>
