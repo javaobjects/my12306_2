@@ -15,6 +15,7 @@ import net.tencent.my12306.entity.City;
 import net.tencent.my12306.entity.Province;
 import net.tencent.my12306.entity.UserType;
 import net.tencent.my12306.entity.Users;
+import net.tencent.my12306.service.ProvinceService;
 import net.tencent.my12306.service.UserService;
 
 /**
@@ -64,7 +65,10 @@ public class UserServlet extends HttpServlet {
 		if (sb.length() > 0) {
 			// 如果校验不通过，那么返回注册页面，让用户再注册一次
 			request.setAttribute("message", "必填信息为空，请重新注册");
+			//为防止省份为空白需要把所有省份再传一次
+			request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
 			request.getRequestDispatcher("/user_register.jsp").forward(request, response);
+			
 		} else {
 			// 3.调用底层service的注册方法添加用户到数据库
 			Date birthday = null;
@@ -104,6 +108,8 @@ public class UserServlet extends HttpServlet {
 			if (userService.isExistsUserName(username)) {
 				// 用户名已存在，回到注册页面
 				request.setAttribute("message", "用户名已被占用");
+				//为防止省份为空白需要把所有省份再传一次
+				request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
 				request.getRequestDispatcher("/user_register.jsp").forward(request, response);
 			} else {
 				if (userService.register(user)) {
@@ -125,6 +131,8 @@ public class UserServlet extends HttpServlet {
 //					System.out.println("register fail");
 					// 注册失败，回到注册页面
 					request.setAttribute("message", "注册失败");
+					//为防止省份为空白需要把所有省份再传一次
+					request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
 					request.getRequestDispatcher("/user_register.jsp").forward(request, response);
 				}
 			}
