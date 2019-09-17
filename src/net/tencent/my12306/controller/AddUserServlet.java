@@ -1,6 +1,7 @@
 package net.tencent.my12306.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -73,7 +74,7 @@ public class AddUserServlet extends HttpServlet {
 			 * 
 			 * City c = new City(); 
 			 * c.setCityId(city);
-			 *  user.setCity(c);//获取城市 String 转 引用类型
+			 * user.setCity(c);//获取城市 String 转 引用类型
 			 * 
 			 * user.setCerttype(new CertType(Integer.parseInt(cert_type), null));//证件类型
 			 * String 转 引用类型
@@ -126,8 +127,8 @@ public class AddUserServlet extends HttpServlet {
 					response.addCookie(password_cookie);
 					response.addCookie(rule_cookie);
 					//2.返回登录页面
-					response.sendRedirect(request.getContextPath() + "/login.jsp?message='注册成功'");
-
+					String mes = URLEncoder.encode("注册成功","utf-8");
+					response.sendRedirect(request.getContextPath() + "/login.jsp?message=" + mes);
 
 				} else {
 					// 注册失败，回到新增用户页面
