@@ -44,7 +44,7 @@ public class AdminManageUserServlet extends HttpServlet {
 		//处理乱码
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		String operator=request.getParameter("operator");
+		String operator = request.getParameter("operator");
 		
 		
 		if("toQueryUserView".equals(operator))
@@ -73,13 +73,13 @@ public class AdminManageUserServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException{
 		
 		HttpSession session = request.getSession();
-		System.out.println("user:" + session.getAttribute("user"));
-		System.out.println("users:" + session.getAttribute("users"));
+//		System.out.println("user:" + session.getAttribute("user"));
+//		System.out.println("users:" + session.getAttribute("users"));
 		
 		
 		List<Users> users = (List<Users>)session.getAttribute("users");
 		
-		if(users==null||users.size()==0)
+		if(users == null || users.size() == 0)
 		{
 			response.setContentType("text/html;charset=utf-8");
 			response.getWriter().println("<script>alert('请先查询');</script>");
@@ -100,15 +100,15 @@ public class AdminManageUserServlet extends HttpServlet {
 					//首先写表头：id username
 					ws.addCell(new Label(0, 0, "id"));
 					ws.addCell(new Label(1, 0, "用户名"));
-					ws.addCell(new Label(2, 0, "真实姓名"));
-					ws.addCell(new Label(3, 0, "性别"));
-					ws.addCell(new Label(4, 0, "城市"));
-					ws.addCell(new Label(5, 0, "证件类型"));
-					ws.addCell(new Label(6, 0, "证件号码"));
-					ws.addCell(new Label(7, 0, "出身日期"));
-					ws.addCell(new Label(8, 0, "旅客类型"));
-					ws.addCell(new Label(9, 0, "备注"));
-					ws.addCell(new Label(10, 0, "IP地址"));
+//					ws.addCell(new Label(2, 0, "真实姓名"));
+					ws.addCell(new Label(2, 0, "性别"));
+//					ws.addCell(new Label(4, 0, "城市"));
+					ws.addCell(new Label(3, 0, "证件类型"));
+					ws.addCell(new Label(4, 0, "证件号码"));
+//					ws.addCell(new Label(7, 0, "出身日期"));
+					ws.addCell(new Label(5, 0, "旅客类型"));
+//					ws.addCell(new Label(9, 0, "备注"));
+//					ws.addCell(new Label(10, 0, "IP地址"));
 					
 					
 					for(int row = 1;row <= users.size();row++)
@@ -116,18 +116,18 @@ public class AdminManageUserServlet extends HttpServlet {
 						Users user = users.get(row-1);
 						ws.addCell(new Label(0, row, user.getId()+""));
 						ws.addCell(new Label(1, row, user.getUsername()));
-						ws.addCell(new Label(2, row, user.getRealname()));
-						ws.addCell(new Label(3, row, user.getSex() == 49 ? "男" : "女"));
-						System.out.println(user.getCity());//null
+//						ws.addCell(new Label(2, row, user.getRealname()));
+						ws.addCell(new Label(2, row, user.getSex() == 49 ? "男" : "女"));
+//						System.out.println(user.getCity());//null
 //						System.out.println(user.getCity().getCityName());
 //						ws.addCell(new Label(4, row, user.getCity().getCityName()));
-						ws.addCell(new Label(5, row, user.getCerttype().getContent()));
-						ws.addCell(new Label(6, row, user.getCert()));
+						ws.addCell(new Label(3, row, user.getCerttype().getContent()));
+						ws.addCell(new Label(4, row, user.getCert()));
 						System.out.println(user.getBirthday());//null
 //						ws.addCell(new Label(7, row, new SimpleFormatter("yyyy-MM-dd").format(user.getBirthday())));
-						ws.addCell(new Label(8, row, user.getUsertype().getContent()));
-						ws.addCell(new Label(9, row, user.getContent()));
-						ws.addCell(new Label(9, row, user.getLoginIp()));
+						ws.addCell(new Label(5, row, user.getUsertype().getContent()));
+//						ws.addCell(new Label(9, row, user.getContent()));
+//						ws.addCell(new Label(9, row, user.getLoginIp()));
 					}
 					
 					workbook.write();
