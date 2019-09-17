@@ -84,8 +84,6 @@ public class AccessFilter implements Filter {
 			
 		}else if(url.contains("/user/"))
 		{
-			
-			
 			if(user!= null)
 			{
 				//用户已经登录了
@@ -110,18 +108,10 @@ public class AccessFilter implements Filter {
 			//放行的代码
 			chain.doFilter(request, response);
 		}
-		
-		
-		
-		
-		
 	}
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		
 	}
-
-  
-
 }

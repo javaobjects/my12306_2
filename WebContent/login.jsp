@@ -79,10 +79,12 @@ if(username != null && password != null && rule != null && !"".equals(username))
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
-String message = URLDecoder.decode(request.getParameter("message"), "utf-8");
+
+String message = request.getParameter("message");
 
 if(message != null)
 {
+	message = URLDecoder.decode(message, "utf-8");
 	%>
 	<script>
 	window.onload = function()

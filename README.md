@@ -2,11 +2,19 @@
 
 ```
 所用技术知识点：
+
 1. 验证码
+
 2. 
+
 ```
 
-#### 项目所遇bug总结
+
+
+
+
+
+#### 项目所遇部分bug总结
 
 1. ORA-02291: 违反完整约束条件 (SCOTT.MY12306_2_USER_CITY_FK) - 未找到父项关键字
 
@@ -33,4 +41,15 @@
 ![](WebContent/bug/bug3_1.png)
 
 完全是因为自己事务没有学好，特么小废物不知道插入数据之后提交造成的。。。。
+
+4. 跳转jsp页面url后带中文出现乱码
+
+解决：两行Java代码
+
+```
+String mes = URLEncoder.encode("注册成功","utf-8");//加码
+response.sendRedirect(request.getContextPath() + "/login.jsp?message=" + mes);
+
+String message = URLDecoder.decode(request.getParameter("message"), "utf-8");//解码
+```
 
