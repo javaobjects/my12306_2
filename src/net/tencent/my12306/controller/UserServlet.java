@@ -1,6 +1,7 @@
 package net.tencent.my12306.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -124,7 +125,9 @@ public class UserServlet extends HttpServlet {
 //						pw.println("<script>alert('"+"注册成功"+"');location.href='login.jsp';</script>");
 					// 生产环境不用挨骂的代码：需求,既要有弹窗又要重定向登录页面
 
-					response.sendRedirect(request.getContextPath() + "/login.jsp?message='注册成功'");
+					String mes = URLEncoder.encode("注册成功","utf-8");
+					response.sendRedirect(request.getContextPath() + "/login.jsp?message=" + mes);
+//					response.encodeRedirectUrl("/login.jsp?message='注册成功'")
 
 //					response.sendRedirect(request.getContextPath()+ "/login.jsp");//request.getContextPath() === /my12306_user_register
 				} else {

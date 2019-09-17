@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="net.tencent.my12306.entity.Users"%>
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -78,7 +79,7 @@ if(username != null && password != null && rule != null && !"".equals(username))
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 
-String message = request.getParameter("message");
+String message = URLDecoder.decode(request.getParameter("message"), "utf-8");
 
 if(message != null)
 {
