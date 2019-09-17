@@ -3,6 +3,7 @@ package net.tencent.my12306.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -45,7 +46,6 @@ public class AdminManageUserServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String operator=request.getParameter("operator");
 		
-		System.out.println(operator);
 		
 		if("toQueryUserView".equals(operator))
 		{
@@ -72,8 +72,12 @@ public class AdminManageUserServlet extends HttpServlet {
 	private void exportExcel(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
 		
-		HttpSession session =request.getSession();
-		List<Users> users=(List<Users>)session.getAttribute("users");
+		HttpSession session = request.getSession();
+		System.out.println("user:" + session.getAttribute("user"));
+		System.out.println("users:" + session.getAttribute("users"));
+		
+		
+		List<Users> users = (List<Users>)session.getAttribute("users");
 		
 		if(users==null||users.size()==0)
 		{
@@ -95,13 +99,35 @@ public class AdminManageUserServlet extends HttpServlet {
 					//ws.addCell(new Label(0, 0, 100+""));
 					//首先写表头：id username
 					ws.addCell(new Label(0, 0, "id"));
-					ws.addCell(new Label(1, 0, "username"));
-					System.out.println("users 中一共有"+users.size()+"条数据");
-					for(int row=1;row<=users.size();row++)
+					ws.addCell(new Label(1, 0, "用户名"));
+					ws.addCell(new Label(2, 0, "真实姓名"));
+					ws.addCell(new Label(3, 0, "性别"));
+					ws.addCell(new Label(4, 0, "城市"));
+					ws.addCell(new Label(5, 0, "证件类型"));
+					ws.addCell(new Label(6, 0, "证件号码"));
+					ws.addCell(new Label(7, 0, "出身日期"));
+					ws.addCell(new Label(8, 0, "旅客类型"));
+					ws.addCell(new Label(9, 0, "备注"));
+					ws.addCell(new Label(10, 0, "IP地址"));
+					
+					
+					for(int row = 1;row <= users.size();row++)
 					{
-						Users user=users.get(row-1);
+						Users user = users.get(row-1);
 						ws.addCell(new Label(0, row, user.getId()+""));
 						ws.addCell(new Label(1, row, user.getUsername()));
+						ws.addCell(new Label(2, row, user.getRealname()));
+						ws.addCell(new Label(3, row, user.getSex() == 49 ? "男" : "女"));
+						System.out.println(user.getCity());//null
+//						System.out.println(user.getCity().getCityName());
+//						ws.addCell(new Label(4, row, user.getCity().getCityName()));
+						ws.addCell(new Label(5, row, user.getCerttype().getContent()));
+						ws.addCell(new Label(6, row, user.getCert()));
+						System.out.println(user.getBirthday());//null
+//						ws.addCell(new Label(7, row, new SimpleFormatter("yyyy-MM-dd").format(user.getBirthday())));
+						ws.addCell(new Label(8, row, user.getUsertype().getContent()));
+						ws.addCell(new Label(9, row, user.getContent()));
+						ws.addCell(new Label(9, row, user.getLoginIp()));
 					}
 					
 					workbook.write();
@@ -112,7 +138,6 @@ public class AdminManageUserServlet extends HttpServlet {
 					try {
 						workbook.close();
 					} catch (WriteException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -135,8 +160,6 @@ public class AdminManageUserServlet extends HttpServlet {
 	 */
 	private void queryUserByPage(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
-		System.out.println("welcome queryUserByPage");
-		System.out.println("--------------------");
 		//获取表单数据
 		String username=request.getParameter("username");
 		
@@ -147,7 +170,6 @@ public class AdminManageUserServlet extends HttpServlet {
 		String sex=request.getParameter("sex");
 		String pageCount=request.getParameter("pageCount");
 		String pageNumber=request.getParameter("pageNumber");
-		System.out.println("======================");
 		
 		//因为数据已经查出来了，在session中，这里只是分页，查询对应页码的数据
 		HttpSession session=request.getSession();
@@ -191,7 +213,6 @@ public class AdminManageUserServlet extends HttpServlet {
 	 */
 	private void queryUser(HttpServletRequest request,
 			HttpServletResponse response)throws ServletException, IOException {
-		System.out.println("--------------------");
 		//获取表单数据
 		String username = request.getParameter("username");
 		String sex = request.getParameter("sex");
@@ -200,7 +221,6 @@ public class AdminManageUserServlet extends HttpServlet {
 		String user_type = request.getParameter("user_type");//旅客类型
 
 		String pageCount = request.getParameter("pageCount");//每页显示多少条信息
-		System.out.println("======================");
 		
 		//怎么查询servlet是不管的，全部交给service，servlet只管调用
 		UserService userService = UserService.getInstance();
@@ -209,7 +229,6 @@ public class AdminManageUserServlet extends HttpServlet {
 				Integer.parseInt(cert_type),cert,
 				Integer.parseInt(user_type),sex.charAt(0));
 		
-		System.out.println(users.toString());
 		
 		/*
 		 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），username  cert_type cert user_type sex  pageCount要回显

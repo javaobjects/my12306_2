@@ -145,7 +145,9 @@ function selectAllNullorReserve(obj,type){
             <td width="132" bordercolor="#FFFFFF"  class="text_cray1">${u.certtype.content}</td>
             <td width="247" bordercolor="#FFFFFF"  class="text_cray1">${u.cert}</td>
             <td width="82" bordercolor="#FFFFFF"  class="text_cray1">${u.usertype.content}</td>
-            <td width="89" bordercolor="#FFFFFF"  class="text_cray1"><a href="UserManageInfo_Amind_Edit.html" class="text_red">编辑</a></td>
+            <td width="89" bordercolor="#FFFFFF"  class="text_cray1">
+            	<span  class="text_red" style="cursor:pointer;">编辑</span>
+            </td>
           </tr>
           
           </c:forEach>
@@ -275,9 +277,9 @@ function selectAllNullorReserve(obj,type){
       	if(i==pageNumber)
       	{
       %>
-      	<a href="#" style="text-decoration: none"><%=i%>&nbsp;&nbsp;</a>
+      	<a href="#" style="text-decoration: underline"><%=i%>&nbsp;&nbsp;</a>
       <%}else{ %>
-     <a href="#" onclick="queryUserByPage(<%=i%>)"><%=i%>&nbsp;&nbsp;</a>
+     <a href="#" onclick="queryUserByPage(<%=i%>)" style="text-decoration:none;"><%=i%>&nbsp;&nbsp;</a>
       <%}}} %>
             
          <script>
