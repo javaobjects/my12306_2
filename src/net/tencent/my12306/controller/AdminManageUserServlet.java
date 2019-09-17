@@ -3,7 +3,6 @@ package net.tencent.my12306.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -63,7 +62,12 @@ public class AdminManageUserServlet extends HttpServlet {
 	}
 
 	/**
-	 * 导出excel报表的方法
+	 * 
+	 * <p>Title: exportExcel</p>  
+	 * <p>
+	 *	Description: 
+	 *	导出excel报表的方法
+	 * </p> 
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -73,10 +77,9 @@ public class AdminManageUserServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException{
 		
 		HttpSession session = request.getSession();
-//		System.out.println("user:" + session.getAttribute("user"));
-//		System.out.println("users:" + session.getAttribute("users"));
 		
 		
+//		List<Users> users = (List<Users>)session.getAttribute("users");
 		List<Users> users = (List<Users>)session.getAttribute("users");
 		
 		if(users == null || users.size() == 0)
@@ -96,19 +99,13 @@ public class AdminManageUserServlet extends HttpServlet {
 				WritableSheet ws = workbook.createSheet("用户列表", 0);
 				
 				try {
-					//ws.addCell(new Label(0, 0, 100+""));
 					//首先写表头：id username
 					ws.addCell(new Label(0, 0, "id"));
 					ws.addCell(new Label(1, 0, "用户名"));
-//					ws.addCell(new Label(2, 0, "真实姓名"));
 					ws.addCell(new Label(2, 0, "性别"));
-//					ws.addCell(new Label(4, 0, "城市"));
 					ws.addCell(new Label(3, 0, "证件类型"));
 					ws.addCell(new Label(4, 0, "证件号码"));
-//					ws.addCell(new Label(7, 0, "出身日期"));
 					ws.addCell(new Label(5, 0, "旅客类型"));
-//					ws.addCell(new Label(9, 0, "备注"));
-//					ws.addCell(new Label(10, 0, "IP地址"));
 					
 					
 					for(int row = 1;row <= users.size();row++)
@@ -116,18 +113,10 @@ public class AdminManageUserServlet extends HttpServlet {
 						Users user = users.get(row-1);
 						ws.addCell(new Label(0, row, user.getId()+""));
 						ws.addCell(new Label(1, row, user.getUsername()));
-//						ws.addCell(new Label(2, row, user.getRealname()));
 						ws.addCell(new Label(2, row, user.getSex() == 49 ? "男" : "女"));
-//						System.out.println(user.getCity());//null
-//						System.out.println(user.getCity().getCityName());
-//						ws.addCell(new Label(4, row, user.getCity().getCityName()));
 						ws.addCell(new Label(3, row, user.getCerttype().getContent()));
 						ws.addCell(new Label(4, row, user.getCert()));
-						System.out.println(user.getBirthday());//null
-//						ws.addCell(new Label(7, row, new SimpleFormatter("yyyy-MM-dd").format(user.getBirthday())));
 						ws.addCell(new Label(5, row, user.getUsertype().getContent()));
-//						ws.addCell(new Label(9, row, user.getContent()));
-//						ws.addCell(new Label(9, row, user.getLoginIp()));
 					}
 					
 					workbook.write();
@@ -141,41 +130,47 @@ public class AdminManageUserServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
-				
-				
 		}	
-				
-		
 	}
 
 	/**
+	 * 
+	 * <p>Title: queryUserByPage</p>  
+	 * <p>
+	 *	Description: 
 	 * 根据页码查询对应页码数据的方法
-	 * 
-	 * 1.servlet可以获取到哪些数据？进来的数据有哪些：username  cert_type cert user_type sex  pageCount
-	 * 2.页码需要哪些数据？查询结果的第2页数据，总页数，页码（这里是动态传入的，），username  cert_type cert user_type sex  pageCount要回显，
-	 * 
-	 * 
+	 * 1.servlet可以获取到哪些数据？
+	 * 进来的数据有哪些：username  cert_type cert user_type sex  pageCount
+	 * 2.页码需要哪些数据？
+	 * 查询结果的第2页数据，
+	 * 总页数，页码（这里是动态传入的，），
+	 * username  cert_type cert user_type sex  pageCount要回显，
+	 * </p> 
 	 * @param request
 	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	private void queryUserByPage(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
 		//获取表单数据
-		String username=request.getParameter("username");
+		String username = request.getParameter("username");
 		
-		String cert_type=request.getParameter("cert_type");
-		String cert=request.getParameter("cert");
+		String cert_type = request.getParameter("cert_type");
+		String cert = request.getParameter("cert");
 		
-		String user_type=request.getParameter("user_type");
-		String sex=request.getParameter("sex");
-		String pageCount=request.getParameter("pageCount");
-		String pageNumber=request.getParameter("pageNumber");
+		String user_type = request.getParameter("user_type");
+		String sex = request.getParameter("sex");
+		String pageCount = request.getParameter("pageCount");
+		String pageNumber = request.getParameter("pageNumber");
 		
 		//因为数据已经查出来了，在session中，这里只是分页，查询对应页码的数据
 		HttpSession session=request.getSession();
-		List<Users> users=(List<Users>)session.getAttribute("users");
+		List<Users> users = (List<Users>)session.getAttribute("users");
 		/*
-		 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），username  cert_type cert user_type sex  pageCount要回显
+		 * 出去的数据有哪些：查询结果的第一页数据，
+		 * 总页数，页码（这里是1，），username  
+		 * cert_type cert user_type sex  pageCount要回显
 		 */
 		//回传刚刚输入的查询条件
 		
@@ -193,23 +188,30 @@ public class AdminManageUserServlet extends HttpServlet {
 		 * 需要这三个数据怎么办？定义一个工具类，定义相关的算法，获取这些数据
 		 * 这个工具类就是大名鼎鼎的PageUtil.java
 		 */
-		PageUtil pageUtil=new PageUtil(users, Integer.parseInt(pageCount), Integer.parseInt(pageNumber));
+		PageUtil pageUtil = new PageUtil(users, Integer.parseInt(pageCount), Integer.parseInt(pageNumber));
 		request.setAttribute("userList", pageUtil.getUsers_page());//把查询结果users传给userlist.jsp页面
 		request.setAttribute("pagesum", pageUtil.getPagesum());//总页数
 		request.setAttribute("pageNumber", pageUtil.getPageNumber());//页码
 		request.getRequestDispatcher("/admin/userlist.jsp").forward(request, response);
 	}
 
+
 	/**
+	 * 
+	 * <p>Title: queryUser</p>  
+	 * <p>
+	 *	Description: 
 	 * 查询用户信息的方法
 	 * 
 	 * 进来的数据有哪些：username  cert_type cert user_type sex  pageCount
 	 * 
 	 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），
 	 * username  cert_type cert user_type sex  pageCount要回显，
-	 * 
+	 * </p> 
 	 * @param request
 	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	private void queryUser(HttpServletRequest request,
 			HttpServletResponse response)throws ServletException, IOException {
@@ -259,14 +261,20 @@ public class AdminManageUserServlet extends HttpServlet {
 	}
 
 	/**
-	 * 去往查询用户页面的方法
+	 * 
+	 * <p>Title: toQueryUserView</p>  
+	 * <p>
+	 *	Description: 
+	 *  去往查询用户页面的方法
+	 * </p> 
 	 * @param request
 	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	private void toQueryUserView(HttpServletRequest request,
 			HttpServletResponse response)throws ServletException, IOException {
 		//由于不需要带礼物（传递数据）给页面，所以直接跳转过去
 		request.getRequestDispatcher("/admin/userlist.jsp").forward(request, response);
 	}
-
 }
