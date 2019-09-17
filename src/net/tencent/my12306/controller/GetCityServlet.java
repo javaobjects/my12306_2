@@ -23,14 +23,14 @@ public class GetCityServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String provinceid=request.getParameter("pid");
+		String provinceid = request.getParameter("pid");
 		
-		List<City> cities=CityService.getInstance().getCityByProvinceid(provinceid);
+		List<City> cities = CityService.getInstance().getCityByProvinceid(provinceid);
 		
 		//输出一个xml文件
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/xml;charset=utf-8");
-		 PrintWriter writer=null;
+		 PrintWriter writer = null;
 				 try {
 					writer=response.getWriter();
 				} catch (IOException e) {

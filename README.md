@@ -7,8 +7,15 @@
 
 2. HttpSession的使用
 
-3. servlet传递数据至Jsp 
+3. servlet传递数据至Jsp
 
+4. Jsp EL表达式  
+https://www.cnblogs.com/czs1982/p/3966748.html
+
+5. Jsp核心标签库的运用
+http://how2j.cn/k/jsp/jsp-jstl/578.html
+
+6. ajax输出xml使用
 
 
 
