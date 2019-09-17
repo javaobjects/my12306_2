@@ -7,7 +7,7 @@
 
 2. HttpSession的使用
 
-
+3. servlet传递数据至Jsp 
 
 
 
