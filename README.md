@@ -47,6 +47,9 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 
 ![](WebContent/bug/12306.png)
 
+#### 总体架构
+
+![](WebContent/bug/JavaEE应用的标准层次结构.png)
 
 #### 项目所遇部分bug总结
 
