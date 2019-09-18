@@ -21,9 +21,9 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 
 7. ajax输出xml使用
 
-8. Md5加密
+8. Md5加密技术
 
-9. 图形验证码
+9. 图形验证码技术
 
 10. Cookie的使用
 
@@ -46,9 +46,6 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 #### 本项目的思维导向图草图
 
 ![](WebContent/bug/12306.png)
-
-
-
 
 
 #### 项目所遇部分bug总结
