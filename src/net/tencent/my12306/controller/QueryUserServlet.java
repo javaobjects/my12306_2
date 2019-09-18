@@ -22,7 +22,6 @@ public class QueryUserServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("--------------------");
 		//获取表单数据
 		String username=request.getParameter("username");
 		
@@ -31,14 +30,12 @@ public class QueryUserServlet extends HttpServlet {
 		
 		String user_type=request.getParameter("user_type");
 		String sex=request.getParameter("sex");
-		System.out.println("======================");
 		
 		//怎么查询servlet是不管的，全部交给service，servlet只管调用
 		UserService userService=UserService.getInstance();
 		
 		List<Users> users=userService.getUserByCondition(username,Integer.parseInt(cert_type),cert,Integer.parseInt(user_type),sex.charAt(0));
 		
-		System.out.println(users.toString());
 		
 		//回传刚刚输入的查询条件
 		request.setAttribute("username", username);
