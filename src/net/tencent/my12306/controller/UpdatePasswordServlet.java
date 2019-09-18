@@ -57,10 +57,12 @@ public class UpdatePasswordServlet extends HttpServlet {
 				//response.sendRedirect("ExitServlet");
 			}else
 			{
-				pw.println("<script>alert('更新密码失败');</script>");
+//				pw.println("<script>alert('更新密码失败,请稍后再试。');</script>");
+				request.setAttribute("mes_alert", "更新密码失败,请稍后再试。");
+				request.getRequestDispatcher("/user/user_password_edit.jsp").forward(request, response);
 			}
 		}else {
-			request.setAttribute("mes_alert", "确认新密码与新密码不一至,请重新输入");
+			request.setAttribute("mes_alert", "确认新密码与新密码不一至,请重新输入。");
 			request.getRequestDispatcher("/user/user_password_edit.jsp").forward(request, response);
 		}
 		

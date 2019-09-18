@@ -245,14 +245,14 @@ public class UsersDao {
 	}
 
 	public void updatePassword(Integer id, String password_new) {
-		Connection conn=null;
-		PreparedStatement stmt=null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		
 		try {
 			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
 			String update_user_sql="update my12306_2_user set password=? where id=?";
-			conn=DBUtils_pool.getConnection();
-			stmt=conn.prepareStatement(update_user_sql);
+			conn = DBUtils_pool.getConnection();
+			stmt = conn.prepareStatement(update_user_sql);
 			stmt.setString(1,password_new);
 			stmt.setInt(2,id);
 			
