@@ -49,7 +49,6 @@ public class UpdatePasswordServlet extends HttpServlet {
 			
 			//3.写三行代码ok
 			//user.getPassword().equals(Md5Utils.md5(p_old))
-			
 			if(UserService.getInstance().updatePassword(user.getId(), Md5Utils.md5(p_old), Md5Utils.md5(p_new)))
 			{
 				pw.println("<script>alert('更新密码成功,请重新登录');window.open('ExitServlet','_parent');</script>");

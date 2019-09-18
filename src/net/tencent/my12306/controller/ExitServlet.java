@@ -26,19 +26,19 @@ public class ExitServlet extends HttpServlet {
 		 * 3.把session也清理掉
 		 */
 		//3.把session也清理掉
-		HttpSession session=request.getSession();
+		HttpSession session = request.getSession();
 		session.invalidate();//销毁session，会马上重新创建一个新的session
 		
 		//1.把cookie清除掉
-		Cookie username_cookie=new Cookie("username", null);
+		Cookie username_cookie = new Cookie("username", null);
 		username_cookie.setMaxAge(7*24*60*60);
 		username_cookie.setPath(request.getContextPath()+"/");
 		
-		Cookie password_cookie=new Cookie("password",null);
+		Cookie password_cookie = new Cookie("password",null);
 		password_cookie.setMaxAge(7*24*60*60);
 		password_cookie.setPath(request.getContextPath()+"/");
 		
-		Cookie rule_cookie=new Cookie("rule",null);
+		Cookie rule_cookie = new Cookie("rule",null);
 		rule_cookie.setMaxAge(7*24*60*60);
 		rule_cookie.setPath(request.getContextPath()+"/");
 		
