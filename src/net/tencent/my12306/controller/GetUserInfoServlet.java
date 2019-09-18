@@ -28,7 +28,7 @@ public class GetUserInfoServlet extends HttpServlet {
 		 */
 		
 		//1.借助session，拿username和password，然后访问数据库获取用户的完整信息
-		HttpSession session=request.getSession();
+		HttpSession session = request.getSession();
 		Users user = (Users)session.getAttribute("user");
 		
 		Users result = UserService.getInstance().login(user.getUsername(), user.getPassword());

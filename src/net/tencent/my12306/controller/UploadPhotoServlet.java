@@ -78,14 +78,16 @@ public class UploadPhotoServlet extends HttpServlet {
 		out.close();
 */
 	}
-
 	/**
-	 * 根据请求头解析出文件名 请求头的格式：火狐和google浏览器下：form-data; name="file";
+	 * 
+	 * <p>Title: getFileName</p>  
+	 * <p>
+	 *	Description: 
+	 *	根据请求头解析出文件名 请求头的格式：火狐和google浏览器下：form-data; name="file";
 	 * filename="snmp4j--api.zip" IE浏览器下：form-data; name="file";
 	 * filename="E:\snmp4j--api.zip"
-	 * 
-	 * @param header
-	 *            请求头
+	 * </p> 
+	 * @param header 请求头
 	 * @return 文件名
 	 */
 	public String getFileName(String header) {

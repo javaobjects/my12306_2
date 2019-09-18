@@ -9,21 +9,25 @@
 
 3. servlet传递数据至Jsp
 
-4. Jsp EL表达式  
+4. JDBC连接池的使用
+
+5. Jsp EL表达式 
 https://www.cnblogs.com/czs1982/p/3966748.html
 
-5. Jsp核心标签库的运用
+6. Jsp核心标签库的运用
 http://how2j.cn/k/jsp/jsp-jstl/578.html
 
+7. ajax输出xml使用
+
+8. Md5加密
+
+9. 图形验证码
+
+10. Cookie的使用
+
+11. 图片上传
 
 
-6. ajax输出xml使用
-
-
-
-1. 验证码
-
-2. 
 
 ```
 
