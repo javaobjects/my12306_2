@@ -31,7 +31,18 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 
 12. 服务端表格分页
 
+13. 导出一个xls Excel表格
+
 ```
+
+#### 项目所导入的Jar包
+
+1. jstl-1.2.jar (JSP标准标签库)
+
+2. [jxl.jar](https://bbs.csdn.net/topics/90494976)(Java操作Excel或创建Excel) 
+
+3. ojdbc6.jar Oracle数据驱动
+
 
 
 
