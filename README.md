@@ -51,6 +51,20 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 
 ![](WebContent/bug/JavaEE应用的标准层次结构.png)
 
+#### 配置环境
+
+Jdk 1.8 
+
+Tomcat 8.0.47 
+
+Oracle 11.2.0.1.0
+
+
+
+
+
+
+
 #### 项目所遇部分bug总结
 
 1. ORA-02291: 违反完整约束条件 (SCOTT.MY12306_2_USER_CITY_FK) - 未找到父项关键字
