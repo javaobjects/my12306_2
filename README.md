@@ -43,7 +43,9 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 
 3. ojdbc6.jar Oracle数据驱动
 
+#### 本项目的思维导向图草图
 
+![](WebContent/bug/12306.png)
 
 
 
