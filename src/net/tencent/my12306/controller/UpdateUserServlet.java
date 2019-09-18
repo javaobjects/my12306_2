@@ -75,11 +75,8 @@ public class UpdateUserServlet extends HttpServlet {
 		}else
 		{
 			response.setContentType("text/html;charset=utf-8");
-			PrintWriter pw=response.getWriter();
+			PrintWriter pw = response.getWriter();
 			pw.println("<script>alert('更新失败');</script>");
 		}
 	}
-       
-    
-
 }

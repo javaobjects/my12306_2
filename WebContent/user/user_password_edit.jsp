@@ -31,7 +31,10 @@
       <tr>
         <td width="20"></td>
         <td width="100" height="40" class="text_cray1">用户名：</td>
-        <td align="left" class="text_cray1"><input name="username" type="text" disabled="true" class="text_cray" id="textfield4" value="${sessionScope.user.username}" size="30" readonly="reasonly"/></td>
+        <td align="left" class="text_cray1">
+	        <input name="username" type="text" disabled="true" class="text_cray" 
+	        id="textfield4" value="${sessionScope.user.username}" size="30" readonly="reasonly"/>
+        </td>
       </tr>
       <tr>
         <td width="20" align="center" class="text_red">*</td>
@@ -50,7 +53,10 @@
       <tr>
         <td width="20" align="center" class="text_red">*</td>
         <td width="100" height="40" class="text_cray1">确认新密码：</td>
-        <td align="left" class="text_cray1"><input name="password_new_confirm" type="text" class="text_cray" id="textfield7" size="30" /></td>
+        <td align="left" class="text_cray1">
+        	<input name="password_new_confirm" type="text" class="text_cray" id="textfield7" size="30" />
+        	<span class="text_red">${mes_alert }</span>
+        </td>
       </tr>
     </table>
       <br></td>
