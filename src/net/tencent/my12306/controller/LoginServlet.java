@@ -3,6 +3,7 @@ package net.tencent.my12306.controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -87,6 +88,17 @@ public class LoginServlet extends HttpServlet {
 							//1.把用户信息放入一个地方，这个地方各个页面都可以从这里拿数据，那么这个地方是HttpSession
 							HttpSession session = request.getSession();
 							session.setAttribute("user", user);
+							
+							// 统计上线人数 +1 --------application:在应用服务器中保存数据
+							ServletContext application = request.getServletContext();
+							Object obj = application.getAttribute("onlineCount");
+							// 第一次进来
+							if(obj == null) {
+								application.setAttribute("onlineCount", 1);
+							}else {
+								//下一次进来
+								application.setAttribute("onlineCount", (Integer)obj + 1);
+							}
 							
 							//根据用户是否自动登录，来写cookie
 							if("auto".equals(auto))

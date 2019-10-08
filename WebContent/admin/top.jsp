@@ -19,7 +19,10 @@
   <tr>
     <td width="75" height="25" bgcolor="#deedf8"></td>
     <td width="1122" align="left" valign="top" bgcolor="#deedf8"><span class="text_cray1">当前位置: 所有用户管理</span></td>
-    <td width="140" valign="top" bgcolor="#deedf8" class="text_cray1">欢迎您，${sessionScope.user.username}<%-- <%=((Users)session.getAttribute("user")).getUsername() %> --%></td>
+    <td width="200" valign="top" bgcolor="#deedf8" class="text_cray1">
+    欢迎您，${sessionScope.user.username}<%-- <%=((Users)session.getAttribute("user")).getUsername() %> --%>
+    ，当前在线人数:${onlineCount }
+    </td>
     <td width="64" align="left" valign="top" bgcolor="#deedf8">
     	<a href="<%=request.getContextPath()%>/ExitServlet" target="_parent" class="cray">退出</a>
    	</td>
