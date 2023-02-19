@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List,
-    net.tencent.my12306.entity.Province,
+    net.tencent.tickets.entity.Province,
     java.util.Iterator,
-    net.tencent.my12306.entity.Users"%>
+    net.tencent.tickets.entity.Users"%>
      <!-- 使用jstl:java standard tag library(单词缩写)
  1.需要先导入jstl.jar包 2.页面通过指令引入标签  3.使用标签 -->   
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  

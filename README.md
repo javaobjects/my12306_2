@@ -69,7 +69,7 @@ Vscode 1.34.0
 
 #### 数据库设计
 
-##### my12306_2_user
+##### tickets_2_user
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
@@ -79,24 +79,24 @@ Vscode 1.34.0
 | rule   | varchar2(2)  | not null | 权限(1 管理员 2 普通用户) |
 | realname   | varchar2(50)   | not null | 真实姓名   |  
 | sex   | char(1)    | not null | 性别(1 男 2 女)   |  
-| city   | number(11)    | not null | 城市信息id值((Foreign外键my12306_tab_city))   |  
-| cert_type   | number(11)    | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)(Foreign外键my12306_tab_certtype)   |  
+| city   | number(11)    | not null | 城市信息id值((Foreign外键tickets_tab_city))   |  
+| cert_type   | number(11)    | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)(Foreign外键tickets_tab_certtype)   |  
 | cert   | varchar2(50)    | not null | 证件号码   |  
 | birthday   | date   | not null | 生日   |  
-| user_type   | number(11)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)((Foreign外键my12306_tab_usertype))   |  
+| user_type   | number(11)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)((Foreign外键tickets_tab_usertype))   |  
 | content   | varchar2(3000)    | null   | 备注信息   |  
 | status   | char(1)   | not null | 用户状态(0 无效 1 有效)   | 
 | login_ip   | varchar2(50)   | not null   | 登陆IP   |  
 | image_path   | varchar2(200)    |  not null | 用户头像路径   |   
 
-##### my12306_2_usertype
+##### tickets_2_usertype
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
 | id | number(11)    | not null  | id (主键)  |  
 | content   | varchar2(40)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)    | 
 
-##### my12306_2_province
+##### tickets_2_province
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
@@ -104,7 +104,7 @@ Vscode 1.34.0
 | provinceid   | varchar2(6)   | not null | 省份标识   |
 | province | varchar2(40) | not null  | 省份名称  |  
 
-##### my12306_2_city
+##### tickets_2_city
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
@@ -113,7 +113,7 @@ Vscode 1.34.0
 | city | varchar2(50) | not null  | 城市名称  |  
 | father | varchar2(6) | not null  | 省份标识  |  
 
-#### my12306_2_certtype
+#### tickets_2_certtype
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
@@ -124,7 +124,7 @@ Vscode 1.34.0
 
 #### 项目所遇部分bug总结
 
-1. ORA-02291: 违反完整约束条件 (SCOTT.MY12306_2_USER_CITY_FK) - 未找到父项关键字
+1. ORA-02291: 违反完整约束条件 (SCOTT.tickets_2_USER_CITY_FK) - 未找到父项关键字
 
 ![](WebContent/bug/bug1.png)
 

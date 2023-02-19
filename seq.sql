@@ -1,5 +1,5 @@
 ﻿-- Create sequence 
-create sequence my12306_2_USER_SEQ
+create sequencetickets6_2_USER_SEQ
 minvalue 1
 maxvalue 999999999999999999999999999
 start with 1

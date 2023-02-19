@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource name="jdbc/oracle/My12306" 
+	<Resource name="jdbc/oracle/tickets" 
 	auth="Container" 
 	type="javax.sql.DataSource"
 	username="scott"

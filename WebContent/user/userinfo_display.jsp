@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="net.tencent.my12306.entity.Users"%>
+    pageEncoding="UTF-8" import="net.tencent.tickets.entity.Users"%>
     <!DOCTYPE HTML>
 <html>
 <head>
