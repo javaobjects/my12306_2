@@ -69,7 +69,7 @@ Vscode 1.34.0
 
 #### 数据库设计
 
-##### tickets_2_user
+##### tickets_user
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
@@ -89,14 +89,14 @@ Vscode 1.34.0
 | login_ip   | varchar2(50)   | not null   | 登陆IP   |  
 | image_path   | varchar2(200)    |  not null | 用户头像路径   |   
 
-##### tickets_2_usertype
+##### tickets_usertype
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
 | id | number(11)    | not null  | id (主键)  |  
 | content   | varchar2(40)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)    | 
 
-##### tickets_2_province
+##### tickets_province
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
@@ -104,7 +104,7 @@ Vscode 1.34.0
 | provinceid   | varchar2(6)   | not null | 省份标识   |
 | province | varchar2(40) | not null  | 省份名称  |  
 
-##### tickets_2_city
+##### tickets_city
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
@@ -113,7 +113,7 @@ Vscode 1.34.0
 | city | varchar2(50) | not null  | 城市名称  |  
 | father | varchar2(6) | not null  | 省份标识  |  
 
-#### tickets_2_certtype
+#### tickets_certtype
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
