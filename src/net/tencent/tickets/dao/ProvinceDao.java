@@ -11,7 +11,7 @@ import net.tencent.tickets.util.DBUtils_pool;
 
 public class ProvinceDao {
 	
-	private static final String QUERY_ALL_PROVINCE = "SELECT id,provinceid,province from tickets_2_province";
+	private static final String QUERY_ALL_PROVINCE = "SELECT tickets_province.PROVINCE_ID,tickets_province.PROVINCE_NUM,tickets_province.PROVINCE_NAME FROM tickets_province";
 
 	/**
 	 * 
@@ -36,9 +36,9 @@ public class ProvinceDao {
 			while(rs.next())
 			{
 				Province p=new Province();
-				p.setId(rs.getInt("id"));
-				p.setProvinceId(rs.getString("provinceid"));
-				p.setProvinceName(rs.getString("province"));
+				p.setId(rs.getInt("PROVINCE_ID"));
+				p.setProvinceNum(rs.getString("PROVINCE_NUM"));
+				p.setProvinceName(rs.getString("PROVINCE_NAME"));
 				
 				provinces.add(p);
 			}

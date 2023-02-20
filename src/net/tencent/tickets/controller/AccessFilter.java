@@ -67,7 +67,7 @@ public class AccessFilter implements Filter {
 			if(user!= null)
 			{
 				//用户已经登录了
-				if(user.getRule().equals("1"))
+				if(user.getUserRule().equals("1"))
 				{
 					//放行的代码
 					chain.doFilter(request, response);
@@ -87,7 +87,7 @@ public class AccessFilter implements Filter {
 			if(user!= null)
 			{
 				//用户已经登录了
-				if(user.getRule().equals("2"))
+				if(user.getUserRule().equals("2"))
 				{
 					//放行的代码
 					chain.doFilter(request, response);

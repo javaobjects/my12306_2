@@ -61,8 +61,8 @@ public class UploadPhotoServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Users user_session = (Users)session.getAttribute("user");
 			UserService userService = UserService.getInstance();
-			Users user = userService.login(user_session.getUsername(), 
-					user_session.getPassword());
+			Users user = userService.login(user_session.getUserName(), 
+					user_session.getUserPassword());
 			
 			//之前的代码
 //			HttpSession session = request.getSession();

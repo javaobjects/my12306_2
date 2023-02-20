@@ -73,52 +73,52 @@ Vscode 1.34.0
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
-| id | number(11)    | not null  | id(Parimary主键)  |  
-| username   | varchar2(30)   | not null | 用户名(Unique唯一)   | 
-| password   | varchar2(50)   | not null | 密码   |  
-| rule   | varchar2(2)  | not null | 权限(1 管理员 2 普通用户) |
-| realname   | varchar2(50)   | not null | 真实姓名   |  
-| sex   | char(1)    | not null | 性别(1 男 2 女)   |  
-| city   | number(11)    | not null | 城市信息id值((Foreign外键tickets_tab_city))   |  
-| cert_type   | number(11)    | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)(Foreign外键tickets_tab_certtype)   |  
-| cert   | varchar2(50)    | not null | 证件号码   |  
-| birthday   | date   | not null | 生日   |  
-| user_type   | number(11)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)((Foreign外键tickets_tab_usertype))   |  
-| content   | varchar2(3000)    | null   | 备注信息   |  
-| status   | char(1)   | not null | 用户状态(0 无效 1 有效)   | 
-| login_ip   | varchar2(50)   | not null   | 登陆IP   |  
-| image_path   | varchar2(200)    |  not null | 用户头像路径   |   
+| USER_ID | number(11)    | not null  | id(Parimary主键)  |
+| USER_NAME | varchar2(30)   | not null | 用户名(Unique唯一)   |
+| USER_PASSWORD | varchar2(50)   | not null | 密码   |
+| USER_RULE | varchar2(2)  | not null | 权限(1 管理员 2 普通用户) |
+| USER_REAL_NAME | varchar2(50)   | not null | 真实姓名   |
+| USER_SEX | char(1)    | not null | 性别(1 男 2 女)   |
+| USER_CITY_ID | number(11)    | not null | 城市信息id值((Foreign外键tickets_city)) FK_TICKETS_CITY_ID |
+| USER_CERTTYPE_ID | number(11)    | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)(Foreign外键tickets_certtype)FK_TICKETS_CERTTYPE_ID |
+| USER_CERT | varchar2(50)    | not null | 证件号码   |
+| USER_BIRTHDAY | date   | not null | 生日   |
+| USER_USERTYPE_ID | number(11)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)((Foreign外键tickets_usertype))FK_TICKETS_USERTYPE_ID |
+| USER_CONTENT | varchar2(3000)    | null   | 备注信息   |
+| USER_STATUS | char(1)   | not null | 用户状态(0 无效 1 有效)   |
+| USER_LOGIN_IP | varchar2(50)   | not null   | 登陆IP   |
+| USER_IMAGE_PATH | varchar2(200)    |  not null | 用户头像路径   |
 
 ##### tickets_usertype
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
-| id | number(11)    | not null  | id (主键)  |  
-| content   | varchar2(40)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)    | 
+| USERTYPE_ID | number(11)    | not null  | id (主键)  |
+| USERTYPE_CONTENT | varchar2(40)   | not null | 旅客类型(1成人2儿童3学生4残疾军人、伤残人民警察)    |
 
 ##### tickets_province
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
-| id | number(11) | not null  | id (主键)  |  
-| provinceid   | varchar2(6)   | not null | 省份标识   |
-| province | varchar2(40) | not null  | 省份名称  |  
+| PROVINCE_ID | number(11) | not null  | id (主键) |
+| PROVINCE_NUM | varchar2(50) | not null | 省份编号 |
+| PROVINCE_NAME | varchar2(40) | not null  | 省份名称  |
 
 ##### tickets_city
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
-| id | number(11) | not null  | id (主键)  |  
-| cityid   | varchar2(6)   | not null | 城市标识   |
-| city | varchar2(50) | not null  | 城市名称  |  
-| father | varchar2(6) | not null  | 省份标识  |  
+| CITY_ID | number(11) | not null  | id (主键) |
+| CITY_NUM | varchar2(50) | not null | 城市编号 |
+| CITY_NAME | varchar2(50) | not null  | 城市名称  |
+| CITY_FATHER | varchar2(6) | not null  | 省份标识  |
 
 #### tickets_certtype
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
-| id | number(11)    | not null  | id (主键)  |  
-| content   | varchar2(20)   | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)| 
+| CERTTYPE_ID | number(11)    | not null  | id (主键)  |
+| CERTTYPE_CONTENT | varchar2(20)   | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)|
 
 
 
@@ -161,3 +161,9 @@ response.sendRedirect(request.getContextPath() + "/login.jsp?message=" + mes);
 String message = URLDecoder.decode(request.getParameter("message"), "utf-8");//解码
 ```
 
+
+
+#### 拓展知识
+
+1. [mysql Navicat12约束条件的设置和详解](https://blog.csdn.net/qq_34168515/article/details/108186202)
+2. [navicat表约束怎么弄](https://www.php.cn/tool/navicat/428197.html)

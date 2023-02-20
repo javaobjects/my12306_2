@@ -14,20 +14,20 @@ import java.util.Date;
  */
 public class Users {
 	private Integer id;
-	private String username;
-	private String password;
-	private String rule;// 1、管理员 2、普通用户
-	private String realname;
-	private Character sex;//性别(1、男 2、女)
+	private String userName;
+	private String userPassword;
+	private String userRule;// 1、管理员 2、普通用户
+	private String userRealName;
+	private Character userSex;//性别(1、男 2、女)
 	private City city;
-	private CertType certtype;
-	private String cert;//证件号码
-	private Date birthday;
-	private UserType usertype;
-	private String content;
-	private Character status;//用户状态（0、无效  1、有效 ）
-	private String loginIp;
-	private String imagePath;
+	private CertType certType;
+	private String userCert;//证件号码
+	private Date userBirthday;
+	private UserType userType;
+	private String userContent;
+	private Character userStatus;//用户状态（0、无效  1、有效 ）
+	private String userLoginIp;
+	private String userImagePath;
 	
 	
 	public Integer getId() {
@@ -36,35 +36,35 @@ public class Users {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getPassword() {
-		return password;
+	public String getUserPassword() {
+		return userPassword;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
-	public String getRule() {
-		return rule;
+	public String getUserRule() {
+		return userRule;
 	}
-	public void setRule(String rule) {
-		this.rule = rule;
+	public void setUserRule(String userRule) {
+		this.userRule = userRule;
 	}
-	public String getRealname() {
-		return realname;
+	public String getUserRealName() {
+		return userRealName;
 	}
-	public void setRealname(String realname) {
-		this.realname = realname;
+	public void setUserRealName(String userRealName) {
+		this.userRealName = userRealName;
 	}
-	public Character getSex() {
-		return sex;
+	public Character getUserSex() {
+		return userSex;
 	}
-	public void setSex(Character sex) {
-		this.sex = sex;
+	public void setUserSex(Character userSex) {
+		this.userSex = userSex;
 	}
 	public City getCity() {
 		return city;
@@ -72,92 +72,92 @@ public class Users {
 	public void setCity(City city) {
 		this.city = city;
 	}
-	public CertType getCerttype() {
-		return certtype;
+	public CertType getCertType() {
+		return certType;
 	}
-	public void setCerttype(CertType certtype) {
-		this.certtype = certtype;
+	public void setCertType(CertType certType) {
+		this.certType = certType;
 	}
-	public String getCert() {
-		return cert;
+	public String getUserCert() {
+		return userCert;
 	}
-	public void setCert(String cert) {
-		this.cert = cert;
+	public void setUserCert(String userCert) {
+		this.userCert = userCert;
 	}
-	public Date getBirthday() {
-		return birthday;
+	public Date getUserBirthday() {
+		return userBirthday;
 	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setUserBirthday(Date userBirthday) {
+		this.userBirthday = userBirthday;
 	}
-	public UserType getUsertype() {
-		return usertype;
+	public UserType getUserType() {
+		return userType;
 	}
-	public void setUsertype(UserType usertype) {
-		this.usertype = usertype;
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
-	public String getContent() {
-		return content;
+	public String getUserContent() {
+		return userContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setUserContent(String userContent) {
+		this.userContent = userContent;
 	}
-	public Character getStatus() {
-		return status;
+	public Character getUserStatus() {
+		return userStatus;
 	}
-	public void setStatus(Character status) {
-		this.status = status;
+	public void setUserStatus(Character userStatus) {
+		this.userStatus = userStatus;
 	}
-	public String getLoginIp() {
-		return loginIp;
+	public String getUserLoginIp() {
+		return userLoginIp;
 	}
-	public void setLoginIp(String loginIp) {
-		this.loginIp = loginIp;
+	public void setUserLoginIp(String userLoginIp) {
+		this.userLoginIp = userLoginIp;
 	}
-	public String getImagePath() {
-		return imagePath;
+	public String getUserImagePath() {
+		return userImagePath;
 	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setUserImagePath(String userImagePath) {
+		this.userImagePath = userImagePath;
 	}
 	public Users() {
 		super();
 	}
-	public Users(Integer id, String username, String password, String rule,
-			String realname, Character sex, City city, CertType certtype,
-			String cert, Date birthday, UserType usertype, String content,
-			Character status, String loginIp, String imagePath) {
+	public Users(Integer id, String userName, String userPassword, String userRule,
+			String userRealName, Character userSex, City city, CertType certType,
+			String userCert, Date userBirthday, UserType userType, String userContent,
+			Character userStatus, String userLoginIp, String userImagePath) {
 		super();
 		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.rule = rule;
-		this.realname = realname;
-		this.sex = sex;
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.userRule = userRule;
+		this.userRealName = userRealName;
+		this.userSex = userSex;
 		this.city = city;
-		this.certtype = certtype;
-		this.cert = cert;
-		this.birthday = birthday;
-		this.usertype = usertype;
-		this.content = content;
-		this.status = status;
-		this.loginIp = loginIp;
-		this.imagePath = imagePath;
+		this.certType = certType;
+		this.userCert = userCert;
+		this.userBirthday = userBirthday;
+		this.userType = userType;
+		this.userContent = userContent;
+		this.userStatus = userStatus;
+		this.userLoginIp = userLoginIp;
+		this.userImagePath = userImagePath;
 	}
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", username=" + username + ", password="
-				+ password + ", rule=" + rule + ", realname=" + realname
-				+ ", sex=" + sex + ", city=" + city + ", certtype=" + certtype
-				+ ", cert=" + cert + ", birthday=" + birthday + ", usertype="
-				+ usertype + ", content=" + content + ", status=" + status
-				+ ", loginIp=" + loginIp + ", imagePath=" + imagePath + "]\n";
+		return "Users [id=" + id + ", userName=" + userName + ", userPassword="
+				+ userPassword + ", userRule=" + userRule + ", userRealName=" + userRealName
+				+ ", userSex=" + userSex + ", city=" + city + ", certType=" + certType
+				+ ", userCert=" + userCert + ", userBirthday=" + userBirthday + ", userType="
+				+ userType + ", userContent=" + userContent + ", userStatus=" + userStatus
+				+ ", userLoginIp=" + userLoginIp + ", userImagePath=" + userImagePath + "]\n";
 	}
-	public Users(String username, String password, Character sex, Date birthday) {
+	public Users(String userName, String userPassword, Character userSex, Date userBirthday) {
 		super();
-		this.username = username;
-		this.password = password;
-		this.sex = sex;
-		this.birthday = birthday;
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.userSex = userSex;
+		this.userBirthday = userBirthday;
 	}
 }

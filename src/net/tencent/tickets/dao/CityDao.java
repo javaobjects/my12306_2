@@ -11,17 +11,17 @@ import net.tencent.tickets.util.DBUtils_pool;
 
 public class CityDao {
 	
-	private static final String QUERY_CITY_BY_PROVINCEID = "select id,cityid,city from tickets_2_city where father=?";
+	private static final String QUERY_CITY_BY_PROVINCEID = "SELECT tickets_city.CITY_ID,tickets_city.CITY_NUM,tickets_city.CITY_NAME from tickets_city where tickets_city.CITY_FATHER=?";
 
 	/**
 	 * 获取指定省份的所有城市信息
 	 */
 	public List<City> queryCityByProvinceid(String provinceId)
 	{
-		List<City> cities=new ArrayList<>();
+		List<City> cities = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		ResultSet rs=null;
+		ResultSet rs = null;
 		try {
 
 			conn = DBUtils_pool.getConnection();
@@ -32,9 +32,9 @@ public class CityDao {
 			{
 				City c=new City();
 				
-				c.setCityId(rs.getString("cityid"));
-				c.setId(rs.getInt("id"));
-				c.setCityName(rs.getString("city"));
+				c.setCityNum(rs.getString("CITY_NUM"));
+				c.setId(rs.getInt("CITY_ID"));
+				c.setCityName(rs.getString("CITY_NAME"));
 				
 				cities.add(c);
 				

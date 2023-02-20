@@ -68,8 +68,8 @@ public class UpdateUserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Users session_user = (Users)session.getAttribute("user");
 			
-			session.setAttribute("user", userService.login(session_user.getUsername(), 
-					session_user.getPassword()));
+			session.setAttribute("user", userService.login(session_user.getUserName(), 
+					session_user.getUserPassword()));
 
 			response.sendRedirect("ToUpdateUserServlet");
 		}else

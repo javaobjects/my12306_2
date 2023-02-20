@@ -31,7 +31,7 @@ public class GetUserInfoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Users user = (Users)session.getAttribute("user");
 		
-		Users result = UserService.getInstance().login(user.getUsername(), user.getPassword());
+		Users result = UserService.getInstance().login(user.getUserName(), user.getUserPassword());
 		
 		
 		

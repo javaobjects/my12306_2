@@ -42,7 +42,7 @@ public class ToUpdateUserServlet extends HttpServlet {
 				HttpSession session=request.getSession();
 				Users user = (Users)session.getAttribute("user");
 				
-				Users result = UserService.getInstance().login(user.getUsername(), user.getPassword());
+				Users result = UserService.getInstance().login(user.getUserName(), user.getUserPassword());
 				
 				
 				
@@ -52,7 +52,7 @@ public class ToUpdateUserServlet extends HttpServlet {
 				request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
 				//获取当前用户所在省份的所有城市信息并传给页面
 				request.setAttribute("cities", CityService.getInstance().getCityByProvinceid
-						(result.getCity().getProvince().getProvinceId()));
+						(result.getCity().getProvince().getProvinceNum()));
 				
 				request.getRequestDispatcher("/user/userinfo_edit.jsp").forward(request, response);
 	}

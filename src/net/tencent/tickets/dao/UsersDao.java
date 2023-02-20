@@ -25,20 +25,47 @@ public class UsersDao {
 	 * status CHAR(1) default '1' not null, login_ip VARCHAR2(50), image_path
 	 * VARCHAR2(200)
 	 */
-	private static final String ADD_USER = "insert into tickets_2_user(id,username,password,rule,realname,sex,city,cert_type"
-			+ ",cert,birthday,user_type,content,status,login_ip,image_path)"
-			+ " values (tickets_2_user_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,'1',?,'')";
+	private static final String ADD_USER = "INSERT INTO tickets_user(tickets_user.USER_ID,tickets_user.USER_NAME,tickets_user.USER_PASSWORD,tickets_user.USER_RULE,\r\n"
+			+ "tickets_user.USER_REAL_NAME,tickets_user.USER_SEX,tickets_user.USER_CITY_ID,tickets_user.USER_CERTTYPE_ID,\r\n"
+			+ "tickets_user.USER_CERT,tickets_user.USER_BIRTHDAY,tickets_user.USER_USERTYPE_ID,tickets_user.USER_CONTENT,tickets_user.USER_STATUS,tickets_user.USER_LOGIN_IP,tickets_user.USER_IMAGE_PATH)\r\n"
+			+ "values (NULL,?,?,?,?,?,?,?,?,?,?,?,'1',?,'')";
 //			+ " values (tickets_2_user_seq.nextval,?,?,'2',?,?,?,?,?,?,?,?,'1',?,'')";
 		//	+ " values (tab_user_seq.nextval,?,?,'2',?,?,200,1,'440104201910106119',?,1,'备注','1',?,'')";
-	private static final String QUERY_USERNAME = "select count(1) as col_count from tickets_2_user where username = ?";
-	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "select u.id,u.username,u.password,u.rule,"
-			+ "u.realname,u.sex,u.city c_id,u.cert_type"
-			+ ",u.cert,u.birthday,u.user_type,u.content,u.status,u.login_ip,u.image_path,"
-			+ "c.city,p.province,p.provinceid,ut.content ut_content,ct.content ct_content "
-			+ "from tickets_2_user u,tickets_2_city c,tickets_2_province p,tickets_2_usertype ut,tickets_2_certtype ct"
-			+ " where u.city=c.id and p.provinceid=c.father "
-			+ "and ut.id=u.user_type and ct.id=u.cert_type "
-			+ "and u.username=? and u.password=?";
+	private static final String QUERY_USERNAME = "SELECT COUNT(1) AS COL_COUNT FROM tickets_user WHERE tickets_user.USER_NAME = ?";
+	private static final String QUERY_USER_BY_USERNAME_AND_PASSWORD = "SELECT\r\n"
+			+ "	tickets_user.USER_ID,\r\n"
+			+ "	tickets_user.USER_NAME,\r\n"
+			+ "	tickets_user.USER_PASSWORD,\r\n"
+			+ "	tickets_user.USER_RULE,\r\n"
+			+ "	tickets_user.USER_REAL_NAME,\r\n"
+			+ "	tickets_user.USER_SEX,\r\n"
+			+ "	tickets_user.USER_CITY_ID,\r\n"
+			+ "	tickets_user.USER_CERTTYPE_ID,\r\n"
+			+ "	tickets_user.USER_CERT,\r\n"
+			+ "	tickets_user.USER_BIRTHDAY,\r\n"
+			+ "	tickets_user.USER_USERTYPE_ID,\r\n"
+			+ "	tickets_user.USER_CONTENT,\r\n"
+			+ "	tickets_user.USER_STATUS,\r\n"
+			+ "	tickets_user.USER_LOGIN_IP,\r\n"
+			+ "	tickets_user.USER_IMAGE_PATH,\r\n"
+			+ "	tickets_city.CITY_ID,\r\n"
+			+ "	tickets_province.PROVINCE_ID,\r\n"
+			+ "	tickets_province.PROVINCE_NUM,\r\n"
+			+ "	tickets_usertype.USERTYPE_CONTENT,\r\n"
+			+ "	tickets_certtype.CERTTYPE_CONTENT \r\n"
+			+ "FROM\r\n"
+			+ "	tickets_user,\r\n"
+			+ "	tickets_city,\r\n"
+			+ "	tickets_province,\r\n"
+			+ "	tickets_usertype,\r\n"
+			+ "	tickets_certtype\r\n"
+			+ "WHERE\r\n"
+			+ "	tickets_user.USER_CITY_ID = tickets_city.CITY_ID\r\n"
+			+ "	AND tickets_province.PROVINCE_ID = tickets_city.CITY_FATHER\r\n"
+			+ "	AND tickets_usertype.USERTYPE_ID = tickets_user.USER_USERTYPE_ID\r\n"
+			+ "	AND tickets_certtype.CERTTYPE_ID = tickets_user.USER_CERTTYPE_ID\r\n"
+			+ "	AND tickets_user.USER_NAME = ?\r\n"
+			+ "	AND tickets_user.USER_PASSWORD = ?";
 	
 	private UsersDao() {}
 	
@@ -60,18 +87,18 @@ public class UsersDao {
 			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(ADD_USER);
 			
-			stmt.setString(1, user.getUsername());//用户名
-			stmt.setString(2, Md5Utils.md5(user.getPassword()));//密码
-			stmt.setString(3, user.getRule());//权限
-			stmt.setString(4, user.getRealname());//真实姓名
-			stmt.setString(5, user.getSex() + "");//性别
+			stmt.setString(1, user.getUserName());//用户名
+			stmt.setString(2, Md5Utils.md5(user.getUserPassword()));//密码
+			stmt.setString(3, user.getUserRule());//权限
+			stmt.setString(4, user.getUserRealName());//真实姓名
+			stmt.setString(5, user.getUserSex() + "");//性别
 			stmt.setInt(6, user.getCity().getId());//城市 此处关联的居然是id不是cityid
-			stmt.setString(7, user.getCerttype().getId().toString());//证件类型
-			stmt.setString(8, user.getCert());//证件号码
-			stmt.setDate(9, new java.sql.Date(user.getBirthday().getTime()));//生日
-			stmt.setInt(10, user.getUsertype().getId());//旅客类型
-			stmt.setString(11, user.getContent());//备注
-			stmt.setString(12, user.getLoginIp());//Ip地址
+			stmt.setString(7, user.getCertType().getId().toString());//证件类型
+			stmt.setString(8, user.getUserCert());//证件号码
+			stmt.setDate(9, new java.sql.Date(user.getUserBirthday().getTime()));//生日
+			stmt.setInt(10, user.getUserType().getId());//旅客类型
+			stmt.setString(11, user.getUserContent());//备注
+			stmt.setString(12, user.getUserLoginIp());//Ip地址
 			
 			rows=stmt.executeUpdate();
 
@@ -152,22 +179,22 @@ public class UsersDao {
 				 * id,username,password,rule,realname,sex,city,cert_type"
 			+ ",cert,birthday,user_type,content,status,login_ip,image_path
 				 */
-				user.setId(rs.getInt("id"));
-				user.setUsername(rs.getString("username"));
-				user.setPassword(rs.getString("password"));
-				user.setRule(rs.getString("rule"));
-				user.setRealname(rs.getString("realname"));
+				user.setId(rs.getInt("USER_ID"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserPassword(rs.getString("USER_PASSWORD"));
+				user.setUserRule(rs.getString("USER_RULE"));
+				user.setUserRealName(rs.getString("USER_REAL_NAME"));
 				//补全另外10个数据
-				user.setSex(rs.getString("sex").charAt(0));
-				user.setCity(new City(rs.getInt("c_id"),null, rs.getString("city"), new Province(null, rs.getString("provinceid"), rs.getString("province"))));
-				user.setCerttype(new CertType(rs.getInt("cert_type"), rs.getString("ct_content")));
-				user.setCert(rs.getString("cert"));
-				user.setBirthday(rs.getDate("birthday"));
-				user.setUsertype(new UserType(rs.getInt("user_type"),rs.getString("ut_content")));
-				user.setContent(rs.getString("content"));
-				user.setStatus(rs.getString("status").charAt(0));
-				user.setLoginIp(rs.getString("login_ip"));
-				user.setImagePath(rs.getString("image_path"));
+				user.setUserSex(rs.getString("USER_SEX").charAt(0));
+				user.setCity(new City(rs.getInt("CITY_ID"),null, rs.getString("CITY_NAME"), new Province(null, rs.getString("PROVINCE_ID"), rs.getString("PROVINCE_NAME"))));
+				user.setCertType(new CertType(rs.getInt("USER_CERTTYPE_ID"), rs.getString("CERTTYPE_CONTENT")));
+				user.setUserCert(rs.getString("USER_CERT"));
+				user.setUserBirthday(rs.getDate("USER_BIRTHDAY"));
+				user.setUserType(new UserType(rs.getInt("USER_USERTYPE_ID"),rs.getString("USERTYPE_CONTENT")));
+				user.setUserContent(rs.getString("USER_CONTENT"));
+				user.setUserStatus(rs.getString("USER_STATUS").charAt(0));
+				user.setUserLoginIp(rs.getString("USER_LOGIN_IP"));
+				user.setUserImagePath(rs.getString("USER_IMAGE_PATH"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -185,18 +212,29 @@ public class UsersDao {
 		
 		try {
 			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
-			String update_user_sql="update tickets_2_user set realname=?,sex=?,city=?,cert_type=?,cert=?,"
-					+ "birthday=?,user_type=?,content=? where id=?";
-			conn=DBUtils_pool.getConnection();
-			stmt=conn.prepareStatement(update_user_sql);
-			stmt.setString(1, user.getRealname());
-			stmt.setString(2, user.getSex() + "");
+			String update_user_sql="UPDATE tickets_user \r\n"
+					+ "SET tickets_user.USER_REAL_NAME =?,\r\n"
+					+ "tickets_user.USER_SEX =?,\r\n"
+					+ "tickets_user.USER_CITY_ID =?,\r\n"
+					+ "tickets_user.USER_CERTTYPE_ID =?,\r\n"
+					+ "tickets_user.USER_CERT =?,\r\n"
+					+ "tickets_user.USER_BIRTHDAY =?,\r\n"
+					+ "tickets_user.USER_USERTYPE_ID =?,\r\n"
+					+ "tickets_user.USER_CONTENT =? \r\n"
+					+ "WHERE\r\n"
+					+ "	tickets_user.USER_ID =?";
+			
+			conn = DBUtils_pool.getConnection();
+			stmt = conn.prepareStatement(update_user_sql);
+			
+			stmt.setString(1, user.getUserRealName());
+			stmt.setString(2, user.getUserSex() + "");
 			stmt.setInt(3, user.getCity().getId());
-			stmt.setInt(4,user.getCerttype().getId());
-			stmt.setString(5,user.getCert());
-			stmt.setDate(6, new java.sql.Date(user.getBirthday().getTime()));
-			stmt.setInt(7,user.getUsertype().getId());
-			stmt.setString(8,user.getContent());
+			stmt.setInt(4,user.getCertType().getId());
+			stmt.setString(5,user.getUserCert());
+			stmt.setDate(6, new java.sql.Date(user.getUserBirthday().getTime()));
+			stmt.setInt(7,user.getUserType().getId());
+			stmt.setString(8,user.getUserContent());
 			stmt.setInt(9, user.getId());
 			
 			rows=stmt.executeUpdate();
@@ -315,11 +353,11 @@ public class UsersDao {
 				user=new Users();
 				
 				user.setId(rs.getInt("id"));
-				user.setUsername(rs.getString("username"));
-				user.setSex(rs.getString("sex").charAt(0));
-				user.setCerttype(new CertType(rs.getInt("ct_id"), rs.getString("ct_content")));
-				user.setCert(rs.getString("cert"));
-				user.setUsertype(new UserType(rs.getInt("ut_id"),rs.getString("ut_content")));
+				user.setUserName(rs.getString("username"));
+				user.setUserSex(rs.getString("sex").charAt(0));
+				user.setCertType(new CertType(rs.getInt("ct_id"), rs.getString("ct_content")));
+				user.setUserCert(rs.getString("cert"));
+				user.setUserType(new UserType(rs.getInt("ut_id"),rs.getString("ut_content")));
 				
 				users.add(user);
 			}

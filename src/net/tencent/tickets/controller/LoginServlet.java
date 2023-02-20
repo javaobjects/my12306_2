@@ -114,7 +114,7 @@ public class LoginServlet extends HttpServlet {
 								password_cookie.setMaxAge(7*24*60*60);
 								password_cookie.setPath(request.getContextPath()+"/");
 								
-								Cookie rule_cookie = new Cookie("rule",user.getRule());
+								Cookie rule_cookie = new Cookie("rule",user.getUserRule());
 								rule_cookie.setMaxAge(7*24*60*60);
 								rule_cookie.setPath(request.getContextPath()+"/");
 								
@@ -126,7 +126,7 @@ public class LoginServlet extends HttpServlet {
 							
 							//成功后跳转到哪？要看用户的rule：如果是管理员，
 							//去往管理员主页面；如果是普通用户，去往普通用户主页面
-							if("2".equals(user.getRule()))
+							if("2".equals(user.getUserRule()))
 							{
 								//普通用户
 								request.getRequestDispatcher("/user/index.jsp").forward(request, response);

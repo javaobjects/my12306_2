@@ -14,7 +14,7 @@ public class City {
 
 	//id cityid city father
 	private Integer id;
-	private String cityId;
+	private String cityNum;
 	/**城市名称,对应数据库city字段**/
 	private String cityName;
 	private Province province;
@@ -24,11 +24,11 @@ public class City {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getCityId() {
-		return cityId;
+	public String getCityNum() {
+		return cityNum;
 	}
-	public void setCityId(String cityId) {
-		this.cityId = cityId;
+	public void setCityNum(String cityNum) {
+		this.cityNum = cityNum;
 	}
 	public String getCityName() {
 		return cityName;
@@ -42,10 +42,10 @@ public class City {
 	public void setProvince(Province province) {
 		this.province = province;
 	}
-	public City(Integer id, String cityId, String cityName, Province province) {
+	public City(Integer id, String cityNum, String cityName, Province province) {
 		super();
 		this.id = id;
-		this.cityId = cityId;
+		this.cityNum = cityNum;
 		this.cityName = cityName;
 		this.province = province;
 	}
@@ -58,7 +58,7 @@ public class City {
 	}
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", cityId=" + cityId + ", cityName=" + cityName + ", province=" + province + "]";
+		return "City [id=" + id + ", cityId=" + cityNum + ", cityName=" + cityName + ", province=" + province + "]";
 	}
 	
 	

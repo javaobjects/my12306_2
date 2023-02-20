@@ -112,11 +112,11 @@ public class AdminManageUserServlet extends HttpServlet {
 					{
 						Users user = users.get(row-1);
 						ws.addCell(new Label(0, row, user.getId()+""));
-						ws.addCell(new Label(1, row, user.getUsername()));
-						ws.addCell(new Label(2, row, user.getSex() == 49 ? "男" : "女"));
-						ws.addCell(new Label(3, row, user.getCerttype().getContent()));
-						ws.addCell(new Label(4, row, user.getCert()));
-						ws.addCell(new Label(5, row, user.getUsertype().getContent()));
+						ws.addCell(new Label(1, row, user.getUserName()));
+						ws.addCell(new Label(2, row, user.getUserSex() == 49 ? "男" : "女"));
+						ws.addCell(new Label(3, row, user.getCertType().getContent()));
+						ws.addCell(new Label(4, row, user.getUserCert()));
+						ws.addCell(new Label(5, row, user.getUserType().getContent()));
 					}
 					
 					workbook.write();

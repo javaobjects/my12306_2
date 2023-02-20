@@ -15,7 +15,7 @@ public class Province {
 	/**id*/
 	private Integer id;
 	/**省份id 字符串类型**/
-	private String provinceId;
+	private String provinceNum;
 	/**省份名称 对应数据库的province字段**/
 	private String provinceName;
 	public Integer getId() {
@@ -24,11 +24,11 @@ public class Province {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getProvinceId() {
-		return provinceId;
+	public String getProvinceNum() {
+		return provinceNum;
 	}
-	public void setProvinceId(String provinceId) {
-		this.provinceId = provinceId;
+	public void setProvinceNum(String provinceNum) {
+		this.provinceNum = provinceNum;
 	}
 	public String getProvinceName() {
 		return provinceName;
@@ -36,10 +36,10 @@ public class Province {
 	public void setProvinceName(String provinceName) {
 		this.provinceName = provinceName;
 	}
-	public Province(Integer id, String provinceId, String provinceName) {
+	public Province(Integer id, String provinceNum, String provinceName) {
 		super();
 		this.id = id;
-		this.provinceId = provinceId;
+		this.provinceNum = provinceNum;
 		this.provinceName = provinceName;
 	}
 	public Province() {
@@ -47,7 +47,7 @@ public class Province {
 	}
 	@Override
 	public String toString() {
-		return "Province [id=" + id + ", provinceId=" + provinceId + ", provinceName=" + provinceName + "]";
+		return "Province [id=" + id + ", provinceNum=" + provinceNum + ", provinceName=" + provinceName + "]";
 	}
 	
 	
