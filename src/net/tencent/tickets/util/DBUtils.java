@@ -22,36 +22,37 @@ public class DBUtils {
 	private static String username;
 	private static String password;
 	
-	static
-	{
-		//如何读取属性文件：jdbc.properties
-		//使用的技术：使用类加载器获取输入流进而加载属性文件，拿到其中的数据
-		InputStream in=DBUtils.class.getClassLoader().getResourceAsStream("jdbc.properties");
-		Properties prop=new Properties();
+	static {
+		// 如何读取属性文件：jdbc.properties
+		// 使用的技术：使用类加载器获取输入流进而加载属性文件，拿到其中的数据
+		InputStream in = DBUtils.class.getClassLoader().getResourceAsStream("mysql_jdbc.properties");
 		
+		System.out.println(in);
+		
+		Properties prop = new Properties();
+
 		try {
 			prop.load(in);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		driverName=prop.getProperty("jdbc_driver");
-		url=prop.getProperty("jdbc_url");
-		username=prop.getProperty("jdbc_username");
-		password=prop.getProperty("jdbc_password");
-		
+
+		driverName = prop.getProperty("jdbc_driver");
+		url = prop.getProperty("jdbc_url");
+		username = prop.getProperty("jdbc_username");
+		password = prop.getProperty("jdbc_password");
+
 	}
 	
 	/**
 	 * 获取连接对象的方法
 	 * @return
 	 */
-	public static Connection getConnection()
-	{
-		Connection conn=null;
+	public static Connection getConnection() {
+		Connection conn = null;
 		try {
 			Class.forName(driverName);
-			conn=DriverManager.getConnection(url, username, password);
+			conn = DriverManager.getConnection(url, username, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

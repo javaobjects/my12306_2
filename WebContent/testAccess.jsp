@@ -11,7 +11,7 @@
 <%
 
 Users user=new Users();
-user.setRule("1");
+user.setUserRule("1");
 session.setAttribute("user", user);
 
 

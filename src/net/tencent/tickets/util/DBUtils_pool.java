@@ -36,7 +36,8 @@ public class DBUtils_pool {
 			//实例化Context对象，其实读取Context.xml文件中的资源
 			Context context = new InitialContext();
 			//使用lookup方法寻找数据源资源并且造型成DataSource
-			 DataSource ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle/tickets");
+//			 DataSource ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle/tickets");
+			 DataSource ds = (DataSource) context.lookup("java:comp/env/jdbc/mysql/tickets");
 			 conn = ds.getConnection();
 		}catch(Exception e)
 		{

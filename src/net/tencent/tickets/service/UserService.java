@@ -8,7 +8,6 @@ import net.tencent.tickets.entity.Users;
 public class UserService {
 	
 	/**
-	 * 
 	 * <p>Title: updatePassword</p>  
 	 * <p>
 	 *	Description: 
@@ -20,11 +19,10 @@ public class UserService {
 	 */
 	public boolean updatePassword(Integer id,String password_old,String password_new)
 	{
-		boolean tmp=false;//默认更新失败
-		if(userDao.find(id,password_old))
-		{
-			userDao.updatePassword(id,password_new);
-			tmp=true;
+		boolean tmp = false;// 默认更新失败
+		if (userDao.find(id, password_old)) {
+			userDao.updatePassword(id, password_new);
+			tmp = true;
 		}
 		return tmp;
 	}
@@ -40,19 +38,19 @@ public class UserService {
 	 */
 	public boolean updateUser(Users user)
 	{
-		return userDao.updateUser(user)>0;
+		return userDao.updateUser(user) > 0;
 	}
 	/**
 	 * 属性依赖UserDao
 	 */
-	private UsersDao userDao=UsersDao.getInstance();
+	private UsersDao userDao = UsersDao.getInstance();
 	
 	/**
 	 * 注册方法
 	 */
 	public boolean register(Users user)
 	{
-		return userDao.addUser(user)>0;
+		return userDao.addUser(user) > 0;
 	}
 	
 	/**
@@ -93,9 +91,8 @@ public class UserService {
 	
 	public static UserService getInstance()
 	{
-		if(userService==null)
-		{
-			userService=new UserService();
+		if (userService == null) {
+			userService = new UserService();
 		}
 		return userService;
 	}

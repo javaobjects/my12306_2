@@ -56,9 +56,9 @@ if(cookies != null)
 if(username != null && password != null && rule != null && !"".equals(username))
 	{
 		user = new Users();
-		user.setUsername(username);
-		user.setPassword(password);
-		user.setRule(rule);
+		user.setUserName(username);
+		user.setUserPassword(password);
+		user.setUserRule(rule);
 		
 		session.setAttribute("user", user);
 

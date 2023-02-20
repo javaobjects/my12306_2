@@ -51,21 +51,21 @@ Users user = (Users)request.getAttribute("userinfo");
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">登录名：</td>
-            <td width="350" align="left" class="text_cray"><%=user.getUsername() %></td>
+            <td width="350" align="left" class="text_cray"><%=user.getUserName() %></td>
             <td width="230" rowspan="5" align="center"
              background="<%=request.getContextPath() %>/images/bg_point_write.gif" class="text_cray">
-             <img src="<%=request.getContextPath()+"/photos/"+user.getImagePath() %>" width="139" height="139">
+             <img src="<%=request.getContextPath()+"/photos/"+user.getUserImagePath() %>" width="139" height="139">
              </td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">真实姓名：</td>
-            <td align="left" class="text_cray"><%=user.getRealname() %></td>
+            <td align="left" class="text_cray"><%=user.getUserRealName() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">性 别：</td>
-            <td align="left" class="text_cray"><%=user.getSex().equals("1")?"男":"女" %></td>
+            <td align="left" class="text_cray"><%=user.getUserSex().equals("1")?"男":"女" %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
@@ -80,27 +80,27 @@ Users user = (Users)request.getAttribute("userinfo");
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">证件类型：</td>
-            <td colspan="2" align="left" class="text_cray"><%=user.getCerttype().getContent() %></td>
+            <td colspan="2" align="left" class="text_cray"><%=user.getCertType().getContent() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">证件号码：</td>
-            <td colspan="2" align="left" class="text_cray"><%=user.getCert() %></td>
+            <td colspan="2" align="left" class="text_cray"><%=user.getUserCert() %></td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">出生日期：</td>
-            <td colspan="2" align="left" class="text_cray"><%=user.getBirthday() %></td>
+            <td colspan="2" align="left" class="text_cray"><%=user.getUserBirthday() %></td>
           </tr>
           <tr>
             <td width="20" height="40" ></td>
             <td width="100" height="40" align="left" class="text_cray1">旅客类型：</td>
-            <td colspan="3" align="left" class="text_cray"><%=user.getUsertype().getContent() %></td>
+            <td colspan="3" align="left" class="text_cray"><%=user.getUserType().getContent() %></td>
           </tr>
           <tr>
             <td width="20" height="40"></td>
             <td width="100" height="40" align="left" class="text_cray1">备注：</td>
-            <td height="40" colspan="2" align="left" class="text_cray"><%=user.getContent() %></td>
+            <td height="40" colspan="2" align="left" class="text_cray"><%=user.getUserContent() %></td>
           </tr>
         </table><br>
       <table width="100%" border="0" cellspacing="0">

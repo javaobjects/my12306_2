@@ -28,37 +28,35 @@ function checkUsername() {
 	//创建ajax引擎对象之后需要做什么？
 	
 	//2.需要获取用户名
-	var username=document.getElementById("username").value;
-	//alert(username);
-	//1.需要创建一个请求url
-	//alert("发送之前："+xmlHttpRequest.readyState);
-	xmlHttpRequest.open("get","UserServlet?operator=checkUsername&username="+username,true);
-	
-	
-	//3.需要指定回调函数
-	
-	xmlHttpRequest.onreadystatechange=getResult;//刚开始readyState是0
-	//4.发送请求
-	
-	xmlHttpRequest.send();
-}
+	var username = document.getElementById("username").value;
+		//alert(username);
+		//1.需要创建一个请求url
+		//alert("发送之前："+xmlHttpRequest.readyState);
+		xmlHttpRequest
+				.open("get", "UserServlet?operator=checkUsername&username="
+						+ username, true);
 
+		//3.需要指定回调函数
 
-//获取校验结果的回调函数
-function getResult()
-{
-	//alert("发送之后："+xmlHttpRequest.readyState);//1,2,3,4
-	console.info(xmlHttpRequest.readyState);
-	console.info(xmlHttpRequest.status);
-	console.info(xmlHttpRequest.responseText);
-	if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200)
-		{
+		xmlHttpRequest.onreadystatechange = getResult;//刚开始readyState是0
+		//4.发送请求
+
+		xmlHttpRequest.send();
+	}
+
+	//获取校验结果的回调函数
+	function getResult() {
+		//alert("发送之后："+xmlHttpRequest.readyState);//1,2,3,4
+		console.info(xmlHttpRequest.readyState);
+		console.info(xmlHttpRequest.status);
+		console.info(xmlHttpRequest.responseText);
+		if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
 			//alert("ok");
 			//alert(xmlHttpRequest.responseText);
-			document.getElementById("mess").innerText=xmlHttpRequest.responseText;
+			document.getElementById("mess").innerText = xmlHttpRequest.responseText;
 		}
-	
-}
+
+	}
 </script>
 <script>
 //实例化ajax引擎对象，定义全局变量
@@ -219,7 +217,7 @@ response.setCharacterEncoding("utf-8");
                     <select name="province" class="text_cray" id="province" onchange="getCity()">
                       <option selected="selected">--请选择省份--</option>
                       <c:forEach items="${provinces}" var="p">
-                      	<option value="${p.provinceId}">${p.provinceName}</option>
+                      	<option value="${p.provinceNum}">${p.provinceName}</option>
                       </c:forEach>
                     </select>
                   </label></td>
