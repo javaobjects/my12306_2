@@ -358,11 +358,11 @@
                 <script src="js/jquery-3.4.1.js"></script>
                 <script>
                     $(function () {
-                        /* 	$("#username").blur(function(){
+                        	/*$("#username").blur(function(){
                                var username = $("#username").val();
                                console.info(username);
                                $.ajax({
-                                      url:"UserServlet?operator=checkUsername&username="+ username,
+                                      url:"/tickets/UserServlet?operator=checkUsername&username="+ username,
                                       method:"POST",
                                       data:{},
                                       dataType:"text",
@@ -378,7 +378,7 @@
                                       },
                                       complete:function (XMLHttpRequest,textStatus) {}
                                       })
-                           });  */
+                           });*/
                     })
                 </script>
                 <!-- <script type="text/JavaScript" src="js/common.js"></script> -->

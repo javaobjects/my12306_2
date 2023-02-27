@@ -1,4 +1,4 @@
-package net.tencent.tickets.controller;
+package net.tencent.tickets.servlet;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ValidateCodeServlet
+ * 生成验证码的Servlet
  */
 @WebServlet("/ValidateCodeServlet")
 public class ValidateCodeServlet extends HttpServlet {
@@ -28,9 +28,10 @@ public class ValidateCodeServlet extends HttpServlet {
 			'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M',
 			'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2',
 			'3', '4', '5', '6', '7', '8', '9' };
+	
 	private static final int WIDTH = 50;
 	private static final int HEIGHT = 20;
-	private static final int LENGTH = 2;
+	private static final int LENGTH = 4;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -38,7 +39,6 @@ public class ValidateCodeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -58,8 +58,11 @@ public class ValidateCodeServlet extends HttpServlet {
 
 		BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
 				BufferedImage.TYPE_INT_RGB);
-		Font mFont = new Font("Arial", Font.TRUETYPE_FONT, 18);
+		
+		
+		//画笔工具
 		Graphics g = image.getGraphics();
+		
 		Random rd = new Random();
 
 		// 设置背景颜色
@@ -68,6 +71,7 @@ public class ValidateCodeServlet extends HttpServlet {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		// 设置字体
+		Font mFont = new Font("Arial", Font.TRUETYPE_FONT, 18);
 		g.setFont(mFont);
 
 		// 画边框
@@ -80,7 +84,7 @@ public class ValidateCodeServlet extends HttpServlet {
 			result += code[rd.nextInt(code.length)];
 		}
 		HttpSession se = request.getSession();
-		se.setAttribute("code", result);
+		se.setAttribute("code", result);//将随机生成的验证码存储到session中，用来与用户输入的验证码作对比
 
 		// 画验证码
 		for (int i = 0; i < result.length(); i++) {

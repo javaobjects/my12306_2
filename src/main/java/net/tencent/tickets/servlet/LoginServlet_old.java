@@ -1,4 +1,4 @@
-package net.tencent.tickets.controller;
+package net.tencent.tickets.servlet;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -26,7 +26,7 @@ import net.tencent.tickets.util.Md5Utils;
  * 
  */
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet_old extends HttpServlet {
 	private static final long serialVersionUID  =  1L;
 
 	@Override

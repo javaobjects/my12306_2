@@ -1,4 +1,4 @@
-package net.tencent.tickets.controller;
+package net.tencent.tickets.servlet;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -49,7 +49,8 @@ public class AddUserServlet extends HttpServlet {
 		String content = request.getParameter("content");//备注
 		
 		//3. 数据的非空校验和合法性校验
-		StringBuffer sb = UserServlet.validateRegisterForm(username, password, confirm_password,"on");
+//		StringBuffer sb = UserServlet.validateRegisterForm(username, password, confirm_password,"on");
+		StringBuffer sb = null;
 		
 		if(sb.length() > 0) {
 			//校验不通过

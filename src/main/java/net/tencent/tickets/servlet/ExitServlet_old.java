@@ -1,4 +1,4 @@
-package net.tencent.tickets.controller;
+package net.tencent.tickets.servlet;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class ExitServlet
  */
 @WebServlet("/ExitServlet")
-public class ExitServlet extends HttpServlet {
+public class ExitServlet_old extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

@@ -1,4 +1,4 @@
-package net.tencent.tickets.controller;
+package net.tencent.tickets.servlet;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -23,7 +23,7 @@ import net.tencent.tickets.service.UserService;
  * Servlet implementation class UserServlet
  */
 @WebServlet("/UserServlet")
-public class UserServlet extends HttpServlet {
+public class UserServlet_old extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/*

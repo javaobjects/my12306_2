@@ -1,0 +1,41 @@
+1. servlet生命周期：
+	加载类 -> 实例化（new） -> 初始化（init） -> 调用服务doGet | doPost -> 销毁（destroy）
+
+2.HTTP请求对象（HttpServletRequest request）：
+	1.获取参数信息               request.getParameter(name)等
+	2.获取请求报头信息         request.getHeader(headName),request.getRemoteAddr()等
+               3.指定请求的字符集编码  request.setCharacterEncoding("utf-8");
+               4.请求转发（站内跳转）  request.getRequestDispatcher("/Login.jsp").forward(request,response);
+	5.获取cookie                  request.getCookies();
+               6.在服务端保存值           request.setAttribute(name,value);
+
+3.HTTP响应对象（HttpServletResponse response）:
+	1.响应内容到客户端       response.getWriter().write（“注册结果：” + result）;
+    	2.指定响应的字符集编码 response.setCharacterEncoding("utf-8");
+			      response.setContentType("text/plain;charset=utf-8");
+	3.请求重定向（站外跳转）response.sendRedirect(request.getContextPath + "/Login.jsp");
+	4.保存cookie                 response.add(cookie);
+
+4.四大作用域对象：pageContext、request、session、application
+
+5.JSP（本质上就是servlet）：
+     ① 生命周期：翻译java -> 编译class -> 类加载 -> 实例化new -> 初始化 init -> 调用服务service -> 销毁destroy 
+     ② JSP脚本元素：JSP声明<%! ... %>、JSP脚本段<% ... %>、JSP表达式<%= ... %>、JSP注释<%-- ... --%>
+     ③ JSP九大内置对象：pageContext、request、session、application、response、out、exception、page、config
+     ④ JSP三个指令：page指令、include指令、taglib指令
+
+6.MD5加密算法
+
+7.JNDI 使用数据源优化数据库连接
+
+8.JSTL自定义标签
+      ① 导入jstl.jar包
+      ② 使用jsp指令引入jstl标签的资源
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+      ③ 使用标签
+	<c:if>   <c:forEach>
+
+9.EL表达式 ${....}
+	
+     

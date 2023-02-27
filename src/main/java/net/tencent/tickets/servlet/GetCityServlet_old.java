@@ -1,4 +1,4 @@
-package net.tencent.tickets.controller;
+package net.tencent.tickets.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +17,7 @@ import net.tencent.tickets.service.CityService;
  * Servlet implementation class GetCityServlet
  */
 @WebServlet("/GetCityServlet")
-public class GetCityServlet extends HttpServlet {
+public class GetCityServlet_old extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
