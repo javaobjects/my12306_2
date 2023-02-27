@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="TestDBUtils_pool">点击获取数据库连接</a>
+<% request.setAttribute("name", "zhangsan");
+	//跳转
+	request.getRequestDispatcher("/b.jsp").forward(request, response);
+%>
+
 </body>
 </html>

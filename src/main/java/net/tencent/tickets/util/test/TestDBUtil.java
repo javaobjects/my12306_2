@@ -2,7 +2,7 @@ package net.tencent.tickets.util.test;
 
 import java.sql.Connection;
 
-import net.tencent.tickets.util.DBUtil;
+import net.tencent.tickets.util.other.DBUtil;
 
 public class TestDBUtil {
 
