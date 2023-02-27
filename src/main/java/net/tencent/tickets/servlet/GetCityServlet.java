@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.tencent.tickets.dao.factory.LocationDaoFactory;
+import net.tencent.tickets.dao.ifac.CityDaoIfac;
 import net.tencent.tickets.entity.City;
 
 /**
@@ -77,20 +79,52 @@ public class GetCityServlet extends HttpServlet {
 	}
 
 	/**
-	 * 响应json格式的字符串
+	 * 响应json格式的字符串 130000
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.获取省份编号provinceId
 		String provinceId = request.getParameter("provinceId");
-		System.out.println("省份编号：" + provinceId);
+		System.out.println("Get 省份编号：" + provinceId);
 		
+		getCitysByProvinceId(provinceId, request, response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//1.获取省份编号provinceId
+		String provinceId = request.getParameter("provinceId");
+		System.out.println("Post 省份编号：" + provinceId);
+		
+//		String data = request.getParameter("data");
+//		
+//		System.out.println(data);
+		
+		
+		
+		
+//		getCitysByProvinceId(provinceId, request, response);
+	}
+	
+	/**
+	 * <p>Title: getCitysByProvinceId</p>
+	 * <p>
+	 *    Description:通过省份id获取城市
+	 * </p>
+	 * <p>Copyright: Copyright (c) 2017</p>
+	 * <p>Company: www.baidudu.com</p>
+	 * @param provinceId
+	 * @param request
+	 * @param response
+	 * @author xianxian
+	 * @date 2023年2月27日下午3:34:14
+	 * @version 1.0
+	 * @throws IOException 
+	 */
+	private void getCitysByProvinceId(String provinceId,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//2.调用service方法，获取城市列表
-//		ICityService cityService = CityServiceImpl.getInstance();
-//		List<City> cityList = cityService.selectCities(provinceId);
-		
-		
-		List<City> cityList = null;
-		
+		@SuppressWarnings("static-access")
+		CityDaoIfac cityDao = new LocationDaoFactory().getCityDaoInstance();
+		List<City> cityList = cityDao.queryCityByProvinceid(provinceId);
 		
 		/*
 			JSON格式字符串:
@@ -103,8 +137,6 @@ public class GetCityServlet extends HttpServlet {
 			[]表示一个数组，{}表示一个对象
 		 */
 		JSONArray JsonArray = JSONArray.fromObject(cityList);
-		
-		
 		System.out.println("json格式的字符串：" + JsonArray.toString());
 		
 		//3.处理结果
@@ -114,5 +146,5 @@ public class GetCityServlet extends HttpServlet {
 		writer.flush();
 		writer.close();
 	}
-
+	
 }

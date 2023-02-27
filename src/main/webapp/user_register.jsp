@@ -356,31 +356,106 @@
                     </table>
                 </form>
                 <script src="js/jquery-3.4.1.js"></script>
-                <script>
-                    $(function () {
-                        	/*$("#username").blur(function(){
-                               var username = $("#username").val();
-                               console.info(username);
-                               $.ajax({
-                                      url:"/tickets/UserServlet?operator=checkUsername&username="+ username,
-                                      method:"POST",
-                                      data:{},
-                                      dataType:"text",
-                                      beforeSend:function (XMLHttpRequest) {},
-                                      success:function (data,textStatus,XMLHttpRequest) {
-                                          console.log(data);
-                                          $("#mess").text(data);
-                                      },
-                                      error:function (XMLHttpRequest,textStatus,errorThorwn) {
-                                             console.error(XMLHttpRequest);
-                                             console.error(textStatus);
-                                             console.error(errorThorwn)
-                                      },
-                                      complete:function (XMLHttpRequest,textStatus) {}
-                                      })
-                           });*/
-                    })
-                </script>
+<script>
+   $(function () {
+       	$("#username").blur(function(){
+              var username = $("#username").val();
+         
+var objArray = [
+				{
+					"cityName" : "石家庄市",
+					"province" : null,
+					"cityNum" : "130100",
+					"id" : 5
+				},
+				{
+					"cityName" : "唐山市",
+					"province" : null,
+					"cityNum" : "130200",
+					"id" : 6
+				},
+				{
+					"cityName" : "秦皇岛市",
+					"province" : null,
+					"cityNum" : "130300",
+					"id" : 7
+				},
+				{
+					"cityName" : "邯郸市",
+					"province" : null,
+					"cityNum" : "130400",
+					"id" : 8
+				},
+				{
+					"cityName" : "邢台市",
+					"province" : null,
+					"cityNum" : "130500",
+					"id" : 9
+				},
+				{
+					"cityName" : "保定市",
+					"province" : null,
+					"cityNum" : "130600",
+					"id" : 10
+				},
+				{
+					"cityName" : "张家口市",
+					"province" : null,
+					"cityNum" : "130700",
+					"id" : 11
+				},
+				{
+					"cityName" : "承德市",
+					"province" : null,
+					"cityNum" : "130800",
+					"id" : 12
+				},
+				{
+					"cityName" : "沧州市",
+					"province" : null,
+					"cityNum" : "130900",
+					"id" : 13
+				},
+				{
+					"cityName" : "廊坊市",
+					"province" : null,
+					"cityNum" : "131000",
+					"id" : 14
+				},
+				{
+					"cityName" : "衡水市",
+					"province" : null,
+					"cityNum" : "131100",
+					"id" : 15
+				} ];
+			// 	console.info(username);
+            //     console.log(objArray);
+            // console.info(JSON.parse(objArray));
+            // console.info(JSON.stringify(objArray));
+				$.ajax({
+						//url:"/tickets/UserServlet?operator=checkUsername&username="+ username,
+						url : "/tickets/GetCityServlet",
+						method : "POST",
+						data : {
+							provinceId : 130000
+						},
+						//data:{data:JSON.parse(objArray)},
+						dataType : "json",
+						beforeSend : function(XMLHttpRequest) {},
+						success : function(data,textStatus,XMLHttpRequest) {
+							console.log(data);
+							//$("#mess").text(data);
+						},
+						error : function(XMLHttpRequest,textStatus,errorThorwn) {
+							console.error(XMLHttpRequest);
+							console.error(textStatus);
+							console.error(errorThorwn)
+						},
+						complete : function(XMLHttpRequest,textStatus) {}
+					})
+				});
+})
+</script>
                 <!-- <script type="text/JavaScript" src="js/common.js"></script> -->
             </body>
 
