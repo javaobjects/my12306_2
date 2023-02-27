@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.tencent.tickets.entity.City;
+import net.tencent.tickets.entity.Province;
 import net.tencent.tickets.util.DBUtils_pool;
 
 public class CityDao {
 	
 	/** 根据省份编号查询所有城市的sql语句 **/
 	private static final String QUERY_CITY_BY_PROVINCENUM = 
-			"SELECT CITY_ID,CITY_NUM,CITY_NAME from tickets_city where CITY_FATHER=?";
+			"SELECT CITY_ID,CITY_NUM,CITY_NAME,CITY_FATHER from tickets_city where CITY_FATHER=?";
 	
 	
 	
@@ -41,18 +42,18 @@ public class CityDao {
 
 			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(QUERY_CITY_BY_PROVINCENUM);
-			stmt.setString(1,provinceNum);
-			rs=stmt.executeQuery();
-			while(rs.next())
-			{
-				City c=new City();
-				
+			stmt.setString(1, provinceNum);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				City c = new City();
+
 				c.setCityNum(rs.getString("CITY_NUM"));
 				c.setId(rs.getInt("CITY_ID"));
 				c.setCityName(rs.getString("CITY_NAME"));
-				
+				c.setProvinceNum(rs.getString("CITY_FATHER"));
+
 				cities.add(c);
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

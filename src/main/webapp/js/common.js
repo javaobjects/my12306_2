@@ -76,7 +76,8 @@ cityArr[33] = ['澳门特别行政区','澳门'];
 //生成省份
 for(var key in provinceArr) {
 		var provinceOption = document.createElement('option');
-		provinceOption.value = provinceOption.text = provinceArr[key];
+		provinceOption.value =
+			provinceOption.text = provinceArr[key];
 		province.options.add(provinceOption);
 }
 //生成市县、区市'

@@ -1,4 +1,4 @@
-package net.tencent.tickets.servlet.other;
+package net.tencent.tickets.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -90,18 +90,11 @@ public class GetCityServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//1.获取省份编号provinceId
-		String provinceId = request.getParameter("provinceId");
-		System.out.println("Post 省份编号：" + provinceId);
+		//1.获取省份编号provinceNum
+		String provinceNum = request.getParameter("provinceNum");
+		System.out.println("Post 省份编号：" + provinceNum);
 		
-//		String data = request.getParameter("data");
-//		
-//		System.out.println(data);
-		
-		
-		
-		
-//		getCitysByProvinceId(provinceId, request, response);
+		getCitysByProvinceId(provinceNum, request, response);
 	}
 	
 	/**
@@ -119,10 +112,10 @@ public class GetCityServlet extends HttpServlet {
 	 * @version 1.0
 	 * @throws IOException 
 	 */
-	private void getCitysByProvinceId(String provinceId,HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void getCitysByProvinceId(String provinceNum,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//2.调用service方法，获取城市列表
 		CityDao cityDao = CityDao.getInstance();
-		List<City> cityList = cityDao.queryCityByProvinceid(provinceId);
+		List<City> cityList = cityDao.queryCityByProvinceid(provinceNum);
 		
 		/*
 			JSON格式字符串:
