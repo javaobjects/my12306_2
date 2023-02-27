@@ -1,4 +1,4 @@
-# 仿12306网站
+# 购票网
 
 
 ####  项目所用技术点 
@@ -33,23 +33,43 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 
 13. 导出一个xls Excel表格
 
+14. 单例模式的使用
+
 ```
 
 #### 项目所导入的Jar包
 
 1. jstl-1.2.jar (JSP标准标签库)
-
 2. [jxl.jar](https://bbs.csdn.net/topics/90494976)(Java操作Excel或创建Excel) 
-
 3. ojdbc6.jar Oracle数据驱动
+3. mysql-connector-java-5.1.39-bin.jar mysql数据驱动
+3. Java生成Json传输给前端的接口驱动
+
+```
+commons-beanutils-1.7.0.jar
+commons-collections-3.1.jar
+commons-lang-2.5.jar
+commons-logging-1.1.1.jar
+ezmorph-1.0.3.jar
+json-lib-2.1-jdk15.jar
+```
+
+6. 上传照片功能需要的jar包
+
+```
+commons-fileupload-1.3.1.jar
+commons-io-2.4.jar
+```
+
+
 
 #### 本项目的思维导向图草图
 
-![](WebContent/bug/12306.png)
+![](Img/12306.png)
 
 #### 总体架构
 
-![](WebContent/bug/JavaEE应用的标准层次结构.png)
+![](Img/JavaEE应用的标准层次结构.png)
 
 ![](Img/%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8md5%E5%8A%A0%E5%AF%86%E5%AF%86%E7%A0%81%E7%9A%84%E4%BB%A3%E7%A0%81%E4%BF%AE%E6%94%B9%E8%AF%B4%E6%98%8E.png)
 
@@ -63,11 +83,13 @@ http://how2j.cn/k/jsp/jsp-jstl/578.html
 
 #### 配置环境
 
-Jdk 1.8 
+jdk1.8.0 161
 
-Tomcat 8.0.47 
+apache-tomcat-9.0.71
 
 Oracle 11.2.0.1.0
+
+mysql-5.5.27
 
 #### 开发工具
 
@@ -76,6 +98,8 @@ Eclipse 4.11.0
 PL/SQL 11.2.0.1.0 
 
 Vscode 1.34.0
+
+Navicat Premium 12
 
 #### 数据库设计
 
@@ -134,7 +158,7 @@ Vscode 1.34.0
 
 #### 项目所遇部分bug总结
 
-1. ORA-02291: 违反完整约束条件 (SCOTT.tickets_2_USER_CITY_FK) - 未找到父项关键字
+1. ORA-02291: 违反完整约束条件 (SCOTT.tickets_USER_CITY_FK) - 未找到父项关键字
 
 ![](WebContent/bug/bug1.png)
 

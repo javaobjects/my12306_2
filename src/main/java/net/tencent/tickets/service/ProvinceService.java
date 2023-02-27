@@ -2,14 +2,12 @@ package net.tencent.tickets.service;
 
 import java.util.List;
 
-import net.tencent.tickets.dao.factory.LocationDaoFactory;
-import net.tencent.tickets.dao.ifac.ProvinceDaoIfac;
+import net.tencent.tickets.dao.ProvinceDao;
 import net.tencent.tickets.entity.Province;
 
 public class ProvinceService {
 	
-//	private ProvinceDao provinceDao = ProvinceDao.getInstance();
-	private ProvinceDaoIfac provinceDao = LocationDaoFactory.getProvinceDaoInstance();
+	private ProvinceDao provinceDao = ProvinceDao.getInstance();
 	
 	/**
 	 * 

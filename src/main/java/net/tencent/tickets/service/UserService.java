@@ -2,8 +2,7 @@ package net.tencent.tickets.service;
 
 import java.util.List;
 
-import net.tencent.tickets.dao.factory.UserDaoFactory;
-import net.tencent.tickets.dao.ifac.UserDaoIfac;
+import net.tencent.tickets.dao.UsersDao;
 import net.tencent.tickets.entity.Users;
 
 public class UserService {
@@ -11,9 +10,8 @@ public class UserService {
 	/**
 	 * 属性依赖UserDao
 	 */
-//	private UsersDao userDao = UsersDao.getInstance();
+	private UsersDao userDao = UsersDao.getInstance();
 	
-	private UserDaoIfac userDao = UserDaoFactory.getUserDaoInstance();
 	
 	
 	
