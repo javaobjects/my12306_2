@@ -1,0 +1,33 @@
+1.在META-INF下配置context.xml
+	<?xml version="1.0" encoding="UTF-8"?>
+	<Context>
+		<Resource name="jdbc/oracle"
+			auth="Container"
+			type="javax.sql.DataSource"
+			
+			username="my12306"
+			password="123456"
+			url="jdbc:oracle:thin:@localhost:1521:orcl"
+			driverClassName="oracle.jdbc.driver.OracleDriver"
+			
+			maxIdle="2"
+			maxWait="5000"
+			maxActive="4"
+		/>
+	</Context>
+	
+2.在tomcat根目录/lib文件夹中添加jdbc驱动包classes12.jar
+
+3.测试
+	//1.上下文
+	Context context = new InitialContext();
+	
+	//2.查找数据源,参数格式：java:comp/env/ + context.xml中配置的name属性值
+	DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
+	
+	//3.从数据源中获取连接
+	Connection conn = dataSource.getConnection();
+	System.out.println(conn);
+	
+	//4.归还连接
+	conn.close();

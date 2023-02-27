@@ -1,0 +1,65 @@
+数据库导出：数据库名右键转储sql
+数据库导入：数据库打开，表右键运行sql
+
+Maria安装就是下一步下一步，然后注意端口号，如果已经安装了mysql数据库，那么端口号改下3308
+其它没什么，那么设置启动类型为手动。
+
+Navicat安装也是下一步，但是注意要破解。
+
+mysql分页：
+
+select * from test limit 0,3;    取第一页数据，3条记录
+
+
+mysql主键自动生成：
+
+create table test (id int auto_increment primary key,name varchar(20));
+
+insert into test(name) values('zhangsan1');
+
+mysql增删改查：
+
+
+
+mysql主键自动生成：
+
+
+===============================================================
+
+1.mysql?
+
+免费
+
+2.mysql和mariya的区别
+
+mariadb开源，还有性能很好
+
+3.如何访问mysql数据库？Navicat访问
+
+
+4.如何建库
+create table test (
+
+id int auto_increment primary key,
+name varchar(20) not null,
+password varchar(30) not null)
+
+insert into test(name,password) values('zhangsan7','1234567');
+
+
+5.如何建表
+
+6.如何查询
+select * from test where name='zhangsan1'
+
+7.如何分页
+select *  from test limit 1,3;----不包含第一条数据，第一个参数是偏移量，第二个参数是查多少条数据出来
+
+8.如何导入导出数据
+导出数据库操作：
+数据库鼠标右键---转存为sql文件
+导入数据库操作：
+首先创建数据库和被导入的数据库同名---然后Tables右键运行sql文件
+
+
+

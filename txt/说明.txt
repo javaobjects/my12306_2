@@ -1,0 +1,28 @@
+
+
+在用户模块的用户更新页面做了头像上传的效果
+
+Web层共享数据的范围：
+	应用对象：ServletContext（application）
+	       	同一网站，不同的客户端，均可以共享此对象中的数据，直到服务器关闭或重启，应用对象中的数据失效
+	       	例如：统计当前在线人数
+	
+	会话对象：HttpSession（session）
+			同一网站，同一客户端，可以共享此对象的数据，直到浏览器关闭，会话中的数据失效
+			例如：登陆用户信息，购物车
+	
+	请求对象：HttpServletRequest（request）
+			在一次请求中有效
+			例如：保存请求过程中的错误信息
+	
+	页面对象：PageContext
+			在当前页面有效
+	
+	
+	作用范围： ServletContext  >  HttpSession > HttpServletRequest > PageContext
+	
+
+共享数据的基本方法：
+	setAttribute()
+	getAttribute()
+	removeAttribute()
