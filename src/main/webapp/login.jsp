@@ -200,10 +200,32 @@
 <script>
     $(function () {
 
-
         let loginObj = {
             _refurbish:function (){
-                $("#yzm").attr("src","/tickets/ValidateCodeServlet?date=" + new Date())//验证码图片地址生成
+                $("#yzm").attr("src","/tickets/login/CreateCodeServlet?date=" + new Date())//验证码图片地址生成
+            },
+            _ajax:function (url,data,titleText){
+                $.ajax({
+                    url: url,
+                    method: "POST",
+                    data: data,
+                    dataType: "json",
+                    beforeSend: function (XMLHttpRequest) {
+                    },
+                    success: function (data, textStatus, XMLHttpRequest) {
+                        if(!data[0].result){
+                            // 验证不通过给出提示
+                            $("#alert_title").text(titleText);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThorwn) {
+                        console.error(XMLHttpRequest);
+                        console.error(textStatus);
+                        console.error(errorThorwn)
+                    },
+                    complete: function (XMLHttpRequest, textStatus) {
+                    }
+                })
             }
         }
         loginObj._refurbish();//给验证码设置一个默认地址
@@ -219,6 +241,22 @@
         $("#text_userName").focus(function (){
             $("#alert_title").text("");
         });
+
+        //用户名输入框失去焦点时
+        $("#text_userName").blur(function (){
+            let url = "/tickets/login/ValidateUserNameServlet";
+            let data = {userName:$("#text_userName").val()};
+            let titleText = "用户名不存在";
+            loginObj._ajax(url,data,titleText);
+        });
+
+
+
+
+
+
+
+
         //密码输入框获取焦点时
         $("#text_password").focus(function (){
             $("#alert_title").text("");
@@ -227,37 +265,13 @@
         $("#text_code").focus(function (){
             $("#alert_title").text("");
         });
-
         //验证码输入框失去焦点时触发
         $("#text_code").blur(function (){
-            let text_code = $("#text_code").val();
-            $.ajax({
-                url: "/tickets/UserCodeServlet",
-                method: "POST",
-                data: {
-                    code: text_code
-                },
-                dataType: "json",
-                beforeSend: function (XMLHttpRequest) {
-                },
-                success: function (data, textStatus, XMLHttpRequest) {
-                    if(!data[0].result){
-                        // 验证不通过给出提示
-                        $("#alert_title").text("验证码输入错误");
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThorwn) {
-                    console.error(XMLHttpRequest);
-                    console.error(textStatus);
-                    console.error(errorThorwn)
-                },
-                complete: function (XMLHttpRequest, textStatus) {
-                }
-            })
+            let url = "/tickets//login/ValidateUserCodeServlet";
+            let data = {code: $("#text_code").val()};
+            let titleText = "验证码输入错误";
+            loginObj._ajax(url,data,titleText);
         })
-
-
-
     })
 </script>
 </body>

@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
 /**
  * 生成验证码的Servlet
  */
-@WebServlet("/ValidateCodeServlet")
-public class ValidateCodeServlet extends HttpServlet {
+@WebServlet("/login/CreateCodeServlet")
+public class CreateCodeServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 

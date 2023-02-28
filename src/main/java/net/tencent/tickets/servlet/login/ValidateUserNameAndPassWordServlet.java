@@ -13,14 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
+import net.tencent.tickets.entity.Users;
+import net.tencent.tickets.service.UserService;
 
-@WebServlet("/UserCodeServlet")
-public class UserCodeServlet extends HttpServlet {
+@WebServlet("/login/ValidateUserNameAndPassWordServlet")
+public class ValidateUserNameAndPassWordServlet extends HttpServlet {
 
 	/**
 	 * serialVersionUID
 	*/
 	private static final long serialVersionUID = 1L;
+	
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
@@ -29,24 +32,26 @@ public class UserCodeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("utf-8");
-		String userCode = request.getParameter("code");// 用户输入的验证码
-		// 服务端验证码
-		String serverCode = (String) session.getAttribute("code");
+		// 1. 获取用户输入的密码
+		String passWord = request.getParameter("passWord");
+		
+		//2. 根据用户名查询该用户是否存在
+		Users isExistsUserName = UserService.getInstance().login(null,passWord);
+		
 		Map<String, Boolean> map = new HashMap<>();
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
-		// ③ 验证码校验：用户输入验证码与服务器生成的验证码是否匹配
-		if (userCode == null || !userCode.equalsIgnoreCase(serverCode)) {
-			map.put("result", false);
-		}else {
-			map.put("result", true);
-		}
-		
+		//3. 将结果返回给前端 true 存在 false 不存在
+//		map.put("result", isExistsUserName);
+
 		JSONArray JsonArray = JSONArray.fromObject(map);
 		writer.write(JsonArray.toString());
 		writer.flush();
 		writer.close();
 	}
+	
+	
+	
 
 }

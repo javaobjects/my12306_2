@@ -34,6 +34,7 @@ public class UserService {
 		}
 		return tmp;
 	}
+	
 	/**
 	 * 
 	 * <p>Title: updateUser</p>  
@@ -87,20 +88,6 @@ public class UserService {
 		return userDao.queryUserByUsernameAndPassword(username,password);
 	}
 	
-	private UserService()
-	{
-		
-	}
-	
-	public static UserService userService;
-	
-	public static UserService getInstance()
-	{
-		if (userService == null) {
-			userService = new UserService();
-		}
-		return userService;
-	}
 	
 	public List<Users> getUserByCondition(String username, int certtype,
 			String cert, int usertype, char sex) {
@@ -109,6 +96,22 @@ public class UserService {
 	}
 	public void saveImage(Integer id, String fileName) {
 		userDao.insertImage(id,fileName);
+	}
+	
+	
+	
+	
+	private UserService() {
+
+	}
+
+	public static UserService userService;
+
+	public static UserService getInstance() {
+		if (userService == null) {
+			userService = new UserService();
+		}
+		return userService;
 	}
 
 }
