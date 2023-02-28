@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.tencent.tickets.entity.Users;
 import net.tencent.tickets.service.UserService;
+import net.tencent.tickets.util.Md5Utils;
 
 @WebServlet("/login/ValidateUserNameAndPassWordServlet")
 public class ValidateUserNameAndPassWordServlet extends HttpServlet {
@@ -32,18 +33,26 @@ public class ValidateUserNameAndPassWordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("utf-8");
-		// 1. 获取用户输入的密码
-		String passWord = request.getParameter("passWord");
+		// 1. 获取用户输入的用户名和密码
+		String userName = request.getParameter("userName");
+		String passWord = Md5Utils.md5(request.getParameter("passWord"));
 		
-		//2. 根据用户名查询该用户是否存在
-		Users isExistsUserName = UserService.getInstance().login(null,passWord);
+		System.out.println("userName: " + userName);
+		System.out.println("passWord: " + passWord);
+		
+		//2. 根据用户名和密码查询该用户是否存在
+		Users user = UserService.getInstance().login(userName,passWord);
 		
 		Map<String, Boolean> map = new HashMap<>();
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
 		//3. 将结果返回给前端 true 存在 false 不存在
-//		map.put("result", isExistsUserName);
+		if(user == null) {
+			map.put("result", false);
+		}else {
+			map.put("result", true);
+		}
 
 		JSONArray JsonArray = JSONArray.fromObject(map);
 		writer.write(JsonArray.toString());

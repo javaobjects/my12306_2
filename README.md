@@ -113,7 +113,7 @@ Navicat Premium 12
 | USER_RULE | varchar2(2)  | not null | 权限(1 管理员 2 普通用户) |
 | USER_REAL_NAME | varchar2(50)   | not null | 真实姓名   |
 | USER_SEX | char(1)    | not null | 性别(1 男 2 女)   |
-| USER_CITY_ID | number(11)    | not null | 城市信息id值((Foreign外键tickets_city)) FK_TICKETS_CITY_ID |
+| USER_CITY_ID | number(11)    | not null | 城市信息id值(Foreign外键tickets_city)FK_TICKETS_CITY_ID |
 | USER_CERTTYPE_ID | number(11)    | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)(Foreign外键tickets_certtype)FK_TICKETS_CERTTYPE_ID |
 | USER_CERT | varchar2(50)    | not null | 证件号码   |
 | USER_BIRTHDAY | date   | not null | 生日   |
@@ -145,7 +145,7 @@ Navicat Premium 12
 | CITY_ID | number(11) | not null  | id (主键) |
 | CITY_NUM | varchar2(50) | not null | 城市编号 |
 | CITY_NAME | varchar2(50) | not null  | 城市名称  |
-| CITY_FATHER | varchar2(6) | not null  | 省份标识  |
+| CITY_FATHER | varchar2(6) | not null  | 省份标识(Foreign外键tickets_province)FK_TICKETS_PROVINCE_NUM |
 
 #### tickets_certtype
 

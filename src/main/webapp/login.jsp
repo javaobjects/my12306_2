@@ -249,18 +249,23 @@
             let titleText = "用户名不存在";
             loginObj._ajax(url,data,titleText);
         });
-
-
-
-
-
-
-
-
         //密码输入框获取焦点时
         $("#text_password").focus(function (){
             $("#alert_title").text("");
         });
+
+
+        // 密码输入框失去焦点时
+        $("#text_password").blur(function (){
+            let url = "/tickets/login/ValidateUserNameAndPassWordServlet";
+            let data = {
+                userName:$("#text_userName").val(),
+                passWord:$("#text_password").val()
+            };
+            let titleText = "用户名或密码错误";
+            loginObj._ajax(url,data,titleText);
+        });
+
         //验证码输入框获取焦点时
         $("#text_code").focus(function (){
             $("#alert_title").text("");

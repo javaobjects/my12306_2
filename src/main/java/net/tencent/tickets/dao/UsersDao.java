@@ -38,23 +38,21 @@ public class UsersDao {
 			+ "	tickets_user.USER_LOGIN_IP,\r\n"
 			+ "	tickets_user.USER_IMAGE_PATH,\r\n"
 			+ "	tickets_city.CITY_ID,\r\n"
+			+ "	tickets_city.CITY_NUM,\r\n"
+			+ "	tickets_city.CITY_NAME,\r\n"
+			+ "	tickets_city.CITY_FATHER,\r\n"
 			+ "	tickets_province.PROVINCE_ID,\r\n"
 			+ "	tickets_province.PROVINCE_NUM,\r\n"
-			+ "	tickets_usertype.USERTYPE_CONTENT,\r\n"
-			+ "	tickets_certtype.CERTTYPE_CONTENT \r\n"
+			+ "	tickets_province.PROVINCE_NAME\r\n"
 			+ "FROM\r\n"
 			+ "	tickets_user,\r\n"
 			+ "	tickets_city,\r\n"
-			+ "	tickets_province,\r\n"
-			+ "	tickets_usertype,\r\n"
-			+ "	tickets_certtype\r\n"
+			+ "	tickets_province\r\n"
 			+ "WHERE\r\n"
-			+ "	tickets_user.USER_CITY_ID = tickets_city.CITY_ID\r\n"
-			+ "	AND tickets_province.PROVINCE_ID = tickets_city.CITY_FATHER\r\n"
-			+ "	AND tickets_usertype.USERTYPE_ID = tickets_user.USER_USERTYPE_ID\r\n"
-			+ "	AND tickets_certtype.CERTTYPE_ID = tickets_user.USER_CERTTYPE_ID\r\n"
-			+ "	AND tickets_user.USER_NAME = ?\r\n"
-			+ "	AND tickets_user.USER_PASSWORD = ?";
+			+ "	tickets_user.USER_CITY_ID = tickets_city.CITY_ID \r\n"
+			+ "	AND tickets_city.CITY_FATHER = tickets_province.PROVINCE_NUM\r\n"
+			+ "	AND tickets_user.USER_NAME = ? "
+			+ "	AND tickets_user.USER_PASSWORD = ? ";
 	
 	public int addUser(Users user) {
 		int rows = 0;
@@ -156,8 +154,8 @@ public class UsersDao {
 				user.setUserSex(rs.getString("USER_SEX").charAt(0));
 				
 				
-//				user.setCity(new City(rs.getInt("CITY_ID"),null, rs.getString("CITY_NAME"), 
-//						new Province(null, rs.getString("PROVINCE_ID"), rs.getString("PROVINCE_NAME"))));
+				user.setCity(new City(rs.getInt("CITY_ID"),rs.getString("CITY_NUM"), rs.getString("CITY_NAME"), 
+						new Province(rs.getInt("PROVINCE_ID"), rs.getString("PROVINCE_ID"), rs.getString("PROVINCE_NAME"))));
 				
 				
 				
