@@ -50,7 +50,7 @@ public class CityDao {
 				c.setCityNum(rs.getString("CITY_NUM"));
 				c.setId(rs.getInt("CITY_ID"));
 				c.setCityName(rs.getString("CITY_NAME"));
-				c.setProvinceNum(rs.getString("CITY_FATHER"));
+				c.setProvince(new Province(null,rs.getString("CITY_FATHER"),null));
 
 				cities.add(c);
 

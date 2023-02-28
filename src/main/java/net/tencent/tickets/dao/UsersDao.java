@@ -154,7 +154,13 @@ public class UsersDao {
 				user.setUserRealName(rs.getString("USER_REAL_NAME"));
 				//补全另外10个数据
 				user.setUserSex(rs.getString("USER_SEX").charAt(0));
-				user.setCity(new City(rs.getInt("CITY_ID"),null, rs.getString("CITY_NAME"), new Province(null, rs.getString("PROVINCE_ID"), rs.getString("PROVINCE_NAME"))));
+				
+				
+//				user.setCity(new City(rs.getInt("CITY_ID"),null, rs.getString("CITY_NAME"), 
+//						new Province(null, rs.getString("PROVINCE_ID"), rs.getString("PROVINCE_NAME"))));
+				
+				
+				
 				user.setCertType(new CertType(rs.getInt("USER_CERTTYPE_ID"), rs.getString("CERTTYPE_CONTENT")));
 				user.setUserCert(rs.getString("USER_CERT"));
 				user.setUserBirthday(rs.getDate("USER_BIRTHDAY"));

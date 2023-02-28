@@ -135,8 +135,7 @@
                                             class="text_red">*</span></td>
                                     <td width="98" height="40" align="left" class="text_cray1">省份：</td>
                                     <td width="104" height="35" align="left"><label>
-                                        <select name="province" class="text_cray" id="province"
-                                                onchange="getCity()">
+                                        <select name="province" class="text_cray" id="province">
                                             <option selected="selected">--请选择省份--</option>
                                             <c:forEach items="${provinces}" var="p">
                                                 <option value="${p.provinceNum}">${p.provinceName}
