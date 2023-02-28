@@ -6,82 +6,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>12306购票系统</title>
-    <link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css">
+    <link href="css/css.css" rel="stylesheet" type="text/css">
     </style>
-    <script language="javascript">
-        /**
-         * 跳转到注册页面
-         */
-        function UserRegistration() {
-            location.href = "<%=request.getContextPath()%>/ToRegisterViewServlet";
-        }
-
-        /**
-         * 提交
-         */
-        function UserLogin() {
-            document.querySelector("#loginForm").submit();
-        }
-    </script>
 </head>
-<%
-    //如果用户前面登录时勾选了自动登录，那么访问登录页面时需要先获取cookie中的内容，如果有，就说明上次写cookie写成功了，
-//那么根据cookie的内容自动跳转到对应的首页面
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        String username = null;
-        String password = null;
-        String rule = null;
-        Users user = null;
-        for (Cookie c : cookies) {
-            if ("username".equals(c.getName())) {
-                username = c.getValue();
-            }
-            if ("password".equals(c.getName())) {
-                password = c.getValue();
-            }
-            if ("rule".equals(c.getName())) {
-                rule = c.getValue();
-            }
-        }
-        if (username != null && password != null && rule != null && !"".equals(username)) {
-            user = new Users();
-            user.setUserName(username);
-            user.setUserPassword(password);
-            user.setUserRule(rule);
-
-            session.setAttribute("user", user);
-
-            //跳转到对应权限页面
-            if ("1".equals(rule)) {
-                response.sendRedirect("admin/index.jsp");
-            } else if ("2".equals(rule)) {
-                response.sendRedirect("user/index.jsp");
-            }
-        }
-    }
-
-%>
-<%
-
-    request.setCharacterEncoding("utf-8");
-    response.setCharacterEncoding("utf-8");
-
-
-    String message = request.getParameter("message");
-
-    if (message != null) {
-        message = URLDecoder.decode(message, "utf-8");
-%>
-<script>
-    window.onload = function () {
-        alert('<%=message%>');
-    }</script>
-
-<% }%>
-
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<form name="form1" method="post" action="<%=request.getContextPath()%>/LoginServlet" id="loginForm">
+<form name="form1" method="post" action="/tickets/login/LoginServlet" id="loginForm">
     <table width="933" border="0" align="center" cellpadding="0" cellspacing="0" style="margin:120px;">
         <tr>
             <td height="412" valign="top" background="images/bg_img1.jpg">
@@ -95,7 +24,7 @@
                         <td width="98" height="20" align="right"><img src="images/text_yh.gif" width="60" height="18">
                         </td>
                         <td width="16">&nbsp;</td>
-                        <td width="136"><input name="username" type="text" id="text_userName" size="18"/>
+                        <td width="136"><input name="userName" type="text" id="text_userName" size="18"/>
                             ${login_message}
                             <span id="alert_title" style="color: brown;"></span>
                         </td>
@@ -114,7 +43,7 @@
                     <tr>
                         <td height="20" align="right"><img src="images/text_password.gif" width="60" height="18"></td>
                         <td>&nbsp;</td>
-                        <td><input name="password" type="text" id="text_password" size="18"/></td>
+                        <td><input name="passWord" type="text" id="text_password" size="18"/></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -149,7 +78,7 @@
                         <td valign="bottom">
                             <table width="100%" border="0" cellspacing="0">
                                 <tr>
-                                    <td width="26" align="left"><input name="auto_login" type="checkbox" value="auto"
+                                    <td width="26" align="left"><input name="autoLogin" type="checkbox" value="auto"
                                                                        style=" margin:0 auto;"/></td>
                                     <td width="170"><img src="images/text_zddl.gif" width="60" height="18"></td>
                                 </tr>
@@ -162,7 +91,9 @@
                     <tr>
                         <td height="20">&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td colspan="2">&nbsp;</td>
+                        <td colspan="2">&nbsp;
+                            <input type="text" name="cookie" id="btn_cookie" style="display: none">
+                        </td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -172,11 +103,13 @@
                         <td colspan="2">
                             <table width="200" border="0" cellspacing="0">
                                 <tr>
-                                    <td width="78"><input name="button" type="button" class="butlogin" id="button"
-                                                          value="" onClick="UserLogin()"></td>
+                                    <td width="78">
+                                        <input name="button" type="button" class="butlogin" id="bun_login" value="" >
+                                    </td>
                                     <td>&nbsp;</td>
-                                    <td width="78"><input name="button2" type="button" class="butzc" id="button2"
-                                                          value="" onClick="UserRegistration()"></td>
+                                    <td width="78">
+                                        <input name="button2" type="button" class="butzc" id="btn_Regist" value="">
+                                    </td>
                                 </tr>
                             </table>
                         </td>
@@ -199,6 +132,20 @@
 <script src="js/jquery-3.4.1.js"></script>
 <script>
     $(function () {
+        // 先从cookie中取数据看看用户是否有保存cookie c_username=xx; c_password=e10adc3949ba59abbe56e057f20f883e'
+        let cookieStr = document.cookie;
+        if(document.cookie){
+            //用户有保存cookie
+            let cookieArray = document.cookie.split(";");
+
+            $("#text_userName").val(cookieArray[0].split("=")[1]);
+            $("#text_password").val(cookieArray[1].split("=")[1]);
+            $("#btn_cookie").val("true");
+            $("#loginForm").submit();
+        }else {
+            //清空 cookie标识
+            $("#btn_cookie").val("");
+        }
 
         let loginObj = {
             _refurbish:function (){
@@ -209,13 +156,18 @@
                     url: url,
                     method: "POST",
                     data: data,
+                    async: true,//异步
                     dataType: "json",
                     beforeSend: function (XMLHttpRequest) {
                     },
                     success: function (data, textStatus, XMLHttpRequest) {
                         if(!data[0].result){
                             // 验证不通过给出提示
-                            $("#alert_title").text(titleText);
+                            if(!data[0].titleTex){
+                                $("#alert_title").text(titleText);
+                            }else {
+                                $("#alert_title").text(data[0].titleTex);
+                            }
                         }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThorwn) {
@@ -272,10 +224,20 @@
         });
         //验证码输入框失去焦点时触发
         $("#text_code").blur(function (){
-            let url = "/tickets//login/ValidateUserCodeServlet";
+            let url = "/tickets/login/ValidateUserCodeServlet";
             let data = {code: $("#text_code").val()};
             let titleText = "验证码输入错误";
             loginObj._ajax(url,data,titleText);
+        })
+
+        // 点击登录按钮时
+        $("#bun_login").click(function (){
+            $("#loginForm").submit();
+        })
+
+        // 点击注册按钮
+        $("#btn_Regist").click(function (){
+            location.href = "/tickets/ToRegisterViewServlet";
         })
     })
 </script>

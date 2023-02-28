@@ -5,14 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>普通用户</title>
-<link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css">
+<link href="css/css.css" rel="stylesheet" type="text/css">
 </head>
 <body class="topbody">
 <form action="" method="get">
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="1411" colspan="2" background="<%=request.getContextPath()%>/images/ny_top_img_bg.gif">
-    	<img src="<%=request.getContextPath()%>/images/ny_top_img.gif" width="650" height="108"></td>
+    <td width="1411" colspan="2" background="images/ny_top_img_bg.gif">
+    	<img src="images/ny_top_img.gif" width="650" height="108"></td>
     </tr>
 </table>
 <table width="100%" border="0" cellspacing="0">
@@ -28,8 +28,12 @@
    	</td>
   </tr>
 </table>
-
 </form>
-
+<script src="../js/jquery-3.4.1.js"></script>
+<script>
+    $(function (){
+        console.info("cookie: " + $.cookie("cookie_userName"));
+    })
+</script>
 </body>
 </html>
