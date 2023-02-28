@@ -1,4 +1,4 @@
-package net.tencent.tickets.servlet.other;
+package net.tencent.tickets.servlet.login;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/ValidateCodeServlet")
 public class ValidateCodeServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	private char code[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
