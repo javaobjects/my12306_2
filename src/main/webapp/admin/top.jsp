@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>普通用户</title>
-<link href="css/css.css" rel="stylesheet" type="text/css">
+<link href="../css/css.css" rel="stylesheet" type="text/css">
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="topbody" style="background-image: url(../images/bg_point_write.gif)">
 <form action="" method="get">
@@ -32,11 +32,5 @@
   </tr>
 </table>
 </form>
-<script src="../js/jquery-3.4.1.js"></script>
-<script>
-    $(function (){
-
-    })
-</script>
 </body>
 </html>
