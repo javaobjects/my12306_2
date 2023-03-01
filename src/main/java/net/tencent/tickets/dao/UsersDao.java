@@ -295,7 +295,7 @@ public class UsersDao {
 				StringBuffer query_user=new StringBuffer("select u.id,u.username,u.sex,u.cert,"
 						+ "ct.id ct_id,ct.content ct_content,"
 						+ "ut.id ut_id,ut.content ut_content "
-						+ "from tickets_user u,tickets_usertype ut,tickets_2_certtype ct "
+						+ "from tickets_user u,tickets_usertype ut,tickets_certtype ct "
 						+ "where ut.id=u.user_type and ct.id=u.cert_type and sex='"+sex+
 						"' and cert_type="+certtype+" and user_type="+usertype);
 				if(username!=null&& !"".equals(username.trim()))
