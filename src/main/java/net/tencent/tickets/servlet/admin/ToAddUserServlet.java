@@ -1,4 +1,4 @@
-package net.tencent.tickets.servlet.other;
+package net.tencent.tickets.servlet.admin;
 
 import java.io.IOException;
 

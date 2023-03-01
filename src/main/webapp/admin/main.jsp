@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>无标题文档</title>
 </head>
-
 <body style="background-image: url(../images/bg_point_write.gif);">
 <table width="100%" border="0" cellspacing="0">
   <tr>
