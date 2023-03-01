@@ -1,4 +1,4 @@
-package net.tencent.tickets.servlet.other;
+package net.tencent.tickets.servlet.user;
 
 import java.io.IOException;
 
@@ -31,9 +31,13 @@ public class GetUserInfoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Users user = (Users)session.getAttribute("user");
 		
+		System.out.println("session userName: " + user.getUserName());
+		System.out.println("session userPassWord: " + user.getUserPassword());
+		
+		
 		Users result = UserService.getInstance().login(user.getUserName(), user.getUserPassword());
 		
-		
+		System.out.println("userName: " + result.getUserName());
 		
 		//2.把用户信息传给页面，并跳转到目标页面
 		request.setAttribute("userinfo", result);
