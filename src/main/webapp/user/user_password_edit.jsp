@@ -33,7 +33,7 @@
         <td width="100" height="40" class="text_cray1">用户名：</td>
         <td align="left" class="text_cray1">
 	        <input name="username" type="text" disabled="true" class="text_cray" 
-	        id="textfield4" value="${sessionScope.user.username}" size="30" readonly="reasonly"/>
+	        id="textfield4" value="${sessionScope.user.userName}" size="30" readonly="reasonly"/>
         </td>
       </tr>
       <tr>
