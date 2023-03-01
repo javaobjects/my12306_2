@@ -6,11 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查看个人信息</title>
 <link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css">
-<script language="javascript">
-	function UpdateInfo(){
-		location.href = "<%=request.getContextPath()%>/ToUpdateUserServlet";
-	}
-</script>
 <%
 Users user = (Users)request.getAttribute("userinfo");
 %>
@@ -111,7 +106,7 @@ Users user = (Users)request.getAttribute("userinfo");
       <table width="263" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td height="30" align="center">
-          	<input name="button" type="button" class="butxg" id="button"value="" onClick="UpdateInfo()">
+          	<input name="button" type="button" class="butxg" id="btn_xg"value="">
           </td>
           </tr>
       </table>
@@ -134,5 +129,13 @@ Users user = (Users)request.getAttribute("userinfo");
   </tr>
 </table>
 </form>
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
+<script>
+    $(function (){
+        $("#btn_xg").click(function (){
+            location.href = "<%=request.getContextPath()%>/ToUpdateUserServlet";
+        })
+    })
+</script>
 </body>
 </html>
