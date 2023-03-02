@@ -7,6 +7,7 @@ import net.tencent.tickets.entity.Province;
 
 public class ProvinceService {
 	
+	private static final String String = null;
 	private ProvinceDao provinceDao = ProvinceDao.getInstance();
 	
 	/**
@@ -21,6 +22,13 @@ public class ProvinceService {
 	public List<Province> getAllProvince() {
 		return provinceDao.queryAllProvince();
 	}
+	
+	
+	
+	public Province queryProvinceByProvinceNum(String provinceNum) {
+		return provinceDao.queryProvinceByProvinceNum(provinceNum);
+	}
+	
 
 	private ProvinceService() {
 

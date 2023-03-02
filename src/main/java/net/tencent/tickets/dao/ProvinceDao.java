@@ -12,7 +12,69 @@ import net.tencent.tickets.util.DBUtils_pool;
 public class ProvinceDao {
 
 	/** 查询所有省份的sql语句   ***/
-	private static final String QUERY_ALL_PROVINCE = "SELECT PROVINCE_ID,PROVINCE_NUM,PROVINCE_NAME FROM tickets_province";
+	private static final String QUERY_ALL_PROVINCE = 
+			"SELECT PROVINCE_ID,PROVINCE_NUM,PROVINCE_NAME FROM tickets_province";
+	
+	/** 根据省份编号查询省份 **/
+	
+	private static final String QUERY_PROVINCE_BY_PROVINCENUM = 
+			"SELECT PROVINCE_ID,PROVINCE_NUM,PROVINCE_NAME FROM tickets_province WHERE PROVINCE_NUM = ?";
+	
+	
+
+	/**
+	 * <p>Title: queryProvinceByProvinceNum</p>
+	 * <p>
+	 *    Description:
+	 * </p>
+	 * <p>Copyright: Copyright (c) 2017</p>
+	 * <p>Company: www.baidudu.com</p>
+	 * @param provinceNum
+	 * @return
+	 * @author xianxian
+	 * @date 2023年3月2日下午6:25:22
+	 * @version 1.0
+	 */
+	public Province queryProvinceByProvinceNum(String provinceNum) {
+		Province province = new Province();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+
+			conn = DBUtils_pool.getConnection();
+			stmt = conn.prepareStatement(QUERY_PROVINCE_BY_PROVINCENUM);
+			
+			System.out.println("QUERY_PROVINCE_BY_PROVINCENUM: " + QUERY_PROVINCE_BY_PROVINCENUM);
+			System.out.println("provinceNum: " + provinceNum);
+			
+			stmt.setString(1, provinceNum);
+			
+			
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+
+				
+				System.out.println("rs.getInt(\"PROVINCE_ID\"): " + rs.getInt("PROVINCE_ID"));
+				System.out.println("rs.getString(\"PROVINCE_NUM\"): " + rs.getString("PROVINCE_NUM"));
+				System.out.println("rs.getString(\"PROVINCE_NAME\"): " + rs.getString("PROVINCE_NAME"));
+				
+				province.setId(rs.getInt("PROVINCE_ID"));
+				province.setProvinceNum(rs.getString("PROVINCE_NUM"));
+				province.setProvinceName(rs.getString("PROVINCE_NAME"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils_pool.release(conn, stmt, rs);
+		}
+		return province;
+	}
+	
+	
+	
+	
+	
 	
 	
 	/**
@@ -30,22 +92,21 @@ public class ProvinceDao {
 	 * @version 1.0
 	 */
 	public List<Province> queryAllProvince() {
-		List<Province> provinces=new ArrayList<>();
+		List<Province> provinces = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		ResultSet rs=null;
+		ResultSet rs = null;
 		try {
 
 			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(QUERY_ALL_PROVINCE);
-			rs=stmt.executeQuery();
-			while(rs.next())
-			{
-				Province p=new Province();
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				Province p = new Province();
 				p.setId(rs.getInt("PROVINCE_ID"));
 				p.setProvinceNum(rs.getString("PROVINCE_NUM"));
 				p.setProvinceName(rs.getString("PROVINCE_NAME"));
-				
+
 				provinces.add(p);
 			}
 		} catch (Exception e) {
@@ -69,4 +130,5 @@ public class ProvinceDao {
 		}
 		return provinceDao;
 	}
+
 }

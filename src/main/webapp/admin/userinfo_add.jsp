@@ -15,7 +15,7 @@
 </head>
 
 <body class="write_bg">
-<form action="<%=request.getContextPath()%>/AddUserServlet" method="post" target="_top">
+<form action="<%=request.getContextPath()%>/AddUserServlet" method="post" target="_top" id="form_addUser">
     <table width="100%" border="0" cellspacing="0">
         <tr>
             <td height="30"></td>
@@ -51,13 +51,10 @@
                 <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
                         <td height="15" colspan="3" align="left" class="text_title">登录信息</td>
-
                     </tr>
                     <tr>
                         <td height="15" colspan="3" align="left">
-          		<span id="mess"
-                      style="color:red;font-weight:bloder;font-size:13px;">
-                    ${message}</span>
+                            <span id="mess" style="color:red;font-weight:bloder;font-size:13px;">${message}</span>
                         </td>
                     </tr>
                     <tr>
@@ -67,7 +64,7 @@
                         <td width="20" align="center" class="text_red">*</td>
                         <td width="100" height="40" align="left" class="text_cray1">登录名：</td>
                         <td class="text_cray">
-                            <input type="text" name="username" id="textfield2"/>
+                            <input type="text" name="userName" id="inp_userName"/>
                             由字母、数字或“_”组成，长度不少于6位，不多于30位
                         </td>
                     </tr>
@@ -75,14 +72,14 @@
                         <td width="20" align="center" class="text_red">*</td>
                         <td width="100" height="40" align="left" class="text_cray1">登录密码：</td>
                         <td class="text_cray">
-                            <input type="password" name="password"/>
+                            <input type="password" name="passWord" id="inp_passWord"/>
                         </td>
                     </tr>
                     <tr>
                         <td width="20" align="center" class="text_red">*</td>
                         <td width="100" height="40" align="left" class="text_cray1">确认密码：</td>
                         <td class="text_cray">
-                            <input type="password" name="confirm_password"/>
+                            <input type="password" name="confirm_passWord" id="inp_confirm_passWord"/>
                         </td>
                     </tr>
                 </table>
@@ -100,7 +97,7 @@
                         <td width="20" align="center" class="text_red">*</td>
                         <td width="100" height="40" align="left" class="text_cray1">用户权限：</td>
                         <td><label>
-                            <select name="rule" class="text_cray">
+                            <select name="rule" class="text_cray" id="select_qx">
                                 <option value="1">管理员</option>
                                 <option value="2">普通用户</option>
                             </select>
@@ -122,7 +119,7 @@
                         <td width="100" height="40" align="left" class="text_cray1">真实姓名：</td>
                         <td width="14"></td>
                         <td colspan="3" align="left">
-                            <input name="realName" type="text" class="text_cray"/>
+                            <input name="realName" type="text" class="text_cray" id="inp_realName"/>
                         </td>
                     </tr>
                     <tr>
@@ -132,11 +129,12 @@
                         <td colspan="3" align="left" class="text_cray1">
                             <input name="sex" type="radio" value="1" checked/>
                             <span class="text_cray">
-              <label>男</label>
-              <input name="sex" type="radio" value="2"/>
-                <label>女</label>
-                <label></label>
-              </span></td>
+                              <label>男</label>
+                              <input name="sex" type="radio" value="2"/>
+                                <label>女</label>
+                                <label></label>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td align="center" class="text_red">*</td>
@@ -149,7 +147,6 @@
                                     <option value="${p.provinceNum}">${p.provinceName}</option>
                                 </c:forEach>
                             </select>
-
                         </td>
                         <td width="48" align="left" class="text_cray">城市：</td>
                         <td width="343" align="left" class="text_cray">
@@ -164,7 +161,7 @@
                         <td width="100" height="40" align="left" class="text_cray1">证件类型：</td>
                         <td>&nbsp;</td>
                         <td colspan="3" align="left">
-                            <select class="text_cray" name="certtype" id="cardType">
+                            <select class="text_cray" name="certType" id="certType">
                                 <option value="1">二代身份证</option>
                                 <option value="2">港澳通行证</option>
                                 <option value="3">台湾通行证</option>
@@ -177,7 +174,7 @@
                         <td width="100" height="40" align="left" class="text_cray1">证件号码：</td>
                         <td></td>
                         <td colspan="3" align="left" class="text_cray">
-                            <input type="text" name="cert" id="textfield6"/>
+                            <input type="text" name="cert" id="inp_certNum"/>
                         </td>
                     </tr>
                     <tr>
@@ -185,7 +182,7 @@
                         <td width="100" height="40" align="left" class="text_cray1">出生日期：</td>
                         <td></td>
                         <td width="175" align="left" class="text_cray">
-                            <input type="date" name="birthday" id="textfield7"/>
+                            <input type="date" name="birthday" id="inp_birthday"/>
                         </td>
                         <td colspan="2" align="left"></td>
                     </tr>
@@ -210,7 +207,7 @@
                         <td height="15" align="left" class="text_cray1">备注：</td>
                         <td></td>
                         <td height="15" colspan="3" align="left">
-                            <textarea name="content" style="width:100%" rows="8"></textarea>
+                            <textarea name="content" style="width:100%" rows="8" id="txtarea_txt"></textarea>
                         </td>
                     </tr>
                 </table>
@@ -225,7 +222,7 @@
         <tr>
             <td width="164"></td>
             <td width="99" height="30" align="center">
-                <input name="button" type="submit" class="buttj" id="button" value="">
+                <input name="button" type="button" class="buttj" id="btn_submit" value="">
             </td>
             <td width="98"></td>
             <td width="97" align="center">
@@ -244,7 +241,8 @@
             <td height="2" background="<%=request.getContextPath()%>/images/bottom_point.gif"></td>
         </tr>
         <tr>
-            <td height="25" align="center" background="<%=request.getContextPath()%>/images/bottom_ny_bg.gif" class="text_cray">copyright@12306
+            <td height="25" align="center" background="<%=request.getContextPath()%>/images/bottom_ny_bg.gif"
+                class="text_cray">copyright@12306
                 购票网
             </td>
         </tr>
@@ -287,6 +285,61 @@
                 }
             })
         });
+
+
+        $("#btn_submit").click(function (){
+
+            let inp_userName = $("#inp_userName").val();
+            let inp_passWord = $("#inp_passWord").val();
+            let inp_confirm_passWord = $("#inp_confirm_passWord").val();
+            let select_qx = $("#select_qx").val();
+            let inp_realName = $("#inp_realName").val();
+            let sexVal = $('input[name="sex"]:checked').val();
+            let province = $("#province").val();
+            let city = $("#city").val();
+            let certType = $("#certType").val();
+            let inp_certNum = $("#inp_certNum").val();
+            let inp_birthday = $("#inp_birthday").val();
+            let passengerType = $("#passengerType").val();//非必填
+            let txtarea_txt = $("#txtarea_txt").val();//非必填
+
+            console.log("inp_userName: " + inp_userName);
+            console.log("inp_passWord: " + inp_passWord);
+            console.log("inp_confirm_passWord: "  + inp_confirm_passWord);
+            console.log("select_qx: " + select_qx);
+            console.log("inp_realName: " + inp_realName);
+            console.log("sexVal: " + sexVal);
+            console.log("province: " + province);
+            console.log("city: " + city);
+            console.log("certType: " + certType);
+            console.log("inp_certNum: " + inp_certNum);
+            console.log("inp_birthday: " + inp_birthday);
+            console.log("passengerType: " + passengerType);
+            console.log("txtarea_txt: " + txtarea_txt);
+            // 1. 校验必填信息非空判断
+            if(
+                !$.trim(inp_userName) || !$.trim(inp_passWord) || !$.trim(inp_confirm_passWord) || !$.trim(select_qx) ||
+                !$.trim(inp_realName) || !$.trim(sexVal) || !$.trim(province) || !$.trim(city) ||
+                !$.trim(certType) || !$.trim(inp_certNum) || !$.trim(inp_birthday)
+            )
+            {
+                $("#mess").text("必填信息不能为空");
+                return;
+            }
+            // 2. 用户名判断 由字母、数字或“_”组成，长度不少于6位，不多于30位
+
+            // 3. 用户名重复判断 需要ajax
+
+            // 4. 密码复杂度判断
+
+            // 5. 两次密码不一致判断
+
+            // 6. 证件号码判断
+
+            // 7. 一切校验都通过则提交
+
+            $("#form_addUser").submit();
+        })
     })
 </script>
 </body>

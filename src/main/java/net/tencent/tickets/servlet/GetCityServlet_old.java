@@ -25,7 +25,7 @@ public class GetCityServlet_old extends HttpServlet {
 			throws ServletException, IOException {
 		String provinceid = request.getParameter("pid");
 		
-		List<City> cities = CityService.getInstance().getCityByProvinceid(provinceid);
+		List<City> cities = CityService.getInstance().getCityByProvinceNum(provinceid);
 		
 		//输出一个xml文件
 		response.setCharacterEncoding("utf-8");

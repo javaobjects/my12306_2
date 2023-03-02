@@ -74,7 +74,12 @@ public class UsersDao {
 			stmt.setString(3, user.getUserRule());//权限
 			stmt.setString(4, user.getUserRealName());//真实姓名
 			stmt.setString(5, user.getUserSex() + "");//性别
-			stmt.setInt(6, user.getCity().getId());//城市 此处关联的居然是id不是cityid
+			
+			System.out.println("user: " + user.toString());
+			
+			System.out.println("user.getCity().getId(): " + user.getCity().getId());
+			
+			stmt.setInt(6, user.getCity().getId());//城市 
 			stmt.setString(7, user.getCertType().getId().toString());//证件类型
 			stmt.setString(8, user.getUserCert());//证件号码
 			stmt.setDate(9, new java.sql.Date(user.getUserBirthday().getTime()));//生日
@@ -349,7 +354,7 @@ public class UsersDao {
 		
 		try {
 			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
-			String update_user_sql="update tickets_user set image_path=? where id=?";
+			String update_user_sql="UPDATE tickets_user SET USER_IMAGE_PATH =? WHERE USER_ID =?";
 			conn=DBUtils_pool.getConnection();
 			stmt=conn.prepareStatement(update_user_sql);
 			stmt.setString(1, fileName);

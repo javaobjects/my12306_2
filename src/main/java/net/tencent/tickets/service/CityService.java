@@ -12,19 +12,34 @@ public class CityService {
 	
 	/**
 	 * 
-	 * <p>Title: getCityByProvinceid</p>  
+	 * <p>Title: getCityByProvinceNum</p>  
 	 * <p>
 	 *	Description: 
 	 *	获取指定省份的城市信息的业务方法
 	 * </p> 
-	 * @param provinceid
+	 * @param provinceNum
 	 * @return
 	 */
-	public List<City> getCityByProvinceid(String provinceid) {
-		return cityDao.queryCityByProvinceid(provinceid);
+	public List<City> getCityByProvinceNum(String provinceNum) {
+		return cityDao.queryCityByProvinceNum(provinceNum);
 	}
 	
-	
+	/**
+	 * <p>Title: queryCityByCityNum</p>
+	 * <p>
+	 *    Description:
+	 * </p>
+	 * <p>Copyright: Copyright (c) 2017</p>
+	 * <p>Company: www.baidudu.com</p>
+	 * @param cityNum
+	 * @return
+	 * @author xianxian
+	 * @date 2023年3月2日下午6:08:03
+	 * @version 1.0
+	 */
+	public City queryCityByCityNum(String cityNum) {
+		return cityDao.queryCityByCityNum(cityNum);
+	}
 	
 	private CityService(){}
 	

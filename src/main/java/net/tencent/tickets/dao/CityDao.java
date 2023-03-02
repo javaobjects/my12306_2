@@ -8,6 +8,8 @@ import java.util.List;
 
 import net.tencent.tickets.entity.City;
 import net.tencent.tickets.entity.Province;
+import net.tencent.tickets.service.ProvinceService;
+import net.tencent.tickets.servlet.other.ProvinceServlet;
 import net.tencent.tickets.util.DBUtils_pool;
 
 public class CityDao {
@@ -16,11 +18,63 @@ public class CityDao {
 	private static final String QUERY_CITY_BY_PROVINCENUM = 
 			"SELECT CITY_ID,CITY_NUM,CITY_NAME,CITY_FATHER from tickets_city where CITY_FATHER=?";
 	
+	/** 根据城市编号查询城市所有  **/
+	
+	private static final String QUERY_CITY_BY_CITYNUM = 
+			"SELECT CITY_ID,CITY_NUM,CITY_NAME,CITY_FATHER from tickets_city where CITY_NUM=?";
 	
 	
 	/**
+	 * <p>Title: queryCityByCityNum</p>
+	 * <p>
+	 *    Description:
+	 * </p>
+	 * <p>Copyright: Copyright (c) 2017</p>
+	 * <p>Company: www.baidudu.com</p>
+	 * @param cityNum
+	 * @return
+	 * @author xianxian
+	 * @date 2023年3月2日下午6:08:47
+	 * @version 1.0
+	 */
+	public City queryCityByCityNum(String cityNum) {
+		City city = new City();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBUtils_pool.getConnection();
+			stmt = conn.prepareStatement(QUERY_CITY_BY_CITYNUM);
+			stmt.setString(1, cityNum);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				city.setCityNum(rs.getString("CITY_NUM"));
+				city.setId(rs.getInt("CITY_ID"));
+				city.setCityName(rs.getString("CITY_NAME"));
+				
+				
+				System.out.println("rs.getString(\"CITY_FATHER\"): " + rs.getString("CITY_FATHER"));
+				
+				ProvinceService provinceService = ProvinceService.getInstance();
+				Province province = provinceService.queryProvinceByProvinceNum(rs.getString("CITY_FATHER"));
+				
+				System.out.println("province: " + province.toString());
+				
+				city.setProvince(province);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils_pool.release(conn, stmt, rs);
+		}
+		return city;
+	}
+	
+
+	
+	/**
 	 * (non-Javadoc)
-	 * <p>Title: queryCityByProvinceid</p>
+	 * <p>Title: queryCityByProvinceNum</p>
 	 * <p>
 	 *    Description:获取指定省份的所有城市信息
 	 * </p>
@@ -28,12 +82,12 @@ public class CityDao {
 	 * <p>Company: www.baidudu.com</p>
 	 * @param provinceNum
 	 * @return
-	 * @see net.tencent.tickets.dao.ifac.CityDaoIfac#queryCityByProvinceid(java.lang.String)
+	 * @see net.tencent.tickets.dao.ifac.CityDaoIfac#queryCityByProvinceNum(java.lang.String)
 	 * @author xianxian
 	 * @date 2023年2月25日下午9:10:45
 	 * @version 1.0
 	 */
-	public List<City> queryCityByProvinceid(String provinceNum) {
+	public List<City> queryCityByProvinceNum(String provinceNum) {
 		List<City> cities = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement stmt = null;

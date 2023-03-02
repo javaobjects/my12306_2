@@ -115,7 +115,7 @@ public class GetCityServlet extends HttpServlet {
 	private void getCitysByProvinceId(String provinceNum,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//2.调用service方法，获取城市列表
 		CityDao cityDao = CityDao.getInstance();
-		List<City> cityList = cityDao.queryCityByProvinceid(provinceNum);
+		List<City> cityList = cityDao.queryCityByProvinceNum(provinceNum);
 		
 		/*
 			JSON格式字符串:

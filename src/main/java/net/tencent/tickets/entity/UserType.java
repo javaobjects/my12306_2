@@ -20,12 +20,15 @@ public class UserType {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getContent() {
-		return content;
-	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public String getContent() {
+		return content;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserType [id=" + id + ", content=" + content + "]";

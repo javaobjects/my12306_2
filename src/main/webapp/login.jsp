@@ -2,12 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" import="net.tencent.tickets.entity.Users" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html、、>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>12306购票系统</title>
     <link href="css/css.css" rel="stylesheet" type="text/css">
-    </style>
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <form name="form1" method="post" action="/tickets/login/LoginServlet" id="loginForm">
@@ -25,7 +24,6 @@
                         </td>
                         <td width="16">&nbsp;</td>
                         <td width="136"><input name="userName" type="text" id="text_userName" size="18"/>
-                            ${login_message}
                             <span id="alert_title" style="color: brown;"></span>
                         </td>
                         <td width="55">&nbsp;</td>
@@ -132,6 +130,14 @@
 <script src="js/jquery-3.4.1.js"></script>
 <script>
     $(function () {
+        //进入页面先看浏览器地址有没有给提示
+        let tip_message = location.href.split("?")[1].split("=");
+        if(tip_message[0] == "message"){
+            // tip_message[1] 乱码暂时无法解决
+            $("#alert_title").text("注册成功！")
+        }else {
+            $("#alert_title").text("")
+        }
         // 先从cookie中取数据看看用户是否有保存cookie c_username=xx; c_password=e10adc3949ba59abbe56e057f20f883e'
         let cookieStr = document.cookie;
         if(document.cookie){
@@ -234,7 +240,6 @@
         $("#bun_login").click(function (){
             $("#loginForm").submit();
         })
-
         // 点击注册按钮
         $("#btn_Regist").click(function (){
             location.href = "/tickets/ToRegisterViewServlet";
