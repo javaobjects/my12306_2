@@ -216,47 +216,51 @@ public class AdminManageUserServlet extends HttpServlet {
 	private void queryUser(HttpServletRequest request,
 			HttpServletResponse response)throws ServletException, IOException {
 		//获取表单数据
-		String username = request.getParameter("username");
+		String userName = request.getParameter("userName");
 		String sex = request.getParameter("sex");
-		String cert_type = request.getParameter("cert_type");//证件类型
-		String cert = request.getParameter("cert");//证件号码
-		String user_type = request.getParameter("user_type");//旅客类型
+		String cert_type = request.getParameter("cert_type");// 证件类型
+		String cert = request.getParameter("cert");// 证件号码
+		String user_type = request.getParameter("user_type");// 旅客类型
 
-		String pageCount = request.getParameter("pageCount");//每页显示多少条信息
-		
-		//怎么查询servlet是不管的，全部交给service，servlet只管调用
+		String pageCount = request.getParameter("pageCount");// 每页显示多少条信息
+
+		// 怎么查询servlet是不管的，全部交给service，servlet只管调用
 		UserService userService = UserService.getInstance();
+
+		List<Users> users = userService.getUserByCondition(userName, Integer.parseInt(cert_type), cert,
+				Integer.parseInt(user_type), sex.charAt(0));
 		
-		List<Users> users = userService.getUserByCondition(username,
-				Integer.parseInt(cert_type),cert,
-				Integer.parseInt(user_type),sex.charAt(0));
 		
+		System.out.println("sex.charAt(0): " + sex.charAt(0));
+		System.out.println("users.size(): " + users.size());
+		System.out.println(users.get(0).getCertType().getContent());
 		
+
 		/*
-		 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），username  cert_type cert user_type sex  pageCount要回显
+		 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），username cert_type cert user_type sex
+		 * pageCount要回显
 		 */
-		//回传刚刚输入的查询条件
-		request.setAttribute("username", username);
+		// 回传刚刚输入的查询条件
+		request.setAttribute("userName", userName);
+		request.setAttribute("sex", sex);
 		request.setAttribute("cert_type", cert_type);
 		request.setAttribute("cert", cert);
 		request.setAttribute("user_type", user_type);
-		request.setAttribute("sex", sex);
 		request.setAttribute("pageCount", pageCount);
-		
-		//对查询结果进行分页，把查询结果放入session，把第一页的数据传给页面即可
-		
-		HttpSession session=request.getSession();
+
+		// 对查询结果进行分页，把查询结果放入session，把第一页的数据传给页面即可
+
+		HttpSession session = request.getSession();
 		session.setAttribute("users", users);
 		/*
 		 * 查询结果的第一页数据，总页数，页码（这里是1，）
 		 * 
-		 * 需要这三个数据怎么办？定义一个工具类，定义相关的算法，获取这些数据
-		 * 这个工具类就是大名鼎鼎的PageUtil.java
+		 * 需要这三个数据怎么办？定义一个工具类，定义相关的算法，获取这些数据 这个工具类就是大名鼎鼎的PageUtil.java
 		 */
-		PageUtil pageUtil=new PageUtil(users, Integer.parseInt(pageCount), 1);
-		request.setAttribute("userList", pageUtil.getUsers_page());//把查询结果users传给userlist.jsp页面
-		request.setAttribute("pagesum", pageUtil.getPagesum());//总页数
-		request.setAttribute("pageNumber", pageUtil.getPageNumber());//页码
+		PageUtil pageUtil = new PageUtil(users, Integer.parseInt(pageCount), 1);
+		request.setAttribute("userList", pageUtil.getUsers_page());// 把查询结果users传给userlist.jsp页面
+		request.setAttribute("pagesum", pageUtil.getPagesum());// 总页数
+		request.setAttribute("pageNumber", pageUtil.getPageNumber());// 页码
 		request.getRequestDispatcher("/admin/userlist.jsp").forward(request, response);
 	}
 

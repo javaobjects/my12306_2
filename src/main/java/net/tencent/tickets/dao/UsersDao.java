@@ -246,7 +246,7 @@ public class UsersDao {
 		try {
 
 			conn = DBUtils_pool.getConnection();
-			stmt = conn.prepareStatement("select * from tickets_user where id=? and password=?");
+			stmt = conn.prepareStatement("SELECT * FROM	tickets_user WHERE USER_ID =? AND USER_PASSWORD =?");
 			stmt.setInt(1,id);
 			stmt.setString(2, password_old);
 			rs=stmt.executeQuery();
@@ -299,51 +299,74 @@ public class UsersDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-			try {
+		try {
 
-				conn = DBUtils_pool.getConnection();
-				
-				StringBuffer query_user=new StringBuffer("select u.id,u.username,u.sex,u.cert,"
-						+ "ct.id ct_id,ct.content ct_content,"
-						+ "ut.id ut_id,ut.content ut_content "
-						+ "from tickets_user u,tickets_usertype ut,tickets_certtype ct "
-						+ "where ut.id=u.user_type and ct.id=u.cert_type and sex='"+sex+
-						"' and cert_type="+certtype+" and user_type="+usertype);
-				if(username!=null&& !"".equals(username.trim()))
-				{
-					query_user.append(" and username like '%"+username.trim()+"%'");
-				}
-				if(cert!=null && !"".equals(cert.trim()))
-				{
-					query_user.append(" and cert='"+cert+"'");
-				}
-				
-				stmt = conn.prepareStatement(query_user.toString());
-				
-				
-				rs=stmt.executeQuery();
-				Users user=null;
-				while(rs.next())
-				{
-					user=new Users();
-					
-					user.setId(rs.getInt("id"));
-					user.setUserName(rs.getString("username"));
-					user.setUserSex(rs.getString("sex").charAt(0));
-					user.setCertType(new CertType(rs.getInt("ct_id"), rs.getString("ct_content")));
-					user.setUserCert(rs.getString("cert"));
-					user.setUserType(new UserType(rs.getInt("ut_id"),rs.getString("ut_content")));
-					
-					users.add(user);
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				DBUtils_pool.release(conn, stmt, rs);
+			conn = DBUtils_pool.getConnection();
+
+//			StringBuffer query_user = new StringBuffer("select u.id,u.username,u.sex,u.cert,"
+//					+ "ct.id ct_id,ct.content ct_content," + "ut.id ut_id,ut.content ut_content "
+//					+ "from tickets_user u,tickets_usertype ut,tickets_certtype ct "
+//					+ "where ut.id=u.user_type and ct.id=u.cert_type and sex='" + sex + "' and cert_type=" + certtype
+//					+ " and user_type=" + usertype);
+			
+			
+			StringBuffer query_user = new StringBuffer("SELECT\r\n"
+					+ "	u.USER_ID,\r\n"
+					+ "	u.USER_NAME,\r\n"
+					+ "	u.USER_SEX,\r\n"
+					+ "	u.USER_CERTTYPE_ID,\r\n"
+					+ "	u.USER_CERT,\r\n"
+					+ "	ct.CERTTYPE_CONTENT,\r\n"
+					+ "	u.USER_USERTYPE_ID,\r\n"
+					+ "	ut.USERTYPE_CONTENT \r\n"
+					+ "FROM\r\n"
+					+ "	tickets_user u,\r\n"
+					+ "	tickets_certtype ct,\r\n"
+					+ "	tickets_usertype ut \r\n"
+					+ "WHERE\r\n"
+					+ "	u.USER_CERTTYPE_ID = ct.CERTTYPE_ID \r\n"
+					+ "	AND u.USER_USERTYPE_ID = ut.USERTYPE_ID \r\n"
+					+ "	AND u.USER_SEX = " + sex + "\r\n"
+					+ "	AND u.USER_CERTTYPE_ID = " + certtype + "\r\n"
+					+ "	AND u.USER_USERTYPE_ID = " + usertype);
+			
+			
+			
+			
+			if (username != null && !"".equals(username.trim())) {
+				query_user.append(" AND USER_NAME like '%" + username.trim() + "%'");
+			}
+			if (cert != null && !"".equals(cert.trim())) {
+				query_user.append(" AND USER_CERT = '" + cert + "'");
 			}
 
-			return users;
+			stmt = conn.prepareStatement(query_user.toString());
+
+			System.out.println("query_user.toString(): " + query_user.toString());
+			
+			
+			rs = stmt.executeQuery();
+			Users user = null;
+			while (rs.next()) {
+				user = new Users();
+
+				user.setId(rs.getInt("USER_ID"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserSex(rs.getString("USER_SEX").charAt(0));
+				user.setUserCert(rs.getString("USER_CERT"));
+				user.setCertType(new CertType(rs.getInt("USER_CERTTYPE_ID"), rs.getString("CERTTYPE_CONTENT")));
+				user.setUserType(new UserType(rs.getInt("USER_USERTYPE_ID"), rs.getString("USERTYPE_CONTENT")));
+
+				users.add(user);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils_pool.release(conn, stmt, rs);
+		}
+
+		return users;
 		}
 
 	

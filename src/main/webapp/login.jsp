@@ -131,13 +131,16 @@
 <script>
     $(function () {
         //进入页面先看浏览器地址有没有给提示
-        let tip_message = location.href.split("?")[1].split("=");
-        if(tip_message[0] == "message"){
-            // tip_message[1] 乱码暂时无法解决
-            $("#alert_title").text("注册成功！")
-        }else {
-            $("#alert_title").text("")
+        if(location.href.split("?")[1]){
+            let tip_message = location.href.split("?")[1].split("=");
+            if(tip_message[0] == "message"){
+                // tip_message[1] 乱码暂时无法解决
+                $("#alert_title").text("注册成功！")
+            }else {
+                $("#alert_title").text("")
+            }
         }
+
         // 先从cookie中取数据看看用户是否有保存cookie c_username=xx; c_password=e10adc3949ba59abbe56e057f20f883e'
         let cookieStr = document.cookie;
         if(document.cookie){
