@@ -192,9 +192,9 @@ public class UsersDao {
 	
 	
 	public int updateUser(Users user) {
-		int rows=0;
-		Connection conn=null;
-		PreparedStatement stmt=null;
+		int rows = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		
 		try {
 			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
@@ -223,7 +223,7 @@ public class UsersDao {
 			stmt.setString(8,user.getUserContent());
 			stmt.setInt(9, user.getId());
 			
-			rows=stmt.executeUpdate();
+			rows = stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -263,25 +263,27 @@ public class UsersDao {
 		return result;
 	}
 	
-	public void updatePassword(Integer id, String password_new) {
+	public Integer updatePassword(Integer id, String password_new) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		int rows = 0;
 		
 		try {
 			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
-			String update_user_sql="update tickets_user set password=? where id=?";
+			String update_user_sql="UPDATE tickets_user SET USER_PASSWORD =? WHERE	USER_ID =?";
 			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(update_user_sql);
 			stmt.setString(1,password_new);
 			stmt.setInt(2,id);
 			
-			stmt.executeUpdate();
+			rows = stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBUtils_pool.release(conn, stmt, null);
 		}
 		
+		return rows;
 	}
 
 	/**

@@ -29,8 +29,7 @@ public class UserService {
 	{
 		boolean tmp = false;// 默认更新失败
 		if (userDao.find(id, password_old)) {
-			userDao.updatePassword(id, password_new);
-			tmp = true;
+			tmp = userDao.updatePassword(id, password_new) > 0 ;
 		}
 		return tmp;
 	}

@@ -1,4 +1,4 @@
-package net.tencent.tickets.servlet.other;
+package net.tencent.tickets.servlet.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,18 +49,15 @@ public class UpdatePasswordServlet extends HttpServlet {
 			
 			//3.写三行代码ok
 			//user.getPassword().equals(Md5Utils.md5(p_old))
-			if(UserService.getInstance().updatePassword(user.getId(), Md5Utils.md5(p_old), Md5Utils.md5(p_new)))
-			{
+			if (UserService.getInstance().updatePassword(user.getId(), Md5Utils.md5(p_old), Md5Utils.md5(p_new))) {
 				pw.println("<script>alert('更新密码成功,请重新登录');window.open('ExitServlet','_parent');</script>");
-				
-				//response.sendRedirect("ExitServlet");
-			}else
-			{
+
+			} else {
 //				pw.println("<script>alert('更新密码失败,请稍后再试。');</script>");
 				request.setAttribute("mes_alert", "更新密码失败,请稍后再试。");
 				request.getRequestDispatcher("/user/user_password_edit.jsp").forward(request, response);
 			}
-		}else {
+		} else {
 			request.setAttribute("mes_alert", "确认新密码与新密码不一至,请重新输入。");
 			request.getRequestDispatcher("/user/user_password_edit.jsp").forward(request, response);
 		}
