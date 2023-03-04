@@ -49,7 +49,7 @@ Users user = (Users)request.getAttribute("userinfo");
             <td width="350" align="left" class="text_cray"><%=user.getUserName() %></td>
             <td width="230" rowspan="5" align="center"
              background="<%=request.getContextPath() %>/images/bg_point_write.gif" class="text_cray">
-             <img src="<%=request.getContextPath()+"/photos/"+user.getUserImagePath() %>" width="139" height="139">
+             <img src="<%=request.getContextPath()+"/photos/"+user.getUserImagePath() %>" width="139" height="139" id="userImage">
              </td>
           </tr>
           <tr>
@@ -60,7 +60,9 @@ Users user = (Users)request.getAttribute("userinfo");
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
             <td width="100" height="40" align="left" class="text_cray1">性 别：</td>
-            <td align="left" class="text_cray"><%=user.getUserSex().equals("1")?"男":"女" %></td>
+            <td align="left" class="text_cray">
+                ${userinfo.userSex == 49 ? "男" : "女"}
+            </td>
           </tr>
           <tr>
             <td width="20" height="40" align="center" class="text_red">*</td>
@@ -132,9 +134,41 @@ Users user = (Users)request.getAttribute("userinfo");
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
 <script>
     $(function (){
+
         $("#btn_xg").click(function (){
             location.href = "<%=request.getContextPath()%>/ToUpdateUserServlet";
         })
+
+
+
+
+        // $.ajax({
+        //     url: "/tickets/GetUserInfoServlet",
+        //     method: "POST",
+        //     data: {
+        //
+        //     },
+        //     dataType: "json",
+        //     beforeSend: function (XMLHttpRequest) {
+        //     },
+        //     success: function (data, textStatus, XMLHttpRequest) {
+        //
+        //         console.log(data);
+        //
+        //
+        //
+        //     },
+        //     error: function (XMLHttpRequest, textStatus, errorThorwn) {
+        //         console.error(XMLHttpRequest);
+        //         console.error(textStatus);
+        //         console.error(errorThorwn)
+        //     },
+        //     complete: function (XMLHttpRequest, textStatus) {
+        //     }
+        // })
+
+
+
     })
 </script>
 </body>

@@ -34,29 +34,24 @@ public class ToUpdateUserServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//先拿用户信息
-		
-		//跳转到编辑页面修改用户信息
-		
-		//1.借助session，拿username和password，然后访问数据库获取用户的完整信息
-				HttpSession session=request.getSession();
-				Users user = (Users)session.getAttribute("user");
-				
-				Users result = UserService.getInstance().login(user.getUserName(), user.getUserPassword());
-				
-				
-				
-				//2.把用户信息传给页面，并跳转到目标页面
-				request.setAttribute("userinfo", result);
-				//获取所有省份并传给页面
-				request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
-				//获取当前用户所在省份的所有城市信息并传给页面
-				request.setAttribute("cities", CityService.getInstance().getCityByProvinceNum
-						(result.getCity().getProvince().getProvinceNum()));
-				
-				request.getRequestDispatcher("/user/userinfo_edit.jsp").forward(request, response);
-	}
-	
-	
+		// 先拿用户信息
 
+		// 跳转到编辑页面修改用户信息
+
+		// 1.借助session，拿username和password，然后访问数据库获取用户的完整信息
+		HttpSession session = request.getSession();
+		Users user = (Users) session.getAttribute("user");
+
+		Users result = UserService.getInstance().login(user.getUserName(), user.getUserPassword());
+		
+		// 2.把用户信息传给页面，并跳转到目标页面
+		request.setAttribute("userinfo", result);
+		// 获取所有省份并传给页面
+		request.setAttribute("provinces", ProvinceService.getInstance().getAllProvince());
+		// 获取当前用户所在省份的所有城市信息并传给页面
+		request.setAttribute("cities",
+				CityService.getInstance().getCityByProvinceNum(result.getCity().getProvince().getProvinceNum()));
+		
+		request.getRequestDispatcher("/user/userinfo_edit.jsp").forward(request, response);
+	}
 }

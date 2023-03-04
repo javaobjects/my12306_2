@@ -2,6 +2,7 @@ package net.tencent.tickets.servlet.user;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -68,9 +69,16 @@ public class UploadPhotoServlet extends HttpServlet {
 //			HttpSession session = request.getSession();
 //			Users user = (Users)session.getAttribute("user");
 			
-			UserService.getInstance().saveImage(user.getId(),fileName);
-			//回到更新用户信息页面，让用户看到自己的照片
-			response.sendRedirect("ToUpdateUserServlet");
+			
+			//判断是否上传成功
+			if(UserService.getInstance().saveImage(user.getId(),fileName)) {
+				//回到更新用户信息页面，让用户看到自己的照片
+				response.sendRedirect("ToUpdateUserServlet");
+			}else {
+				PrintWriter pw = response.getWriter();
+				pw.println("<script>alert('上传照片失败，请稍后再试！');</script>");
+			}
+
 			
 		/*PrintWriter out = response.getWriter();
 		out.println("上传成功");

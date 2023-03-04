@@ -1,4 +1,4 @@
-package net.tencent.tickets.servlet.other;
+package net.tencent.tickets.servlet.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,10 @@ import net.tencent.tickets.entity.CertType;
 import net.tencent.tickets.entity.City;
 import net.tencent.tickets.entity.UserType;
 import net.tencent.tickets.entity.Users;
+import net.tencent.tickets.service.CertTypeService;
+import net.tencent.tickets.service.CityService;
 import net.tencent.tickets.service.UserService;
+import net.tencent.tickets.service.UserTypeService;
 
 
 @WebServlet("/UpdateUserServlet")
@@ -33,7 +36,7 @@ public class UpdateUserServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String realname = request.getParameter("realname");
 		String sex = request.getParameter("sex");
-		String city = request.getParameter("city");
+		String cityNum = request.getParameter("city");
 		String certtype = request.getParameter("certtype");
 		String cert = request.getParameter("cert");
 		String birthday = request.getParameter("birthday");
@@ -48,35 +51,78 @@ public class UpdateUserServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-		CertType cert_type = new CertType(Integer.parseInt(certtype), null);
-		UserType user_type = new UserType(Integer.parseInt(usertype), null);
+		
+		CertTypeService certTypeService = CertTypeService.getInstance();
+		UserTypeService userTypeService = UserTypeService.getInstance();
+		CityService cityService = CityService.getInstance();
+		
+		CertType cert_type = certTypeService.queryCertTypeById(certtype);
+		UserType user_type = userTypeService.queryUserTypeById(usertype);
+		City city = cityService.queryCityByCityNum(cityNum);
 		
 		
-		Users user = new Users(Integer.parseInt(id), null, null, null,
-				realname, sex.charAt(0), new City(Integer.parseInt(city)), 
-				cert_type, cert, birth, user_type, content, null, null, null);
+		Users user = new Users(
+				Integer.parseInt(id), 
+				null, 
+				null, 
+				null,
+				realname, 
+				sex.charAt(0), 
+				city, 
+				cert_type, 
+				cert, 
+				birth, 
+				user_type, 
+				content, 
+				null, 
+				null, 
+				null
+				);
+		
+//		
+//		Users user = new Users(
+//				null,//id自动生成
+//				userName,
+//				passWord,
+//				rule,
+//				realName,
+//				sex.charAt(0),
+//				city,
+//				certType,
+//				cert,
+//				birthday,
+//				userType,
+//				content,
+//				'1',//用户状态有效
+//				request.getRemoteAddr(),//ip地址
+//				""//图片路径
+//				);
+		
+		
+		
+		
+		
+		
+		
 		
 		//4.调用底层UserService中的更新方法更新用户信息
 		UserService userService = UserService.getInstance();
 		boolean result = userService.updateUser(user);
 		
 		
-		if(result)
-		{
-			//重定向到ToUpdateUserServlet即可:再次获取更新后的用户信息然后去往更新页面展示，让用户看到更新后的效果
-			//同步更新session中的用户信息
+		if (result) {
+			// 重定向到ToUpdateUserServlet即可:再次获取更新后的用户信息然后去往更新页面展示，让用户看到更新后的效果
+			// 同步更新session中的用户信息
 			HttpSession session = request.getSession();
-			Users session_user = (Users)session.getAttribute("user");
-			
-			session.setAttribute("user", userService.login(session_user.getUserName(), 
-					session_user.getUserPassword()));
+			Users session_user = (Users) session.getAttribute("user");
+
+			session.setAttribute("user", userService.login(session_user.getUserName(), session_user.getUserPassword()));
 
 			response.sendRedirect("ToUpdateUserServlet");
-		}else
-		{
+		} else {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter pw = response.getWriter();
-			pw.println("<script>alert('更新失败');</script>");
+			pw.println("<script>alert('更新失败.请稍后再试!');</script>");
 		}
 	}
 }

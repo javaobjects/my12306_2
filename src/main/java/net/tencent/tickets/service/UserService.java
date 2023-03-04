@@ -12,9 +12,6 @@ public class UserService {
 	 */
 	private UsersDao userDao = UsersDao.getInstance();
 	
-	
-	
-	
 	/**
 	 * <p>Title: updatePassword</p>  
 	 * <p>
@@ -93,8 +90,10 @@ public class UserService {
 		
 		return userDao.queryUserByCondition(username,certtype,cert,usertype,sex);
 	}
-	public void saveImage(Integer id, String fileName) {
-		userDao.insertImage(id,fileName);
+	
+	
+	public Boolean saveImage(Integer id, String fileName) {
+		return userDao.insertImage(id,fileName) > 0;
 	}
 	
 	

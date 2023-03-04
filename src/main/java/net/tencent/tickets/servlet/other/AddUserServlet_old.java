@@ -1,4 +1,4 @@
-package net.tencent.tickets.servlet.admin;
+package net.tencent.tickets.servlet.other;
 
 import java.io.IOException;
 import java.net.URLEncoder;

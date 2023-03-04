@@ -26,11 +26,9 @@ public class ValidateUserNameAndPassWordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req, resp);
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("utf-8");
 		// 1. 获取用户输入的用户名和密码
@@ -58,9 +56,7 @@ public class ValidateUserNameAndPassWordServlet extends HttpServlet {
 		writer.write(JsonArray.toString());
 		writer.flush();
 		writer.close();
+		
 	}
-	
-	
-	
 
 }

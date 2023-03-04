@@ -166,7 +166,7 @@ public class UsersDao {
 				
 				
 				user.setCity(new City(rs.getInt("CITY_ID"),rs.getString("CITY_NUM"), rs.getString("CITY_NAME"), 
-						new Province(rs.getInt("PROVINCE_ID"), rs.getString("PROVINCE_ID"), rs.getString("PROVINCE_NAME"))));
+						new Province(rs.getInt("PROVINCE_ID"), rs.getString("PROVINCE_NUM"), rs.getString("PROVINCE_NAME"))));
 				
 				
 				
@@ -373,9 +373,10 @@ public class UsersDao {
 
 	
 	
-	public void insertImage(Integer id, String fileName) {
-		Connection conn=null;
-		PreparedStatement stmt=null;
+	public Integer insertImage(Integer id, String fileName) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int rows = 0;
 		
 		try {
 			//这些待更新的数据：真实姓名 性 别   城市 证件类型 证件号码 出生日期 旅客类型 备注
@@ -385,12 +386,13 @@ public class UsersDao {
 			stmt.setString(1, fileName);
 			stmt.setInt(2, id);
 			
-			stmt.executeUpdate();
+			rows = stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBUtils_pool.release(conn, stmt, null);
 		}
+		return rows;
 	}
 	
 //	 单例模式实现步骤：

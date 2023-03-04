@@ -1,6 +1,7 @@
 package net.tencent.tickets.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.tencent.tickets.entity.Users;
 import net.tencent.tickets.service.UserService;
 
@@ -30,19 +32,10 @@ public class GetUserInfoServlet extends HttpServlet {
 		//1.借助session，拿username和password，然后访问数据库获取用户的完整信息
 		HttpSession session = request.getSession();
 		Users user = (Users)session.getAttribute("user");
-		
-		System.out.println("session userName: " + user.getUserName());
-		System.out.println("session userPassWord: " + user.getUserPassword());
-		
-		
 		Users result = UserService.getInstance().login(user.getUserName(), user.getUserPassword());
-		
-		System.out.println("userName: " + result.getUserName());
-		
 		//2.把用户信息传给页面，并跳转到目标页面
 		request.setAttribute("userinfo", result);
 		request.getRequestDispatcher("/user/userinfo_display.jsp").forward(request, response);
 	}
-
 
 }
