@@ -67,7 +67,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td height="10" colspan="4"></td>
+                        <td height="10" colspan="4">
+                            <span class="text_red" id="tip_text"></span>
+                        </td>
                     </tr>
                     <tr>
                         <td width="20" align="center" class="text_red1">
@@ -76,14 +78,13 @@
                             登录名：
                         </td>
                         <td width="350" align="left" class="text_cray1">
-                            <input name="username" type="text" disabled="true" class="text_cray" id="textfield22"
+                            <input name="userName" type="text" disabled="true" class="text_cray" id="inp_userName"
                                    value="${userinfo.userName}" readonly="readonly"/>
                         </td>
                         <td width="230" colspan="-1" rowspan="7" align="center"
                             background="<%=request.getContextPath()%>/images/bg_point_write.gif"
                             class="text_cray1">
-                            <img src="<%=request.getContextPath()%>/photos/${userinfo.userImagePath}"
-                                 width="120">
+                            <img src="<%=request.getContextPath()%>/photos/${userinfo.userImagePath}" width="120" id="user_head_img">
                             <table width="90%" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td height="15"></td>
@@ -98,7 +99,7 @@
                                 </tr>
                                 <tr>
                                     <td align="center">
-                                        <input name="uploadFile" type="file" class="text_cray" size="20"/>
+                                        <input name="uploadFile" type="file" class="text_cray" size="20" id="txt_uploadFile"/>
                                         <input type="button" value="上传" id="btn_uploadFile"
                                                style="position: relative;top: -21px;left: 70px;"
                                         />
@@ -113,7 +114,7 @@
                             真实姓名：
                         </td>
                         <td align="left" class="text_cray1">
-                            <input name="realname" type="text" class="text_cray" id="textfield2"
+                            <input name="realname" type="text" class="text_cray" id="inp_userRealName"
                                    value="${userinfo.userRealName}"
                             />
                         </td>
@@ -168,7 +169,7 @@
 <%--                            第二种写法 --%>
 
                             <% Users user = (Users) request.getAttribute("userinfo"); %>
-                            <select name="provinceid" class="text_cray"  id="province">
+                            <select name="provinceNum" class="text_cray"  id="province">
 
 
                                 <%
@@ -225,7 +226,7 @@
                             证件类型：
                         </td>
                         <td align="left" class="text_cray1">
-                            <select class="text_cray" name="certtype" id="cardType">
+                            <select class="text_cray" name="certType" id="cardType">
                                 <option value="1" ${userinfo.certType.id==1? "selected": ""}>
 													<span>
 														二代身份证
@@ -257,7 +258,7 @@
                             证件号码：
                         </td>
                         <td align="left" class="text_cray1">
-                            <input name="cert" type="text" class="text_cray" id="textfield6"
+                            <input name="cert" type="text" class="text_cray" id="inp_userCert"
                                    value="${userinfo.userCert}"
                             />
                         </td>
@@ -270,7 +271,7 @@
                             出生日期：
                         </td>
                         <td colspan="2" align="left" class="text_cray1">
-                            <input name="birthday" type="text" class="text_cray" id="textfield7"
+                            <input name="birthday" type="text" class="text_cray" id="inp_userBirthday"
                                    value="${userinfo.userBirthday}"
                             />
                         </td>
@@ -281,7 +282,7 @@
                             旅客类型：
                         </td>
                         <td height="35" colspan="2" align="left" class="text_cray1">
-                            <select class="text_cray" id="passengerType" name="usertype">
+                            <select class="text_cray" id="userType" name="userType">
                                 <option value="1" ${userinfo.userType.id==1? "selected": ""}>
                                     成人
                                 </option>
@@ -306,7 +307,7 @@
                             备注：
                         </td>
                         <td height="80" colspan="2" align="left" class="text_cray1">
-                        <textarea name="content" rows="8" class="text_cray" style="width:100%">${userinfo.userContent}</textarea>
+                        <textarea name="userContent" rows="8" class="text_cray" style="width:100%" id="userContent">${userinfo.userContent}</textarea>
                         </td>
                     </tr>
                 </table>
@@ -320,10 +321,10 @@
                     <tr>
                         <td width="164"></td>
                         <td width="99" height="30" align="center">
-                            <input name="button" type="submit" class="buttj" id="button" value=""></td>
+                            <input name="button" type="button" class="buttj" id="btn_submit" value=""></td>
                         <td width="98"></td>
                         <td width="97" align="center">
-                            <input name="button2" type="reset" class="butcz" id="button2" value=""></td>
+                            <input name="button2" type="reset" class="butcz" id="btn_rest" value=""></td>
                         <td width="92"></td>
                     </tr>
                 </table>
@@ -348,26 +349,57 @@
     </tr>
     </table>
 </form>
+<script src="<%=request.getContextPath()%>/js/customJs/uploadPhoto.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
 <script src="<%=request.getContextPath()%>/js/customJs/getCitysByProvinceNum.js"></script>
 <script>
-    document.querySelector("#btn_uploadFile").onclick = () =>
-    {
-        //表单提交，上传照片，告诉我是成功还是失败，最好回显照片
-        //1.获取表单元素
-        let form = document.querySelector("#edit_form");
-        //2.修改表单的属性：支持进行二进制数据的提交
-        form.encoding = "multipart/form-data";
-        //3.指定处理上传图片请求的servlet
-        form.action = "UploadPhotoServlet";
-        //4.表单提交
-        form.submit();
-        //以下代码将表单属性还原
-        //需要修改表单的enctype属性，js中的代码如下：
-        form.encoding = "application/x-www-form-urlencoded";
-        form.action = "UpdateUserServlet";
-    }
+    $(function (){
+        //1. 获取保个输入框的值
+        let inp_userRealName = $("#inp_userRealName").val();
+        let sex = $('input[name="sex"]:checked').val();
+        let provinceNum = $("#province").val();
+        let cityNum = $("#city").val();
+        let cardType = $("#cardType").val();
+        let inp_userCert = $("#inp_userCert").val();
+        let inp_userBirthday = $("#inp_userBirthday").val();
+        let userType = $("#userType").val();
+        let userContent = $("#userContent").val();
+
+        // console.log("inp_userRealName: " +inp_userRealName);
+        // console.log("sex: " + sex);
+        // console.log("provinceNum: " + provinceNum);
+        // console.log("cityNum: " + cityNum);
+        // console.log("cardType: " + cardType);
+        // console.log("inp_userCert: " + inp_userCert);
+        // console.log("inp_userBirthday: " + inp_userBirthday);
+        // console.log("usertype: " + userType);
+        // console.log("userContent: " + userContent);
+
+        $("#btn_submit").click(function (){
+
+            //2. 非空判断, 必填非空不让提交
+            if(
+                !$.trim(inp_userRealName) ||
+                !$.trim(sex)||
+                !$.trim(provinceNum)||
+                !$.trim(cityNum)||
+                !$.trim(cardType)||
+                !$.trim(inp_userCert)||
+                !$.trim(inp_userBirthday)||
+                !$.trim(userType)
+            ){
+                $("#tip_text").text("必填项不能为空!");
+                return;
+            }
+
+            //3. 一些字符特殊判断
+
+            //4. 提交
+            $("#edit_form").submit()
+        })
+
+
+    })
 </script>
 </body>
-
 </html>

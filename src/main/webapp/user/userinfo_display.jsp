@@ -138,37 +138,6 @@ Users user = (Users)request.getAttribute("userinfo");
         $("#btn_xg").click(function (){
             location.href = "<%=request.getContextPath()%>/ToUpdateUserServlet";
         })
-
-
-
-
-        // $.ajax({
-        //     url: "/tickets/GetUserInfoServlet",
-        //     method: "POST",
-        //     data: {
-        //
-        //     },
-        //     dataType: "json",
-        //     beforeSend: function (XMLHttpRequest) {
-        //     },
-        //     success: function (data, textStatus, XMLHttpRequest) {
-        //
-        //         console.log(data);
-        //
-        //
-        //
-        //     },
-        //     error: function (XMLHttpRequest, textStatus, errorThorwn) {
-        //         console.error(XMLHttpRequest);
-        //         console.error(textStatus);
-        //         console.error(errorThorwn)
-        //     },
-        //     complete: function (XMLHttpRequest, textStatus) {
-        //     }
-        // })
-
-
-
     })
 </script>
 </body>

@@ -303,19 +303,19 @@
             let passengerType = $("#passengerType").val();//非必填
             let txtarea_txt = $("#txtarea_txt").val();//非必填
 
-            console.log("inp_userName: " + inp_userName);
-            console.log("inp_passWord: " + inp_passWord);
-            console.log("inp_confirm_passWord: "  + inp_confirm_passWord);
-            console.log("select_qx: " + select_qx);
-            console.log("inp_realName: " + inp_realName);
-            console.log("sexVal: " + sexVal);
-            console.log("province: " + province);
-            console.log("city: " + city);
-            console.log("certType: " + certType);
-            console.log("inp_certNum: " + inp_certNum);
-            console.log("inp_birthday: " + inp_birthday);
-            console.log("passengerType: " + passengerType);
-            console.log("txtarea_txt: " + txtarea_txt);
+            // console.log("inp_userName: " + inp_userName);
+            // console.log("inp_passWord: " + inp_passWord);
+            // console.log("inp_confirm_passWord: "  + inp_confirm_passWord);
+            // console.log("select_qx: " + select_qx);
+            // console.log("inp_realName: " + inp_realName);
+            // console.log("sexVal: " + sexVal);
+            // console.log("province: " + province);
+            // console.log("city: " + city);
+            // console.log("certType: " + certType);
+            // console.log("inp_certNum: " + inp_certNum);
+            // console.log("inp_birthday: " + inp_birthday);
+            // console.log("passengerType: " + passengerType);
+            // console.log("txtarea_txt: " + txtarea_txt);
             // 1. 校验必填信息非空判断
             if(
                 !$.trim(inp_userName) || !$.trim(inp_passWord) || !$.trim(inp_confirm_passWord) || !$.trim(select_qx) ||

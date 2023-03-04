@@ -36,40 +36,36 @@ public class UploadPhotoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		// 存储路径
-		String savePath = request.getServletContext().getRealPath(
-				"/photos");
 		
+
 		// 获取上传的文件集合
 		//Collection<Part> parts = request.getParts();
 		// 上传单个文件
 	
 			// Servlet3.0将multipart/form-data的POST请求封装成Part，通过Part对上传的文件进行操作。
 			// Part part = parts[0];//从上传的文件集合中获取Part对象
-			Part part = request.getPart("uploadFile");// 通过表单file控件(<input type="file"
-												// name="file">)的名字直接获取Part对象
+			Part part = request.getPart("uploadFile");// 通过表单file控件(<input type="file" name="file">)的名字直接获取Part对象
 			// Servlet3没有提供直接获取文件名的方法,需要从请求头中解析出来
 			// 获取请求头，请求头的格式：form-data; name="file"; filename="snmp4j--api.zip"
 			String header = part.getHeader("content-disposition");
+			
 			// 获取文件名
 			String fileName = getFileName(header);
+			
+			// 存储路径 存到了服务器的路径 客户端的文件夹是看不到的 布署完成后可直接使用
+			String saveServletPath = request.getServletContext().getRealPath("/photos") + File.separator + fileName;
+			
 			// 把文件写到指定路径
 			//UUID.randomUUID()+".jpg"
-			part.write(savePath + File.separator + fileName);//
+			part.write(saveServletPath);
 
 			//把这个照片路径保存到数据库
-
 			HttpSession session = request.getSession();
 			Users user_session = (Users)session.getAttribute("user");
 			UserService userService = UserService.getInstance();
-			Users user = userService.login(user_session.getUserName(), 
-					user_session.getUserPassword());
+			Users user = userService.login(user_session.getUserName(), user_session.getUserPassword());
 			
-			//之前的代码
-//			HttpSession session = request.getSession();
-//			Users user = (Users)session.getAttribute("user");
-			
-			
+
 			//判断是否上传成功
 			if(UserService.getInstance().saveImage(user.getId(),fileName)) {
 				//回到更新用户信息页面，让用户看到自己的照片
@@ -77,14 +73,10 @@ public class UploadPhotoServlet extends HttpServlet {
 			}else {
 				PrintWriter pw = response.getWriter();
 				pw.println("<script>alert('上传照片失败，请稍后再试！');</script>");
+				pw.flush();
+				pw.close();
 			}
-
 			
-		/*PrintWriter out = response.getWriter();
-		out.println("上传成功");
-		out.flush();
-		out.close();
-*/
 	}
 	/**
 	 * 
@@ -116,5 +108,5 @@ public class UploadPhotoServlet extends HttpServlet {
 		String fileName = tempArr2[1].substring(tempArr2[1].lastIndexOf("\\") + 1).replaceAll("\"", "");
 		return fileName;
 	}
-   
+	
 }

@@ -51,21 +51,7 @@ public class AddUserServlet extends HttpServlet {
 		String birthday_date = request.getParameter("birthday");//出生日期
 		String userTypeId = request.getParameter("user_type");//旅客类型
 		String content = request.getParameter("content");//备注
-		
-		System.out.println("userName: " + userName);
-		System.out.println("passWord: " + passWord);
-		System.out.println("confirm_password: " + confirm_password);
-		System.out.println("rule: " + rule);
-		System.out.println("realName: " + realName);
-		System.out.println("sex: " + sex);
-		System.out.println("provinceNum: " + provinceNum);
-		System.out.println("cityNum: " + cityNum);
-		System.out.println("certTypeId: " + certTypeId);
-		System.out.println("cert: " + cert);
-		System.out.println("birthday_date: " + birthday_date);
-		System.out.println("userTypeId: " + userTypeId);
-		System.out.println("content: " + content);
-		
+				
 		//4. 校验通过,调用底层service的注册方法添加用户到数据库
 		Date birthday = null;
 		try {

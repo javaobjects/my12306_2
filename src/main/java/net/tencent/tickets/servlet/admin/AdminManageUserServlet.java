@@ -230,11 +230,6 @@ public class AdminManageUserServlet extends HttpServlet {
 		List<Users> users = userService.getUserByCondition(userName, Integer.parseInt(cert_type), cert,
 				Integer.parseInt(user_type), sex.charAt(0));
 		
-		
-		System.out.println("sex.charAt(0): " + sex.charAt(0));
-		System.out.println("users.size(): " + users.size());
-		System.out.println(users.get(0).getCertType().getContent());
-		
 
 		/*
 		 * 出去的数据有哪些：查询结果的第一页数据，总页数，页码（这里是1，），username cert_type cert user_type sex

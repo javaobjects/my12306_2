@@ -42,20 +42,12 @@ public class LoginServlet extends HttpServlet {
 		String cookieStr = request.getParameter("cookie");
 		Boolean haveCookie = cookieStr.equals("true");
 		
-		
-		
-		System.out.println("cookie: " + cookieStr);
-		System.out.println("cookie equals(true): " + (cookieStr.equals("true")));
-		
-		
 		//1.获取参数
 		String username = request.getParameter("userName");
 		String password = haveCookie ? request.getParameter("passWord") :
 				Md5Utils.md5(request.getParameter("passWord"));
 		String userCode = request.getParameter("code");//用户输入的验证码
 		String autoLogin = request.getParameter("autoLogin");//是否自动登录
-		
-		System.out.println(username + "  " + password + " " + userCode + " " + autoLogin);
 		
 		/**
 		 * 服务端校验：
@@ -99,20 +91,14 @@ public class LoginServlet extends HttpServlet {
 		UserService userService = UserService.getInstance();
 		Users user = userService.login(username, password);
 
-		System.out.println("登陆用户：" + user);
-
 		// 3.校验
 		// 用户名密码合法
 		if (user != null && user.getId() > 0) {
-			
-			System.out.println("true.equals(autoLogin):  " + ("true".equals(autoLogin)));
 			
 			/**
 			 * 判断是否需要记住密码
 			 */
 			if ("auto".equals(autoLogin)) {
-				System.out.println("需要记住密码");
-				
 				
 				// 1.创建Cookie
 				Cookie cookie_userName = new Cookie("c_username", username);
@@ -137,9 +123,6 @@ public class LoginServlet extends HttpServlet {
 			// 统计上线人数 +1-----------------------------application:在应用服务器中保存数据
 			online(request);
 
-			System.out.println("user.getUserRule(): " + ("1".equals(user.getUserRule())));
-			
-			
 			// 【请求重定向】根据角色权限到指定的页面【首页Index.html】，显示用户登陆信息
 			// 1、管理员
 			if ("1".equals(user.getUserRule())) {

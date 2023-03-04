@@ -205,4 +205,5 @@ String message = URLDecoder.decode(request.getParameter("message"), "utf-8");//�
 2. [java之Cookie具体解释](https://www.cnblogs.com/lytwajue/p/7243006.html)
 2. [java读取和写入浏览器Cookies](https://www.cnblogs.com/MaxElephant/p/8250666.html)
 2. [Java Session 详解](http://www.codebaoku.com/it-java/it-java-224930.html)
+2. [谷歌浏览器控制台 f12怎么设置成中文/英文 切换方法，一定要看到最后！！！](https://www.cnblogs.com/sinberya/p/16408606.html)
 

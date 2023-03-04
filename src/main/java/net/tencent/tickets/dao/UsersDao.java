@@ -75,10 +75,6 @@ public class UsersDao {
 			stmt.setString(4, user.getUserRealName());//真实姓名
 			stmt.setString(5, user.getUserSex() + "");//性别
 			
-			System.out.println("user: " + user.toString());
-			
-			System.out.println("user.getCity().getId(): " + user.getCity().getId());
-			
 			stmt.setInt(6, user.getCity().getId());//城市 
 			stmt.setString(7, user.getCertType().getId().toString());//证件类型
 			stmt.setString(8, user.getUserCert());//证件号码
@@ -343,9 +339,6 @@ public class UsersDao {
 			}
 
 			stmt = conn.prepareStatement(query_user.toString());
-
-			System.out.println("query_user.toString(): " + query_user.toString());
-			
 			
 			rs = stmt.executeQuery();
 			Users user = null;

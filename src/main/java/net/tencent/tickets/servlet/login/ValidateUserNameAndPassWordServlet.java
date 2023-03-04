@@ -35,9 +35,6 @@ public class ValidateUserNameAndPassWordServlet extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String passWord = Md5Utils.md5(request.getParameter("passWord"));
 		
-		System.out.println("userName: " + userName);
-		System.out.println("passWord: " + passWord);
-		
 		//2. 根据用户名和密码查询该用户是否存在
 		Users user = UserService.getInstance().login(userName,passWord);
 		
