@@ -1,7 +1,6 @@
 package net.tencent.tickets.servlet.user;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
 import net.tencent.tickets.entity.Users;
 import net.tencent.tickets.service.UserService;
 

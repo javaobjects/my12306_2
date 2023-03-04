@@ -241,7 +241,9 @@
 
         // 点击登录按钮时
         $("#bun_login").click(function (){
-            $("#loginForm").submit();
+            if(!$("#alert_title").text()){
+                $("#loginForm").submit();
+            }
         })
         // 点击注册按钮
         $("#btn_Regist").click(function (){

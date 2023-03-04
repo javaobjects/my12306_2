@@ -214,14 +214,16 @@
                 <br>
                 <table width="773" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr align="center">
-                        <td width="102" align="left" class="text_cray1"><a href="#">
-                            <label></label>
-                            <label></label>
-                            <label>
-                                <input type="checkbox" name="checkbox2" value="11"
-                                       onclick="selectAllNullorReserve('checkbox','反选');"><span
-                                    class="text_blue">全选</span></label>
-                        </a></td>
+                        <td width="102" align="left" class="text_cray1">
+                            <a href="#">
+                                <label></label>
+                                <label></label>
+                                <label>
+                                    <input type="checkbox" name="selectAllorSelectNone" value="11" id="inp_selectAllorSelectNone">
+                                    <span class="text_blue">全选</span>
+                                </label>
+                            </a>
+                        </td>
                         <td width="525" align="right" class="text_cray1"><a href="#">
                             <!--<input type="button" name="Submit23" value="新增" onClick="UserAdd()"> -->
                         </a></td>
@@ -229,16 +231,10 @@
                             <input name="Submit22" type="button" class="butsc" value="">
                         </a></td>
                         <td width="91" align="right" class="text_cray1"><label>
-                            <input name="Submit3" type="button" class="butdc" value="" onclick="exportExcel()">
+                            <input name="exportExcel" type="button" class="butdc" value=""  id="btn_exportExcel">
                         </label></td>
                     </tr>
                 </table>
-                <script>
-                    function exportExcel() {
-                        window.location.href = "AdminManageUserServlet?operator=exportExcel";
-                    }
-
-                </script>
                 <br>
                 <table width="773" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr align="center" style="width:60%">
@@ -301,5 +297,50 @@
         </tr>
     </table>
 </form>
+<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
+<script>
+    $(function (){
+        let objMethod = {
+            selectAllNullorReserve:function (order){
+                let checkboxArray = $('input[type="checkbox"]');
+                switch (order){
+                    case "全选":
+                        for (let i = 0; i < checkboxArray.length; i++) {
+                            if(!checkboxArray.eq(i).attr("checked")){
+                                checkboxArray.eq(i).attr("checked",true);
+                            }
+                        }
+                        break;
+                    case "全不选":
+                        for (let i = 0; i < checkboxArray.length; i++) {
+                            if(checkboxArray.eq(i).attr("checked")){
+                                checkboxArray.eq(i).attr("checked",false);
+                            }
+                        }
+                        break;
+                    case "反选":
+                        for (let i = 0; i < checkboxArray.length; i++) {
+                            if(checkboxArray.eq(i).attr("checked")){
+                                checkboxArray.eq(i).attr("checked",false);
+                            }else {
+                                checkboxArray.eq(i).attr("checked",true);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        //点击导出EXCEL
+        $("#btn_exportExcel").click(function (){
+            window.location.href = "AdminManageUserServlet?operator=exportExcel";
+        })
+        //全选 反选
+        $("#inp_selectAllorSelectNone").click(function (){
+            objMethod.selectAllNullorReserve("反选");
+        })
+    })
+</script>
 </body>
 </html>
