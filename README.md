@@ -1094,6 +1094,7 @@ String update_user_sql="UPDATE tickets_user SET USER_PASSWORD =? WHERE	USER_ID =
 2. [JSP 中EL表达式用法详解](https://www.cnblogs.com/czs1982/p/3966748.html)
 2. [Jsp核心标签库的运用](https://how2j.cn/k/jsp/jsp-jstl/578.html)
 2. [**navicat如何导出mysql数据表结构**](https://blog.51cto.com/u_15127600/4187552)
+2. [解决向github提交代码不用输入帐号密码](https://segmentfault.com/a/1190000008435592)
 
 #### 未来项目展望
 
