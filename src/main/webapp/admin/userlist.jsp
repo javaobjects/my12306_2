@@ -9,7 +9,7 @@
     <link href="<%=request.getContextPath()%>/css/css.css" rel="stylesheet" type="text/css">
 </head>
 <body class="write_bg">
-<form name="form1" method="post" id="form1"
+<form name="form1" method="post" id="form_queryUser"
       action="<%=request.getContextPath()%>/AdminManageUserServlet?operator=queryUser">
 
     <table width="1107" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -74,7 +74,7 @@
                             </select>
                         </label></td>
                         <td width="8%" align="center" valign="middle" class="text_craybold"><label>
-                            <input name="Submit" type="submit" class="butcx" value="" id="btn_query">
+                            <input name="btn_query" type="button" class="butcx" value="" id="btn_query">
                         </label></td>
                     </tr>
                     <tr>
@@ -228,7 +228,7 @@
                             <!--<input type="button" name="Submit23" value="新增" onClick="UserAdd()"> -->
                         </a></td>
                         <td width="55" align="right" class="text_cray1"><a href="#">
-                            <input name="Submit22" type="button" class="butsc" value="">
+<%--                            <input name="del" type="button" class="butsc" value="" id="btn_del">--%>
                         </a></td>
                         <td width="91" align="right" class="text_cray1"><label>
                             <input name="exportExcel" type="button" class="butdc" value=""  id="btn_exportExcel">
@@ -240,7 +240,6 @@
                     <tr align="center" style="width:60%">
                         <td width="335" align="center" class="text_cray">&nbsp;</td>
                         <td width="284" align="center" class="text_cray">>>
-
 
                             <% Integer pagesum = (Integer) request.getAttribute("pagesum");
                                 Integer pageNumber = (Integer) request.getAttribute("pageNumber");
@@ -260,27 +259,27 @@
                             <script>
                                 function queryUserByPage(i) {
                                     // alert(1);
-                                    var form = document.getElementById("form1");
-                                    form.action = "AdminManageUserServlet?operator=queryUserByPage&pageNumber=" + i;
+                                    var form = document.getElementById("form_queryUser");
+                                    form.action = "<%=request.getContextPath()%>/AdminManageUserServlet?operator=queryUserByPage&pageNumber=" + i;
                                     form.submit();
-                                    form.action = "AdminManageUserServlet?operator=queryUser";//请还原，否则点击查询按钮会分页查询
+                                    form.action = "<%=request.getContextPath()%>/AdminManageUserServlet?operator=queryUser";//请还原，否则点击查询按钮会分页查询
                                 }
-
-
                             </script>
                             &lt;&lt;
                         </td>
                         <td width="154" align="right" class="text_cray1" style="width:20%"><label class="text_cray">
                             每页显示
-                            <select name="pageCount">
+                            <select name="pageCount" id="select_pageCount">
                                 <option value="10" ${pageCount.equals("10")?"selected":""}>10</option>
                                 <option value="20" ${pageCount.equals("20")?"selected":""}>20</option>
                                 <option value="30" ${pageCount.equals("30")?"selected":""}>30</option>
                             </select>
-                            条信息</label></td>
+                            条信息</label>
+                        </td>
                     </tr>
                 </table>
-                <br></td>
+                <br>
+            </td>
         </tr>
         <tr>
             <td height="20"></td>
@@ -301,29 +300,29 @@
 <script>
     $(function (){
         let objMethod = {
-            selectAllNullorReserve:function (order){
+            selectAllNullorReserve: function (order) {
                 let checkboxArray = $('input[type="checkbox"]');
-                switch (order){
+                switch (order) {
                     case "全选":
                         for (let i = 0; i < checkboxArray.length; i++) {
-                            if(!checkboxArray.eq(i).attr("checked")){
-                                checkboxArray.eq(i).attr("checked",true);
+                            if (!checkboxArray.eq(i).attr("checked")) {
+                                checkboxArray.eq(i).attr("checked", true);
                             }
                         }
                         break;
                     case "全不选":
                         for (let i = 0; i < checkboxArray.length; i++) {
-                            if(checkboxArray.eq(i).attr("checked")){
-                                checkboxArray.eq(i).attr("checked",false);
+                            if (checkboxArray.eq(i).attr("checked")) {
+                                checkboxArray.eq(i).attr("checked", false);
                             }
                         }
                         break;
                     case "反选":
                         for (let i = 0; i < checkboxArray.length; i++) {
-                            if(checkboxArray.eq(i).attr("checked")){
-                                checkboxArray.eq(i).attr("checked",false);
-                            }else {
-                                checkboxArray.eq(i).attr("checked",true);
+                            if (checkboxArray.eq(i).attr("checked")) {
+                                checkboxArray.eq(i).attr("checked", false);
+                            } else {
+                                checkboxArray.eq(i).attr("checked", true);
                             }
                         }
                         break;
@@ -333,12 +332,20 @@
             }
         }
         //点击导出EXCEL
-        $("#btn_exportExcel").click(function (){
+        $("#btn_exportExcel").click(function () {
             window.location.href = "AdminManageUserServlet?operator=exportExcel";
         })
         //全选 反选
-        $("#inp_selectAllorSelectNone").click(function (){
+        $("#inp_selectAllorSelectNone").click(function () {
             objMethod.selectAllNullorReserve("反选");
+        })
+        // 查询
+        $("#btn_query").click(function () {
+            $("#form_queryUser").submit();
+        })
+        // 分页改变时
+        $("#select_pageCount").change(function () {
+            $("#form_queryUser").submit();
         })
     })
 </script>

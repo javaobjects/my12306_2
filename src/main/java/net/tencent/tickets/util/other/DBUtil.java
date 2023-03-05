@@ -19,7 +19,6 @@ public class DBUtil {
 		try {
 			//0.加载外部配置文件db.properties
 			String path = DBUtil.class.getResource("/dbconfig/mysql_jdbc.properties").getPath();
-			System.out.println("path: " + path);
 			properties.load(new FileInputStream(path));
 			
 			//1.载入JDBC驱动程序
@@ -44,7 +43,6 @@ public class DBUtil {
 			// 2.定义连接URL jdbc:oracle:thin:@<主机IP>:1521:<数据库服务名>
 			String url = properties.getProperty("jdbc.url");
 
-			System.out.println("url: " + url);
 			// 3.建立连接
 			conn = DriverManager.getConnection(url, properties.getProperty("jdbc.username"),
 					properties.getProperty("jdbc.password"));

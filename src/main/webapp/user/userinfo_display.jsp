@@ -99,7 +99,8 @@ Users user = (Users)request.getAttribute("userinfo");
             <td width="100" height="40" align="left" class="text_cray1">备注：</td>
             <td height="40" colspan="2" align="left" class="text_cray"><%=user.getUserContent() %></td>
           </tr>
-        </table><br>
+        </table>
+        <br>
       <table width="100%" border="0" cellspacing="0">
         <tr>
           <td></td>

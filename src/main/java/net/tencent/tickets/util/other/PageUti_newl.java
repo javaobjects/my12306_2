@@ -1,4 +1,4 @@
-package net.tencent.tickets.util;
+package net.tencent.tickets.util.other;
 
 import java.util.List;
 

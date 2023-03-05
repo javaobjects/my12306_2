@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import net.tencent.tickets.entity.Users;
 import net.tencent.tickets.util.Md5Utils;
-import net.tencent.tickets.util.PageUti_newl;
+import net.tencent.tickets.util.other.PageUti_newl;
 
 /**
  * 用户管理模块-Servlet

@@ -52,13 +52,8 @@ public class CityDao {
 				city.setId(rs.getInt("CITY_ID"));
 				city.setCityName(rs.getString("CITY_NAME"));
 				
-				
-				System.out.println("rs.getString(\"CITY_FATHER\"): " + rs.getString("CITY_FATHER"));
-				
 				ProvinceService provinceService = ProvinceService.getInstance();
 				Province province = provinceService.queryProvinceByProvinceNum(rs.getString("CITY_FATHER"));
-				
-				System.out.println("province: " + province.toString());
 				
 				city.setProvince(province);
 			}

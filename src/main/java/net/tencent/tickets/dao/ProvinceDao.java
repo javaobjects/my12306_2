@@ -45,20 +45,11 @@ public class ProvinceDao {
 			conn = DBUtils_pool.getConnection();
 			stmt = conn.prepareStatement(QUERY_PROVINCE_BY_PROVINCENUM);
 			
-			System.out.println("QUERY_PROVINCE_BY_PROVINCENUM: " + QUERY_PROVINCE_BY_PROVINCENUM);
-			System.out.println("provinceNum: " + provinceNum);
-			
 			stmt.setString(1, provinceNum);
-			
 			
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 
-				
-				System.out.println("rs.getInt(\"PROVINCE_ID\"): " + rs.getInt("PROVINCE_ID"));
-				System.out.println("rs.getString(\"PROVINCE_NUM\"): " + rs.getString("PROVINCE_NUM"));
-				System.out.println("rs.getString(\"PROVINCE_NAME\"): " + rs.getString("PROVINCE_NAME"));
-				
 				province.setId(rs.getInt("PROVINCE_ID"));
 				province.setProvinceNum(rs.getString("PROVINCE_NUM"));
 				province.setProvinceName(rs.getString("PROVINCE_NAME"));

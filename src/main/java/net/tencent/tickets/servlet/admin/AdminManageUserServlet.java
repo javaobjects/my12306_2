@@ -1,6 +1,5 @@
 package net.tencent.tickets.servlet.admin;
 
-
 import java.io.IOException;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import net.tencent.tickets.util.PageUtil;
 
 
 /**
- * 
  * <p>Title: AdminManageUserServlet</p>  
  * <p>
  *	Description: 
@@ -78,8 +76,7 @@ public class AdminManageUserServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		
-//		List<Users> users = (List<Users>)session.getAttribute("users");
+		@SuppressWarnings("unchecked")
 		List<Users> users = (List<Users>)session.getAttribute("users");
 		
 		if(users == null || users.size() == 0)
@@ -260,7 +257,6 @@ public class AdminManageUserServlet extends HttpServlet {
 	}
 
 	/**
-	 * 
 	 * <p>Title: toQueryUserView</p>  
 	 * <p>
 	 *	Description: 

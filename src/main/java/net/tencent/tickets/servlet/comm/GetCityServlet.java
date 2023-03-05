@@ -27,8 +27,6 @@ public class GetCityServlet extends HttpServlet {
 	protected void doGet_xml(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.获取省份编号provinceId
 		String provinceId = request.getParameter("provinceId");
-		System.out.println("省份编号：" + provinceId);
-		
 		//2.调用service方法，获取城市列表
 //		ICityService cityService = CityServiceImpl.getInstance();
 //		List<City> cityList = cityService.selectCities(provinceId);
@@ -67,8 +65,6 @@ public class GetCityServlet extends HttpServlet {
 		}
 		xml.append("</cities>");
 		
-		System.out.println("xml格式的字符串：" + xml);
-		
 		//3.处理结果
 		response.setContentType("text/xml;charset=utf-8");
 		PrintWriter writer = response.getWriter();
@@ -83,8 +79,6 @@ public class GetCityServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.获取省份编号provinceId
 		String provinceId = request.getParameter("provinceId");
-		System.out.println("Get 省份编号：" + provinceId);
-		
 		getCitysByProvinceId(provinceId, request, response);
 	}
 	
@@ -92,8 +86,6 @@ public class GetCityServlet extends HttpServlet {
 		
 		//1.获取省份编号provinceNum
 		String provinceNum = request.getParameter("provinceNum");
-		System.out.println("Post 省份编号：" + provinceNum);
-		
 		getCitysByProvinceId(provinceNum, request, response);
 	}
 	
@@ -128,8 +120,6 @@ public class GetCityServlet extends HttpServlet {
 			[]表示一个数组，{}表示一个对象
 		 */
 		JSONArray JsonArray = JSONArray.fromObject(cityList);
-		System.out.println("json格式的字符串：" + JsonArray.toString());
-		
 		//3.处理结果
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter writer = response.getWriter();
