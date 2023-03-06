@@ -25,8 +25,6 @@
 //	 3.提供一个公共的静态方法，返回刚才定义的变量，如果这个变量为null，那么给他赋值
 ```
 
-
-
 + 核心代码示例代码 Service
 
 ```Java
@@ -55,7 +53,6 @@ public class CityService {
 	public List<City> getCityByProvinceNum(String provinceNum) {
 		return cityDao.queryCityByProvinceNum(provinceNum);
 	}
-	
 	/**
 	 * <p>Title: queryCityByCityNum</p>
 	 * <p>
@@ -287,8 +284,6 @@ commons-io-2.4.jar
         				+- web.xml -- 配置默认显示的前端页面和过滤器的配置
 ```
 
-
-
 ####  编码规范
 
 - 规范方式：严格遵守阿里编码规约。
@@ -432,7 +427,6 @@ Navicat Premium 12
 		<filter-name>f1</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-  
 <!--  默认显示页面-->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -451,7 +445,7 @@ Navicat Premium 12
 
 1. 验证码功能
 
-![](Img\GIF_1.gif)
+![](Img/GIF_1.gif)
 
 
 + Java 利用26个英文字母以及十个数字随机组合成四位验证码
