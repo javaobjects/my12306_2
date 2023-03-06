@@ -1117,6 +1117,9 @@ String update_user_sql="UPDATE tickets_user SET USER_PASSWORD =? WHERE	USER_ID =
 2. [Jsp核心标签库的运用](https://how2j.cn/k/jsp/jsp-jstl/578.html)
 2. [**navicat如何导出mysql数据表结构**](https://blog.51cto.com/u_15127600/4187552)
 2. [解决向github提交代码不用输入帐号密码](https://segmentfault.com/a/1190000008435592)
+2. [Git 报错 Updates were rejected because the remote contains work that you do](https://blog.csdn.net/liulei952413829/article/details/117553977)
+2. [解决Updates were rejected because the remote contains work that you do](https://blog.csdn.net/m0_51715325/article/details/121789720)
+2. [【解决】Merge branch 'master' of https://gitee.com/](https://blog.csdn.net/mus123/article/details/104201106)
 
 #### 未来项目展望
 
