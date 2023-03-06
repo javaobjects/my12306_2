@@ -451,7 +451,7 @@ Navicat Premium 12
 
 1. 验证码功能
 
-![](Img\GIF_1.gif)
+![](Img/GIF_1.gif)
 
 
 + Java 利用26个英文字母以及十个数字随机组合成四位验证码
