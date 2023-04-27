@@ -10,6 +10,125 @@
 
 # 购票网
 
+#### 项目说明
+
++ 此项目为JavaWeb项目，后端纯Java未使用框架，前端为Jsp，实现了前后端数据通信，前后端基本的增删改查功能。
+
+#### 开发环境
+
++ Windows
+
+#### 配置环境
+
+| 程序           | 版本        | 说明                       |
+|--------------|-----------|--------------------------|
+| Jdk          | 1.8.0 161 | Java 开发工具包               |
+| Mysql        | 5.5.27    | 关系型数据库                   |
+| Apache-Tomcat | 9.0.71     | Java 服务器           |
+
+#### 开发工具
+
+| 工具                       | 版本            | 说明                      |
+|--------------------------|---------------|-------------------------|
+| Eclipse IDE              | 2022.12      | 后前端开发IDE                |
+| Git                      | 2.24.1        | 代码托管平台                  |
+| Google   Chrome          | 75.0.3770.100 | 浏览器、前端调试工具              |
+| Navicat                  | 11.1.13       | 数据库连接工具                 |
+| Postman                  | 7.1.0         | 接口测试工具                  |
+| VMware   Workstation Pro | 14.1.3        | 虚拟机(未用到或许你会用到)          |
+| PowerDesigner            | 15            | 数据库设计工具(未用到或许你会用到)      |
+| SQLyog                   | 12.0.3        | 数据库连接工具 (未用到或许你会用到)     |
+| Visio                    | 2013          | 时序图、流程图等绘制工具(未用到或许你会用到) |
+| ProcessOn                | ——            | 架构图等绘制工具(未用到或许你会用到)     |
+| XMind   ZEN              | 9.2.0         | 思维导图绘制工具(未用到或许你会用到)     |
+| RedisDesktop             | 0.9.3.817     | redis客户端连接工具(未用到或许你会用到) |
+
+####  编码规范
+
+- 规范方式：严格遵守阿里编码规约。
+- 命名统一：简介最大程度上达到了见名知意。
+- 分包明确：层级分明可快速定位到代码位置。
+- 注释完整：描述性高大量减少了开发人员的代码阅读工作量。
+- 工具规范：使用统一jar包避免出现内容冲突。
+- 代码整洁：可读性、维护性高。
+
+#### 包结构
+
+```
+ +- tickets
+     +- Img --md文件所需的图片
+     +- sql --sql语句包
+     +- txt --部分知识点总结
+        +- src
+        	+- main
+        	|	+- java
+        	|	|	+- net
+        	|	|		+- tencent
+        	|	|		|	+- tickets
+        	|	|		|		+- dao -- 数据访问层，与底层 MySQL 进行数据交互
+        	|	|		|		+- entity --实体
+        	|	|		|		+- filter --过滤器，控制前端页面访问
+        	|	|		|		+- service --dao与servlet解耦合
+        	|	|		|		+- servlet -- 主要是处理各种 Http 请求，各类基本参数校验，或者不复用的业务简单处理，返回 JSON 数据等
+        	|	|		|		|	+- admin
+        	|	|		|		|	+- comm
+        	|	|		|		|	+- login
+        	|	|		|		|	+- user
+        	|	|		|		+- util -- 业务相关工具
+        	|	+- webapp
+        	|	|	+- admin -- 管理员前端页面
+        	|	|	+- css -- 样式
+        	|	|	+- images -- 图片
+        	|	|	+- js -- 前端页面行为逻辑控制
+        	|	|	+- META-INF
+        	|	|		+- context.xml -- 数据库的配置
+        	|	|	+- photos -- 用户上传头像客户端存储位置
+        	|	|	+- user -- 用户前端界面
+        	|	|	+- WEB-INF
+        				+- lib -- 存放此项目所用的各种jar包
+        				+- web.xml -- 配置默认显示的前端页面和过滤器的配置
+```
+
+#### 项目所导入的Jar包
+
+1. jstl-1.2.jar (JSP标准标签库)
+2. [jxl.jar](https://bbs.csdn.net/topics/90494976)(Java操作Excel或创建Excel) 
+3. ojdbc6.jar Oracle数据驱动
+3. mysql-connector-java-5.1.39-bin.jar mysql数据驱动
+3. Java生成Json传输给前端的接口驱动
+
+```
+commons-beanutils-1.7.0.jar
+commons-collections-3.1.jar
+commons-lang-2.5.jar
+commons-logging-1.1.1.jar
+ezmorph-1.0.3.jar
+json-lib-2.1-jdk15.jar
+```
+
+6. 上传照片功能需要的jar包
+
+```
+commons-fileupload-1.3.1.jar
+commons-io-2.4.jar
+```
+
+#### 项目启动
+
+1. 数据库：mysql5.6执行sql脚本
+
+2. 在src/main/webapp/META-INF下的context.xml更改自己数据库的用户名密码等配置
+
+3. 在Eclipse里导入此项目-->右键此项目-->Run As-->Run On Server-->在弹出的对话框选择自己的Tomcat-->Next-->Finish-->启动成功后你的默认浏览器会自动弹出一个名为 http://localhost:8080/tickets/ 的页面表明启动成功
+
+![](Img/JB-1.png)
+
+![](Img/JB-2.png)
+
+![](Img/JB-3.png)
+
+![](Img/JB-4.png)
+
 ####  项目所用技术点 
 
 1. 访问控制过滤器Filter的使用
@@ -232,75 +351,6 @@ CityService cityService = CityService.getInstance();
 City city = cityService.queryCityByCityNum(cityNum);
 ```
 
-#### 项目所导入的Jar包
-
-1. jstl-1.2.jar (JSP标准标签库)
-2. [jxl.jar](https://bbs.csdn.net/topics/90494976)(Java操作Excel或创建Excel) 
-3. ojdbc6.jar Oracle数据驱动
-3. mysql-connector-java-5.1.39-bin.jar mysql数据驱动
-3. Java生成Json传输给前端的接口驱动
-
-```
-commons-beanutils-1.7.0.jar
-commons-collections-3.1.jar
-commons-lang-2.5.jar
-commons-logging-1.1.1.jar
-ezmorph-1.0.3.jar
-json-lib-2.1-jdk15.jar
-```
-
-6. 上传照片功能需要的jar包
-
-```
-commons-fileupload-1.3.1.jar
-commons-io-2.4.jar
-```
-
-#### 包结构
-
-```
- +- tickets
-     +- Img --md文件所需的图片
-     +- sql --sql语句包
-     +- txt --部分知识点总结
-        +- src
-        	+- main
-        	|	+- java
-        	|	|	+- net
-        	|	|		+- tencent
-        	|	|		|	+- tickets
-        	|	|		|		+- dao -- 数据访问层，与底层 MySQL 进行数据交互
-        	|	|		|		+- entity --实体
-        	|	|		|		+- filter --过滤器，控制前端页面访问
-        	|	|		|		+- service --dao与servlet解耦合
-        	|	|		|		+- servlet -- 主要是处理各种 Http 请求，各类基本参数校验，或者不复用的业务简单处理，返回 JSON 数据等
-        	|	|		|		|	+- admin
-        	|	|		|		|	+- comm
-        	|	|		|		|	+- login
-        	|	|		|		|	+- user
-        	|	|		|		+- util -- 业务相关工具
-        	|	+- webapp
-        	|	|	+- admin -- 管理员前端页面
-        	|	|	+- css -- 样式
-        	|	|	+- images -- 图片
-        	|	|	+- js -- 前端页面行为逻辑控制
-        	|	|	+- META-INF
-        	|	|		+- context.xml -- 数据库的配置
-        	|	|	+- photos -- 用户上传头像客户端存储位置
-        	|	|	+- user -- 用户前端界面
-        	|	|	+- WEB-INF
-        				+- lib -- 存放此项目所用的各种jar包
-        				+- web.xml -- 配置默认显示的前端页面和过滤器的配置
-```
-
-####  编码规范
-
-- 规范方式：严格遵守阿里编码规约。
-- 命名统一：简介最大程度上达到了见名知意。
-- 分包明确：层级分明可快速定位到代码位置。
-- 注释完整：描述性高大量减少了开发人员的代码阅读工作量。
-- 工具规范：使用统一jar包避免出现内容冲突。
-- 代码整洁：可读性、维护性高。
 
 #### 本项目的思维导向图草图
 
