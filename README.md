@@ -24,16 +24,19 @@
 |--------------|-----------|--------------------------|
 | Jdk          | 1.8.0 161 | Java 开发工具包               |
 | Mysql        | 5.5.27    | 关系型数据库                   |
+| 或者 Oracle    | 11.2.0.1.0    | 关系型数据库                   |
 | Apache-Tomcat | 9.0.71     | Java 服务器           |
 
 #### 开发工具
 
 | 工具                       | 版本            | 说明                      |
 |--------------------------|---------------|-------------------------|
-| Eclipse IDE              | 2022.12      | 后前端开发IDE                |
+| Eclipse IDE              | 4.11.0(2022.12)| 后端开发IDE                |
+| Vscode IDE              | 1.34.0| 前端开发IDE                |
 | Git                      | 2.24.1        | 代码托管平台                  |
 | Google   Chrome          | 75.0.3770.100 | 浏览器、前端调试工具              |
-| Navicat                  | 11.1.13       | 数据库连接工具                 |
+| Navicat                  | 12       | 数据库连接工具                 |
+| PL/SQL                  | 11.2.0.1.0       | 数据库连接工具                 |
 | Postman                  | 7.1.0         | 接口测试工具                  |
 | VMware   Workstation Pro | 14.1.3        | 虚拟机(未用到或许你会用到)          |
 | PowerDesigner            | 15            | 数据库设计工具(未用到或许你会用到)      |
@@ -113,13 +116,62 @@ commons-fileupload-1.3.1.jar
 commons-io-2.4.jar
 ```
 
-#### 项目启动
+#### 搭建运行本项目步骤
 
-1. 数据库：mysql5.6执行sql脚本
+1. 确保已配置好jdk1.8的环境且与Eclipse开发工具相匹配
+2. 确保已安装好Tomcat配置环境且和Eclipse开发工具配置完成
+3. 导入了以应的jar包
 
-2. 在src/main/webapp/META-INF下的context.xml更改自己数据库的用户名密码等配置
+![](Img/12.png)
 
-3. 在Eclipse里导入此项目-->右键此项目-->Run As-->Run On Server-->在弹出的对话框选择自己的Tomcat-->Next-->Finish-->启动成功后你的默认浏览器会自动弹出一个名为 http://localhost:8080/tickets/ 的页面表明启动成功
+4. 将tickets_all.sql导入自己的navicat执行并生成对应的mysql数据库数据 前提是要配置好自己的mysql数据库跟navicat可视化工具
+5. 配置自己mysql数据库在META-INF下的context.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/mysql" 
+	auth="Container" 
+	type="javax.sql.DataSource"
+	username="root"
+	password="123456"
+	url="jdbc:mysql://localhost:3306/tickets"
+	driverClassName="com.mysql.jdbc.Driver"
+	maxIdle="2"
+	maxWait="5000"
+	maxActive="4" />
+</Context>
+```
+
+6. 配置默认显示页面以及拦截器 WEB-INF下的web.xml 当然拦截器需要自己完成对应的功能，这里只是配置
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>tickets</display-name>
+
+<!--	拦截器-->
+	<filter>
+		<filter-name>f1</filter-name>
+		<filter-class>net.tencent.tickets.filter.AccessFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>f1</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<!--  默认显示页面-->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+</web-app>
+```
+
+7. 在Eclipse里导入此项目-->右键此项目-->Run As-->Run On Server-->在弹出的对话框选择自己的Tomcat-->Next-->Finish-->启动成功后你的默认浏览器会自动弹出一个名为 http://localhost:8080/tickets/ 的页面表明启动成功
 
 ![](Img/JB-1.png)
 
@@ -128,6 +180,8 @@ commons-io-2.4.jar
 ![](Img/JB-3.png)
 
 ![](Img/JB-4.png)
+
+8. txt文件夹有部分知识点总结
 
 ####  项目所用技术点 
 
@@ -370,23 +424,6 @@ City city = cityService.queryCityByCityNum(cityNum);
 
 ![](Img/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0.png)
 
-#### 配置环境
-
-jdk1.8.0 161
-
-apache-tomcat-9.0.71
-
-mysql-5.5.27 或 Oracle 11.2.0.1.0
-
-#### 开发工具
-
-Eclipse 4.11.0
-
-PL/SQL 11.2.0.1.0 
-
-Vscode 1.34.0
-
-Navicat Premium 12
 
 #### 数据库设计
 
@@ -434,71 +471,13 @@ Navicat Premium 12
 | CITY_NAME | varchar2(50) | not null  | 城市名称  |
 | CITY_FATHER | varchar2(6) | not null  | 省份标识(Foreign外键tickets_province)FK_TICKETS_PROVINCE_NUM |
 
-#### tickets_certtype
+##### tickets_certtype
 
 |列名|数据类型|可否为空|说明|
 | -- | -- | -- | -- |
 | CERTTYPE_ID | number(11)    | not null  | id (主键)  |
 | CERTTYPE_CONTENT | varchar2(20)   | not null | 证件类型(1二代身份证2港澳通行证3台湾通行证4护照)|
 
-
-
-#### 搭建运行本项目步骤
-
-1. 确保已配置好jdk1.8的环境且与Eclipse开发工具相匹配
-2. 确保已安装好Tomcat配置环境且和Eclipse开发工具配置完成
-3. 导入了以应的jar包
-
-![](Img/12.png)
-
-4. 将tickets_all.sql导入自己的navicat执行并生成对应的mysql数据库数据 前提是要配置好自己的mysql数据库跟navicat可视化工具
-5. 配置自己mysql数据库在META-INF下的context.xml
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Context>
-	<Resource name="jdbc/mysql" 
-	auth="Container" 
-	type="javax.sql.DataSource"
-	username="root"
-	password="123456"
-	url="jdbc:mysql://localhost:3306/tickets"
-	driverClassName="com.mysql.jdbc.Driver"
-	maxIdle="2"
-	maxWait="5000"
-	maxActive="4" />
-</Context>
-```
-
-6. 配置默认显示页面以及拦截器 WEB-INF下的web.xml 当然拦截器需要自己完成对应的功能，这里只是配置
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>tickets</display-name>
-
-<!--	拦截器-->
-	<filter>
-		<filter-name>f1</filter-name>
-		<filter-class>net.tencent.tickets.filter.AccessFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>f1</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-<!--  默认显示页面-->
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>login.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-  </welcome-file-list>
-</web-app>
-```
-
-7. txt文件夹有部分知识点总结
 
 #### 本项目部分业务功能及其实现简介
 
@@ -1182,4 +1161,4 @@ String update_user_sql="UPDATE tickets_user SET USER_PASSWORD =? WHERE	USER_ID =
 
 #### 未来项目展望
 
-+ 名为购票网 未来当然会想办法实现模仿购票的功能
++ 名为购票网 未来不排队会实现模仿购票的功能
