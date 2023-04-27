@@ -1161,4 +1161,4 @@ String update_user_sql="UPDATE tickets_user SET USER_PASSWORD =? WHERE	USER_ID =
 
 #### 未来项目展望
 
-+ 名为购票网 未来不排队会实现模仿购票的功能
++ 名为购票网 未来不排除会实现模仿购票的功能
