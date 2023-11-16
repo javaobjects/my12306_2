@@ -122,6 +122,11 @@ commons-io-2.4.jar
 2. 确保已安装好Tomcat配置环境且和Eclipse开发工具配置完成
 3. 导入了以应的jar包
 
+```
+右键项目 -->Build Path --> Configure Build Path --> Java Build Path
+--> Libraries(Class path) --> Add JARs.. --> 选择要导入的包可多选 --> Apply and close
+```
+
 ![](Img/12.png)
 
 4. 将tickets_all.sql导入自己的navicat执行并生成对应的mysql数据库数据 前提是要配置好自己的mysql数据库跟navicat可视化工具
