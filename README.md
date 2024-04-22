@@ -1164,6 +1164,3 @@ String update_user_sql="UPDATE tickets_user SET USER_PASSWORD =? WHERE	USER_ID =
 2. [解决Updates were rejected because the remote contains work that you do](https://blog.csdn.net/m0_51715325/article/details/121789720)
 2. [【解决】Merge branch 'master' of https://gitee.com/](https://blog.csdn.net/mus123/article/details/104201106)
 
-#### 未来项目展望
-
-+ 名为购票网 未来不排除会实现模仿购票的功能
